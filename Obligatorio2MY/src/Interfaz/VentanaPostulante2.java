@@ -207,7 +207,6 @@ public class VentanaPostulante2 extends javax.swing.JFrame {
     private void botonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEliminarActionPerformed
         String tematicaSeleccionada = listaExperiencia.getSelectedValue();
         String[] nombreTematicaSeleccionada = tematicaSeleccionada.split(" \\(");
-        System.out.println(nombreTematicaSeleccionada[0] +".");
         if (tematicaSeleccionada != null){
             listModel.removeElement(tematicaSeleccionada);
             tematicaPostulante.remove(tematicaSeleccionada);
@@ -223,9 +222,7 @@ public class VentanaPostulante2 extends javax.swing.JFrame {
     private void botonAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAgregarActionPerformed
         String tematicaSeleccionada = (String) listaTema.getSelectedItem();
         int nivelSeleccionado = (int) numeroNivel.getValue();
-        System.out.println("existen : " + temasAgregados);
         if (temasAgregados.contains(tematicaSeleccionada)) {
-            System.out.println("dentro del if: " + temasAgregados);
             return;
         }
         for (Tematica tematica : temas) {
@@ -234,8 +231,6 @@ public class VentanaPostulante2 extends javax.swing.JFrame {
                 listModel.addElement(experiencia);
                 listaExperiencia.setModel(listModel);
                 temasAgregados.add(tematicaSeleccionada);
-                System.out.println("se agregó: " + temasAgregados);
-
                 tematicaPostulante.add(experiencia);
                 break;
             }

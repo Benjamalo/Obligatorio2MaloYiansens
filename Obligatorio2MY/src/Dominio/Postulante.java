@@ -61,5 +61,14 @@ public class Postulante extends Persona{
     public void setTematicas(ArrayList<String> tematicas) {
         this.tematicas = tematicas;
     }
-    
+    public String mostrarDatos(Postulante postulante){
+        String dato = postulante.getNombre() + 
+                postulante.getCedula() + 
+                postulante.getDireccion() + 
+                postulante.getMail() + 
+                postulante.getTelefono() + 
+                postulante.getLinkedIn() + 
+                postulante.getModalidad(); 
+        return dato;
+    }
 }

@@ -25,5 +25,4 @@ public class Sistema {
     public void setListaDePostulantes(ArrayList<Postulante> listaDePostulantes) {
         this.listaDePostulantes = listaDePostulantes;
     }
-
 }

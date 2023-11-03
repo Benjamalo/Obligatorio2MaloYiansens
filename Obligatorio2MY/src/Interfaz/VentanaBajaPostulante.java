@@ -139,6 +139,8 @@ public class VentanaBajaPostulante extends javax.swing.JFrame {
                 break;
             }
         }
+        comboPostulantes.setSelectedItem(null);
+        textoInfo.setText("");
     }//GEN-LAST:event_botonEliminarActionPerformed
 
     private void botonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCancelarActionPerformed

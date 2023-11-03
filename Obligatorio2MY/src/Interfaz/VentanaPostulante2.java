@@ -246,6 +246,7 @@ public class VentanaPostulante2 extends javax.swing.JFrame {
         Postulante postulante = new Postulante(nombrePostulante,cedulaPostulante,direccionPostulante,linkedinPostulante,telefonoPostulante,mailPostulante,modalidadPostulante, tematicaPostulante);
         System.out.println("------------------Postulante creado correctamente---------------------");
         postulantes.add(postulante);
+
         /*for (Postulante postulante : postulantes) {
             System.out.println("Nombre: " + postulante.getNombre());
             System.out.println("Cedula: " + postulante.getCedula());

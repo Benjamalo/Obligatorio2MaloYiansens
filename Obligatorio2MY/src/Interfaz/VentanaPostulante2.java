@@ -1,6 +1,7 @@
 
 package Interfaz;
 
+import Dominio.Sistema;
 import Dominio.Postulante;
 import Dominio.Tematica;
 import java.util.ArrayList;
@@ -10,6 +11,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 
 public class VentanaPostulante2 extends javax.swing.JFrame {
+    
     private ArrayList<Tematica> temas;
     private DefaultComboBoxModel<String> comboBoxModel;
     DefaultListModel<String> listModel = new DefaultListModel<>();
@@ -23,6 +25,7 @@ public class VentanaPostulante2 extends javax.swing.JFrame {
     private String modalidadPostulante;
     private ArrayList<String> tematicaPostulante = new ArrayList<>();
     private ArrayList<Postulante> postulantes;
+    
     public VentanaPostulante2(String nombre, int cedula, String direccion, String linkedin, int telefono,String mail,String modalidad, ArrayList<Tematica> tematicasRegistradas,ArrayList<Postulante> postulantes) {
         initComponents();
         nombrePostulante = nombre;
@@ -42,6 +45,7 @@ public class VentanaPostulante2 extends javax.swing.JFrame {
         for (Tematica tematica : temas) {
             comboBoxModel.addElement(tematica.getNombre()); 
         }
+        
     }
 
     private VentanaPostulante2() {
@@ -238,7 +242,7 @@ public class VentanaPostulante2 extends javax.swing.JFrame {
     }//GEN-LAST:event_botonAgregarActionPerformed
 
     private void botonRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRegistrarActionPerformed
-        
+
         Postulante postulante = new Postulante(nombrePostulante,cedulaPostulante,direccionPostulante,linkedinPostulante,telefonoPostulante,mailPostulante,modalidadPostulante, tematicaPostulante);
         System.out.println("------------------Postulante creado correctamente---------------------");
         postulantes.add(postulante);

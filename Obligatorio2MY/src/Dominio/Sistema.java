@@ -5,8 +5,8 @@ import java.util.ArrayList;
 
 
 public class Sistema {
-    ArrayList<Postulante> listaDePostulantes = new ArrayList<>();
-    ArrayList<Tematica> listaDeTematicas = new ArrayList<>();
+    public ArrayList<Postulante> listaDePostulantes = new ArrayList<>();
+    public ArrayList<Tematica> listaDeTematicas = new ArrayList<>();
     public Sistema(){
     }
 

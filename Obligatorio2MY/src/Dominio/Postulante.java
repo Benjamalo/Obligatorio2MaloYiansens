@@ -71,4 +71,8 @@ public class Postulante extends Persona{
                 postulante.getModalidad(); 
         return dato;
     }
+    @Override
+    public String toString(){
+        return getNombre() + "(" + getCedula()+ ")";
+    }
 }

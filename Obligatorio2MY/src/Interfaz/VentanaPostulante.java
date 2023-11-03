@@ -247,7 +247,7 @@ public class VentanaPostulante extends javax.swing.JFrame {
         String linkedin = textoLinkedin.getText();
         String modalidad = obtenerModalidadSeleccionada();
          if (cedulas.contains(cedula)) {
-             System.out.println("ya se registró este postulante...");
+             System.out.println("Ya se registró este postulante");
              return;
         }
          cedulas.add(cedula);

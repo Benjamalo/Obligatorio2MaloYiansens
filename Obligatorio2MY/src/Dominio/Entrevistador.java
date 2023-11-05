@@ -20,5 +20,4 @@ public class Entrevistador extends Persona {
         this.ingreso = ingreso;
     }
     
-    
 }

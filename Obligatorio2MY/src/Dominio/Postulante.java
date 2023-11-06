@@ -73,6 +73,6 @@ public class Postulante extends Persona{
     }
     @Override
     public String toString(){
-        return getNombre() + "(" + getCedula()+ ")";
+        return getNombre() + "(" + getCedula()+ ")" + "tematicas: " + getTematicas();
     }
 }

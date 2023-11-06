@@ -201,14 +201,8 @@
       </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="textoNombre">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="textoNombreActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="textoCedula">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="textoCedulaActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="textoDireccion">
     </Component>
@@ -238,9 +232,6 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="textoTelefono">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="textoTelefonoActionPerformed"/>
-      </Events>
     </Component>
   </SubComponents>
 </Form>

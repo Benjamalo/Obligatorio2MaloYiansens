@@ -1,7 +1,6 @@
 
 package Interfaz;
 
-import Dominio.Sistema;
 import Dominio.Postulante;
 import Dominio.Tematica;
 import java.util.ArrayList;
@@ -15,7 +14,7 @@ public class VentanaPostulante2 extends javax.swing.JFrame {
     private ArrayList<Tematica> temas;
     private DefaultComboBoxModel<String> comboBoxModel;
     DefaultListModel<String> listModel = new DefaultListModel<>();
-    private Set<String> temasAgregados = new HashSet<>();
+    private Set<String> temasAgregados;
     private String nombrePostulante;
     private int cedulaPostulante;
     private String direccionPostulante;
@@ -23,11 +22,13 @@ public class VentanaPostulante2 extends javax.swing.JFrame {
     private int telefonoPostulante;
     private String mailPostulante;
     private String modalidadPostulante;
-    private ArrayList<String> tematicaPostulante = new ArrayList<>();
+    private ArrayList<String> tematicaPostulante;
     private ArrayList<Postulante> postulantes;
     
     public VentanaPostulante2(String nombre, int cedula, String direccion, String linkedin, int telefono,String mail,String modalidad, ArrayList<Tematica> tematicasRegistradas,ArrayList<Postulante> postulantes) {
         initComponents();
+        temasAgregados = new HashSet<>();
+        tematicaPostulante = new ArrayList<>();
         nombrePostulante = nombre;
         cedulaPostulante = cedula;
         direccionPostulante = direccion;

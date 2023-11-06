@@ -38,4 +38,10 @@ public class Sistema {
         Entrevistador entrevistador = new Entrevistador(nombre, cedula, direccion, fecha);
         this.listaDeEntrevistadores.add(entrevistador);
     }
+
+    @Override
+    public String toString() {
+        return "Sistema{" + "listaDePostulantes=" + listaDePostulantes + ", listaDeTematicas=" + listaDeTematicas + ", listaDeEntrevistadores=" + listaDeEntrevistadores + '}';
+    }
+    
 }

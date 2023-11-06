@@ -4,13 +4,10 @@ package Interfaz;
 import Dominio.Postulante;
 import Dominio.Tematica;
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
 import javax.swing.*;
 
 public class VentanaPostulante extends javax.swing.JFrame {
-    private Set<Integer> cedulas = new HashSet<>();
-
+    private String modalidad;
     private ButtonGroup grupoBotones;
     private ArrayList<Tematica> tematicasRegistradas;
     private ArrayList<Postulante> postulantes;
@@ -91,18 +88,6 @@ public class VentanaPostulante extends javax.swing.JFrame {
             }
         });
 
-        textoNombre.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textoNombreActionPerformed(evt);
-            }
-        });
-
-        textoCedula.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textoCedulaActionPerformed(evt);
-            }
-        });
-
         botonCancelar.setText("Cancelar");
         botonCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -118,12 +103,6 @@ public class VentanaPostulante extends javax.swing.JFrame {
         });
 
         jLabel1.setText("Telefono:");
-
-        textoTelefono.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textoTelefonoActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -218,39 +197,23 @@ public class VentanaPostulante extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    private String obtenerModalidadSeleccionada() {
-        String modalidad = ""; // Variable para almacenar la modalidad seleccionada
-        if (radioRemoto.isSelected()) {
-            modalidad = "Remoto";
-        } else if (radioPresencial.isSelected()) {
-            modalidad = "Presencial";
-        } else if (radioMixto.isSelected()) {
-            modalidad = "Mixto";
-        }
-        return modalidad;
-    }
+    
     private void radioRemotoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioRemotoActionPerformed
-        System.out.println("Apreto Remoto");
+        this.modalidad = "Remoto" ;
     }//GEN-LAST:event_radioRemotoActionPerformed
 
     private void radioMixtoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioMixtoActionPerformed
-        System.out.println("Apreto Mixto");
+       this.modalidad = "Mixto" ;
     }//GEN-LAST:event_radioMixtoActionPerformed
 
     private void botonSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSiguienteActionPerformed
-       
+
         String nombre = textoNombre.getText();
         int cedula = Integer.parseInt(textoCedula.getText());
         String direccion = textoDireccion.getText();
         String mail = textoMail.getText();
         int telefono = Integer.parseInt(textoTelefono.getText());
         String linkedin = textoLinkedin.getText();
-        String modalidad = obtenerModalidadSeleccionada();
-         if (cedulas.contains(cedula)) {
-             System.out.println("Ya se registró este postulante");
-             return;
-        }
-         cedulas.add(cedula);
         VentanaPostulante2 ventanaTematica = new VentanaPostulante2(nombre, cedula, direccion, linkedin,telefono,mail,modalidad,tematicasRegistradas,postulantes);
         ventanaTematica.setVisible(true);
         textoNombre.setText("");
@@ -267,20 +230,8 @@ public class VentanaPostulante extends javax.swing.JFrame {
     }//GEN-LAST:event_botonCancelarActionPerformed
 
     private void radioPresencialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioPresencialActionPerformed
-        System.out.println("Apreto Presencial");
+        this.modalidad = "Presencial" ;
     }//GEN-LAST:event_radioPresencialActionPerformed
-
-    private void textoCedulaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textoCedulaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textoCedulaActionPerformed
-
-    private void textoTelefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textoTelefonoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textoTelefonoActionPerformed
-
-    private void textoNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textoNombreActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textoNombreActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

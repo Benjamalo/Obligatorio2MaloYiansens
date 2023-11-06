@@ -10,12 +10,33 @@ public class Sistema {
     private ArrayList<Entrevistador> listaDeEntrevistadores;
     private ArrayList<Entrevista> listaDeEntrevistas;
     public int contadorEntrevista=0;
+    private ArrayList<Puesto> listaDePuestos;
     public Sistema(){
+        listaDePuestos = new ArrayList<>();
         listaDePostulantes = new ArrayList<>();
         listaDeTematicas = new ArrayList<>();
         listaDeEntrevistadores = new ArrayList<>();
         listaDeEntrevistas = new ArrayList<>();
     }
+
+    public ArrayList<Puesto> getListaDePuestos() {
+        return listaDePuestos;
+    }
+
+    public void setListaDePuestos(Puesto nuevoPuesto) {
+        System.out.println("puesto ha sido agregado: " + nuevoPuesto.getNombre());
+        this.listaDePuestos.add(nuevoPuesto);
+    }
+    public boolean comprueboPuesto(String nombrePuesto){
+        for(Puesto puesto : listaDePuestos){
+            if (puesto.getNombre().equals(nombrePuesto)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    
     public Entrevistador darEntrevistador(String nombre){
         for (Entrevistador entrevistador:listaDeEntrevistadores){
             if (entrevistador.getNombre().equals(nombre)) {

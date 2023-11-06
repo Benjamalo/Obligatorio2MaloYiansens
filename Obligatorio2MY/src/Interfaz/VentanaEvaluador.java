@@ -19,8 +19,6 @@ public class VentanaEvaluador extends javax.swing.JFrame {
         this.sistema = sistema;
         lista = sistema.getListaDeEntrevistadores();
     }
-
-    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {

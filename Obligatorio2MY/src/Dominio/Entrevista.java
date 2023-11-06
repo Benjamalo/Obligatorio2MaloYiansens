@@ -56,5 +56,10 @@ public class Entrevista {
     public void setID(int ID) {
         this.ID = ID;
     }
+
+    @Override
+    public String toString() {
+        return "Entrevista{" + "entrevistador=" + entrevistador.getNombre() + ", postulante=" + postulante + ", puntaje=" + puntaje + ", comentarios=" + comentarios + ", ID=" + ID + '}';
+    }
     
 }

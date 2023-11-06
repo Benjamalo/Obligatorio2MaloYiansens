@@ -12,10 +12,12 @@ import Dominio.Sistema;
 public class VentanaEvaluador extends javax.swing.JFrame {
 
     private ArrayList<Entrevistador> lista;
+    private Sistema sistema;
     
-    public VentanaEvaluador(ArrayList<Entrevistador> evaluadores) {
+    public VentanaEvaluador(Sistema sistema) {
         initComponents();
-        lista = evaluadores;
+        this.sistema = sistema;
+        lista = sistema.getListaDeEntrevistadores();
     }
 
     
@@ -158,6 +160,22 @@ public class VentanaEvaluador extends javax.swing.JFrame {
         int cedula2 = Integer.parseInt(cedula);
         String direccion = textoDireccion.getText();
         int fecha = (int) seleccionFecha.getValue();
+        
+        if (sistema.existeCedula(cedula2)) {
+            JOptionPane.showMessageDialog(null, "Cédula ya registrada.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        if (!sistema.establecerFecha(fecha)){
+            JOptionPane.showMessageDialog(null, "Fecha de ingreso menor al 1950s.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+       
+        Entrevistador entrevistador = new Entrevistador(nombre,cedula2,direccion,fecha);
+        sistema.agregarEntrevistador(entrevistador);
+        textoNombre.setText("");
+        textoCedula.setText("");
+        textoDireccion.setText("");
+        seleccionFecha.setValue(0);
         //quiero probar crear un metodo que llame a Sistema
     }//GEN-LAST:event_botonRegistrarActionPerformed
 

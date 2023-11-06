@@ -16,7 +16,7 @@ public class Persona implements Serializable{
     }
     public Persona(){
         this.nombre = "";
-        this.cedula = getCedula();
+        this.cedula = 0;
         this.direccion = "";
     }
 

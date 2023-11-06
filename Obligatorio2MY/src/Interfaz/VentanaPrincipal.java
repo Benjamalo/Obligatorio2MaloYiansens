@@ -129,7 +129,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_botonPosActionPerformed
 
     private void botonEvaluadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEvaluadorActionPerformed
-        VentanaEvaluador ventana = new VentanaEvaluador(sistema.getListaDeEntrevistadores());
+        VentanaEvaluador ventana = new VentanaEvaluador(sistema);
         ventana.setVisible(true);
     }//GEN-LAST:event_botonEvaluadorActionPerformed
 

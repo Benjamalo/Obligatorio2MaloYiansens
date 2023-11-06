@@ -45,9 +45,6 @@ public class VentanaPostulante2 extends javax.swing.JFrame {
             comboBoxModel.addElement(tematica.getNombre()); 
         }   
     }
-    private VentanaPostulante2() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {

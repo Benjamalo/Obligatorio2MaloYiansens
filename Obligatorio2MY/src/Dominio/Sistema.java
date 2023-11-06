@@ -34,9 +34,9 @@ public class Sistema {
     public void setListaDeEntrevistadores(ArrayList<Entrevistador> listaDeEvaluadores) {
         this.listaDeEntrevistadores = listaDeEvaluadores;
     }
-    public void agregarEntrevistador(String nombre, int cedula, String direccion, int fecha){
-        Entrevistador entrevistador = new Entrevistador(nombre, cedula, direccion, fecha);
+    public void agregarEntrevistador(Entrevistador entrevistador){
         this.listaDeEntrevistadores.add(entrevistador);
+        System.out.println("El entrevistador ha sido agregado, entrevistadores: " + listaDeEntrevistadores);
     }
     public boolean existeCedula(int cedula){
         for(Postulante postulante : listaDePostulantes){
@@ -44,9 +44,17 @@ public class Sistema {
                 return true;
             }
         }
+        for (Entrevistador entrevistador : listaDeEntrevistadores) {
+             if (entrevistador.getCedula() == cedula) {
+                    return true;
+                }
+        }
         return false;
     }
-
+    
+    public boolean establecerFecha(int fecha){
+        return fecha>=1950;
+    }
     @Override
     public String toString() {
         return "Sistema{" + "listaDePostulantes=" + listaDePostulantes + ", listaDeTematicas=" + listaDeTematicas + ", listaDeEntrevistadores=" + listaDeEntrevistadores + '}';

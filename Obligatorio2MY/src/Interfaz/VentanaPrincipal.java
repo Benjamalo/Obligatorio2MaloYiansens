@@ -123,7 +123,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_botonTematicaActionPerformed
 
     private void botonPosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonPosActionPerformed
-        VentanaPostulante ventanaPos = new VentanaPostulante(sistema.getListaDeTematicas(), sistema.getListaDePostulantes());
+        VentanaPostulante ventanaPos = new VentanaPostulante(sistema.getListaDeTematicas(), sistema.getListaDePostulantes(),sistema);
         ventanaPos.setVisible(true);
         System.out.println("SISTEMA: "+ sistema.toString());
     }//GEN-LAST:event_botonPosActionPerformed

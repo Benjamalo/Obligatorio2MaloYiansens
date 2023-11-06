@@ -2,6 +2,7 @@
 package Interfaz;
 
 import Dominio.Postulante;
+import Dominio.Sistema;
 import Dominio.Tematica;
 import java.util.ArrayList;
 import javax.swing.*;
@@ -11,8 +12,10 @@ public class VentanaPostulante extends javax.swing.JFrame {
     private ButtonGroup grupoBotones;
     private ArrayList<Tematica> tematicasRegistradas;
     private ArrayList<Postulante> postulantes;
-    public VentanaPostulante( ArrayList<Tematica> tematicasRegistradas,ArrayList<Postulante> postulantes) {
+    private Sistema sistema;
+    public VentanaPostulante( ArrayList<Tematica> tematicasRegistradas,ArrayList<Postulante> postulantes, Sistema sistema) {
         initComponents();
+        this.sistema = sistema;
         this.tematicasRegistradas = tematicasRegistradas;
         grupoBotones = new ButtonGroup();
         grupoBotones.add(radioMixto);
@@ -214,6 +217,10 @@ public class VentanaPostulante extends javax.swing.JFrame {
         String mail = textoMail.getText();
         int telefono = Integer.parseInt(textoTelefono.getText());
         String linkedin = textoLinkedin.getText();
+        if (sistema.existeCedula(cedula)) {
+            System.out.println("la cedula ya existe");
+            return;
+        }
         VentanaPostulante2 ventanaTematica = new VentanaPostulante2(nombre, cedula, direccion, linkedin,telefono,mail,modalidad,tematicasRegistradas,postulantes);
         ventanaTematica.setVisible(true);
         textoNombre.setText("");

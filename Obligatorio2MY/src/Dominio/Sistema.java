@@ -38,6 +38,14 @@ public class Sistema {
         Entrevistador entrevistador = new Entrevistador(nombre, cedula, direccion, fecha);
         this.listaDeEntrevistadores.add(entrevistador);
     }
+    public boolean existeCedula(int cedula){
+        for(Postulante postulante : listaDePostulantes){
+            if (postulante.getCedula() == cedula) {
+                return true;
+            }
+        }
+        return false;
+    }
 
     @Override
     public String toString() {

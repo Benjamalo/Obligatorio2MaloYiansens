@@ -4,8 +4,6 @@ package Interfaz;
 import Dominio.Postulante;
 import Dominio.Tematica;
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 
@@ -13,8 +11,8 @@ public class VentanaPostulante2 extends javax.swing.JFrame {
     
     private ArrayList<Tematica> temas;
     private DefaultComboBoxModel<String> comboBoxModel;
-    DefaultListModel<String> listModel = new DefaultListModel<>();
-    private Set<String> temasAgregados;
+    DefaultListModel<String> modeloListaTematica = new DefaultListModel<>();
+    private ArrayList<String> temasAgregados;
     private String nombrePostulante;
     private int cedulaPostulante;
     private String direccionPostulante;
@@ -27,7 +25,7 @@ public class VentanaPostulante2 extends javax.swing.JFrame {
     
     public VentanaPostulante2(String nombre, int cedula, String direccion, String linkedin, int telefono,String mail,String modalidad, ArrayList<Tematica> tematicasRegistradas,ArrayList<Postulante> postulantes) {
         initComponents();
-        temasAgregados = new HashSet<>();
+        temasAgregados = new ArrayList<>();
         tematicaPostulante = new ArrayList<>();
         nombrePostulante = nombre;
         cedulaPostulante = cedula;
@@ -45,10 +43,8 @@ public class VentanaPostulante2 extends javax.swing.JFrame {
         listaTema.setModel(comboBoxModel);
         for (Tematica tematica : temas) {
             comboBoxModel.addElement(tematica.getNombre()); 
-        }
-        
+        }   
     }
-
     private VentanaPostulante2() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
@@ -213,7 +209,7 @@ public class VentanaPostulante2 extends javax.swing.JFrame {
         String tematicaSeleccionada = listaExperiencia.getSelectedValue();
         String[] nombreTematicaSeleccionada = tematicaSeleccionada.split(" \\(");
         if (tematicaSeleccionada != null){
-            listModel.removeElement(tematicaSeleccionada);
+            modeloListaTematica.removeElement(tematicaSeleccionada);
             tematicaPostulante.remove(tematicaSeleccionada);
             temasAgregados.remove(nombreTematicaSeleccionada[0]);
             System.out.println("se eliminó: " + temasAgregados);
@@ -233,8 +229,8 @@ public class VentanaPostulante2 extends javax.swing.JFrame {
         for (Tematica tematica : temas) {
             if (tematica.getNombre().equals(tematicaSeleccionada)) {
                 String experiencia = tematica.getNombre() + " (" + nivelSeleccionado + ")";
-                listModel.addElement(experiencia);
-                listaExperiencia.setModel(listModel);
+                modeloListaTematica.addElement(experiencia);
+                listaExperiencia.setModel(modeloListaTematica);
                 temasAgregados.add(tematicaSeleccionada);
                 tematicaPostulante.add(experiencia);
                 break;

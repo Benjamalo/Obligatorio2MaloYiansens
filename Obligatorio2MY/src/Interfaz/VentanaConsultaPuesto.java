@@ -1,10 +1,21 @@
 
 package Interfaz;
 
-public class VentanaConsultaPuesto extends javax.swing.JFrame {
+import Dominio.Puesto;
+import Dominio.Sistema;
+import javax.swing.DefaultListModel;
 
-    public VentanaConsultaPuesto() {
+public class VentanaConsultaPuesto extends javax.swing.JFrame {
+    private Sistema sistema;
+    DefaultListModel<String> modeloListaPuestos = new DefaultListModel<>();
+
+    public VentanaConsultaPuesto(Sistema sistema) {
         initComponents();
+        this.sistema = sistema;
+        for (Puesto puesto : sistema.getListaDePuestos()) {
+            modeloListaPuestos.addElement(puesto.getNombre());
+        }
+        listaDePuestos.setModel(modeloListaPuestos);        
     }
 
     @SuppressWarnings("unchecked")
@@ -20,6 +31,9 @@ public class VentanaConsultaPuesto extends javax.swing.JFrame {
         jSpinner1 = new javax.swing.JSpinner();
         botonConsultar = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
+        jLabel4 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        listaDePostulantes = new javax.swing.JList<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -37,6 +51,20 @@ public class VentanaConsultaPuesto extends javax.swing.JFrame {
         jLabel3.setText("Nivel:");
 
         botonConsultar.setText("Consultar");
+        botonConsultar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonConsultarActionPerformed(evt);
+            }
+        });
+
+        jLabel4.setText("Postulantes:");
+
+        listaDePostulantes.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane2.setViewportView(listaDePostulantes);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -50,6 +78,7 @@ public class VentanaConsultaPuesto extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(38, 38, 38)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel4)
                             .addComponent(jLabel2)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel3)
@@ -58,7 +87,8 @@ public class VentanaConsultaPuesto extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 231, Short.MAX_VALUE)
                                 .addComponent(botonConsultar))
                             .addComponent(jScrollPane1)
-                            .addComponent(jSeparator1))))
+                            .addComponent(jSeparator1)
+                            .addComponent(jScrollPane2))))
                 .addContainerGap(51, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -77,7 +107,11 @@ public class VentanaConsultaPuesto extends javax.swing.JFrame {
                     .addComponent(botonConsultar))
                 .addGap(18, 18, 18)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(212, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(32, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -100,16 +134,23 @@ public class VentanaConsultaPuesto extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void botonConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonConsultarActionPerformed
+        
+    }//GEN-LAST:event_botonConsultarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonConsultar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSpinner jSpinner1;
+    private javax.swing.JList<String> listaDePostulantes;
     private javax.swing.JList<String> listaDePuestos;
     // End of variables declaration//GEN-END:variables
 }

@@ -156,7 +156,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_botonEvaluadorActionPerformed
 
     private void botonConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonConsultaActionPerformed
-        // TODO add your handling code here:
+        VentanaConsultaPuesto consultarPuesto = new VentanaConsultaPuesto(sistema);
+        consultarPuesto.setVisible(true);
+
     }//GEN-LAST:event_botonConsultaActionPerformed
 
     private void botonBajaPosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBajaPosActionPerformed

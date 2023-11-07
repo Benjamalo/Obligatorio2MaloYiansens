@@ -2,8 +2,6 @@
 package Dominio;
 
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
 
 
 public class Sistema {
@@ -50,27 +48,27 @@ public class Sistema {
                     System.out.println("El temario contiene TODOS");
                     boolean encontrado = false;
                     for (Entrevista entrevista : listaDeEntrevistas) {
-                            if (postulante.getNombre().equals(entrevista.getPostulante().getNombre()) &&
-                                postulante.getModalidad().equals(puesto.getTipoDeTrabajo())){
-                                for(String temaRequerido : puesto.getTemasRequeridos()){
-                                    for (TematicaExperiencia tematicaPostulante : postulante.getTematicas()){
+                        if (postulante.getNombre().equals(entrevista.getPostulante().getNombre()) &&
+                            postulante.getModalidad().equals(puesto.getTipoDeTrabajo())){
+                            for(String temaRequerido : puesto.getTemasRequeridos()){
+                                for (TematicaExperiencia tematicaPostulante : postulante.getTematicas()){
 
-                                        if (temaRequerido.equals(tematicaPostulante.getNombreTematica())&&
-                                            tematicaPostulante.getNivelExperiencia()>=nivelPuesto) {
-                                            PersonaACEPTADA.add(postulante.getNombre());
-                                            System.out.println("Agrego persona aceptado");
-                                            encontrado = true;
-                                            break;
-                                        }
+                                    if (temaRequerido.equals(tematicaPostulante.getNombreTematica())&&
+                                        tematicaPostulante.getNivelExperiencia()>=nivelPuesto) {
+                                        PersonaACEPTADA.add(postulante.getNombre());
+                                        System.out.println("Agrego persona aceptado");
+                                        encontrado = true;
+                                        break;
                                     }
-                                    if (encontrado) {
-                                break; // Sal del bucle interno
-                            }
+                                }
+                                if (encontrado) {
+                                break;
+                                }
                                 }
                             }
-                             if (encontrado) {
-                        break; // Sal del bucle interno
-                    }
+                        if (encontrado) {
+                        break;
+                        }
                     }
                 }
             }

@@ -3,6 +3,7 @@ package Interfaz;
 
 import Dominio.Postulante;
 import Dominio.Tematica;
+import Dominio.TematicaExperiencia;
 import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
@@ -22,9 +23,10 @@ public class VentanaPostulante2 extends javax.swing.JFrame {
     private String modalidadPostulante;
     private ArrayList<String> tematicaPostulante;
     private ArrayList<Postulante> postulantes;
-    
+    private ArrayList<TematicaExperiencia> tematicaConXP;    
     public VentanaPostulante2(String nombre, int cedula, String direccion, String linkedin, int telefono,String mail,String modalidad, ArrayList<Tematica> tematicasRegistradas,ArrayList<Postulante> postulantes) {
         initComponents();
+        tematicaConXP= new ArrayList<>();
         temasAgregados = new ArrayList<>();
         tematicaPostulante = new ArrayList<>();
         nombrePostulante = nombre;
@@ -205,12 +207,15 @@ public class VentanaPostulante2 extends javax.swing.JFrame {
     private void botonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEliminarActionPerformed
         String tematicaSeleccionada = listaExperiencia.getSelectedValue();
         String[] nombreTematicaSeleccionada = tematicaSeleccionada.split(" \\(");
-        if (tematicaSeleccionada != null){
-            modeloListaTematica.removeElement(tematicaSeleccionada);
-            tematicaPostulante.remove(tematicaSeleccionada);
-            temasAgregados.remove(nombreTematicaSeleccionada[0]);
-            System.out.println("se eliminó: " + temasAgregados);
-        }
+        modeloListaTematica.removeElement(tematicaSeleccionada);
+        tematicaPostulante.remove(tematicaSeleccionada);
+        temasAgregados.remove(nombreTematicaSeleccionada[0]);
+        for (TematicaExperiencia tematicaExperiencia : tematicaConXP) {
+            if (tematicaExperiencia.getNombreTematica().equals(nombreTematicaSeleccionada[0])) {
+                tematicaConXP.remove(tematicaExperiencia);
+                break;
+            }
+        }  
     }//GEN-LAST:event_botonEliminarActionPerformed
 
     private void botonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCancelarActionPerformed
@@ -230,6 +235,8 @@ public class VentanaPostulante2 extends javax.swing.JFrame {
                 listaExperiencia.setModel(modeloListaTematica);
                 temasAgregados.add(tematicaSeleccionada);
                 tematicaPostulante.add(experiencia);
+                TematicaExperiencia tem = new TematicaExperiencia(tematicaSeleccionada,nivelSeleccionado);
+                tematicaConXP.add(tem);
                 break;
             }
         }
@@ -237,10 +244,9 @@ public class VentanaPostulante2 extends javax.swing.JFrame {
 
     private void botonRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRegistrarActionPerformed
 
-        Postulante postulante = new Postulante(nombrePostulante,cedulaPostulante,direccionPostulante,linkedinPostulante,telefonoPostulante,mailPostulante,modalidadPostulante, tematicaPostulante);
+        Postulante postulante = new Postulante(nombrePostulante,cedulaPostulante,direccionPostulante,linkedinPostulante,telefonoPostulante,mailPostulante,modalidadPostulante, tematicaConXP);
         System.out.println("------------------Postulante creado correctamente---------------------");
         postulantes.add(postulante);
-
         /*for (Postulante postulante : postulantes) {
             System.out.println("Nombre: " + postulante.getNombre());
             System.out.println("Cedula: " + postulante.getCedula());

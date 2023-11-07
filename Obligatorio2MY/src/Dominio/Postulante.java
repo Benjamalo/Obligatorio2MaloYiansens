@@ -9,9 +9,9 @@ public class Postulante extends Persona{
     private int telefono;
     private String mail;
     private String modalidad;
-    private ArrayList<String> tematicas;
+    private ArrayList<TematicaExperiencia> tematicas;
     
-    public Postulante(String nombre, int cedula, String direccion, String linkedIn, int telefono, String mail, String modalidad,ArrayList<String> tema){
+    public Postulante(String nombre, int cedula, String direccion, String linkedIn, int telefono, String mail, String modalidad,ArrayList<TematicaExperiencia> tema){
      
         super(nombre, cedula, direccion);  
         this.linkedIn = linkedIn;
@@ -54,11 +54,10 @@ public class Postulante extends Persona{
         this.modalidad = modalidad;
     }
 
-    public ArrayList<String> getTematicas() {
+    public ArrayList<TematicaExperiencia> getTematicas() {
         return tematicas;
     }
-
-    public void setTematicas(ArrayList<String> tematicas) {
+    public void setTematicas(ArrayList<TematicaExperiencia> tematicas) {
         this.tematicas = tematicas;
     }
     public String mostrarDatos(Postulante postulante){

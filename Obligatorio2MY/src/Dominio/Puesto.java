@@ -10,7 +10,7 @@ public class Puesto {
     public Puesto(String nombrePuesto,String tipoDeTrabajo,ArrayList<String> temasRequeridos){
         this.nombre = nombrePuesto;
         this.tipoDeTrabajo=tipoDeTrabajo;
-        this.temasRequeridos= temasRequeridos;
+        this.temasRequeridos = new ArrayList<>(temasRequeridos);
     }
 
     public String getNombre() {

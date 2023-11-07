@@ -3,12 +3,17 @@ package Interfaz;
 
 import Dominio.Puesto;
 import Dominio.Sistema;
+import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 
 public class VentanaConsultaPuesto extends javax.swing.JFrame {
     private Sistema sistema;
     DefaultListModel<String> modeloListaPuestos = new DefaultListModel<>();
-
+    DefaultListModel<String> modeloListaPostulantes = new DefaultListModel<>();
+    DefaultListModel<String> emptyListModel = new DefaultListModel<>();
+    
+    
+    
     public VentanaConsultaPuesto(Sistema sistema) {
         initComponents();
         this.sistema = sistema;
@@ -28,7 +33,7 @@ public class VentanaConsultaPuesto extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         listaDePuestos = new javax.swing.JList<>();
         jLabel3 = new javax.swing.JLabel();
-        jSpinner1 = new javax.swing.JSpinner();
+        nivelParaPuesto = new javax.swing.JSpinner();
         botonConsultar = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel4 = new javax.swing.JLabel();
@@ -83,7 +88,7 @@ public class VentanaConsultaPuesto extends javax.swing.JFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel3)
                                 .addGap(182, 182, 182)
-                                .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(nivelParaPuesto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 231, Short.MAX_VALUE)
                                 .addComponent(botonConsultar))
                             .addComponent(jScrollPane1)
@@ -103,7 +108,7 @@ public class VentanaConsultaPuesto extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(nivelParaPuesto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(botonConsultar))
                 .addGap(18, 18, 18)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -135,7 +140,16 @@ public class VentanaConsultaPuesto extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonConsultarActionPerformed
-        
+
+        listaDePostulantes.removeAll();
+
+        String nombrePuesto = listaDePuestos.getSelectedValue();
+        int nivelPuesto = (int)nivelParaPuesto.getValue();
+        ArrayList<String>PersonasConNivel = sistema.tieneEntrevista(nombrePuesto, nivelPuesto);
+        for(String postulante : PersonasConNivel){
+            modeloListaPostulantes.addElement(postulante);
+        }
+        listaDePostulantes.setModel(modeloListaPostulantes);
     }//GEN-LAST:event_botonConsultarActionPerformed
 
 
@@ -149,8 +163,8 @@ public class VentanaConsultaPuesto extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JSpinner jSpinner1;
     private javax.swing.JList<String> listaDePostulantes;
     private javax.swing.JList<String> listaDePuestos;
+    private javax.swing.JSpinner nivelParaPuesto;
     // End of variables declaration//GEN-END:variables
 }

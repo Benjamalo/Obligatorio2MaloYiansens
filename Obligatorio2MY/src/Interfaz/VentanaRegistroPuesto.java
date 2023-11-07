@@ -224,6 +224,7 @@ public class VentanaRegistroPuesto extends javax.swing.JFrame {
         nombrePuesto.setText("");
         grupoBotones.clearSelection();
         listaTematicasSeleccionadas.setModel(emptyListModel);
+        tematicasDelPuesto.clear();
         modeloListaTematica = new DefaultListModel<>();
         
     }//GEN-LAST:event_botonRegistrarPuestoActionPerformed

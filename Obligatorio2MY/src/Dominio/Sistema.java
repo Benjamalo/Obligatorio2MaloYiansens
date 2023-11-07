@@ -2,6 +2,8 @@
 package Dominio;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 
 public class Sistema {
@@ -11,20 +13,84 @@ public class Sistema {
     private ArrayList<Entrevista> listaDeEntrevistas;
     public int contadorEntrevista=0;
     private ArrayList<Puesto> listaDePuestos;
+    private ArrayList<String> Temario;
+    private ArrayList<String> PersonaACEPTADA;
+
+ 
     public Sistema(){
+        PersonaACEPTADA=new ArrayList<>();
+        Temario = new ArrayList<>();
         listaDePuestos = new ArrayList<>();
         listaDePostulantes = new ArrayList<>();
         listaDeTematicas = new ArrayList<>();
         listaDeEntrevistadores = new ArrayList<>();
         listaDeEntrevistas = new ArrayList<>();
     }
+    
 
+    
+    
+    
+   public ArrayList<String> tieneEntrevista(String nombrePuesto, int nivelPuesto) {
+        PersonaACEPTADA.clear();
+        for(Puesto puesto : listaDePuestos){
+            if (puesto.getNombre().equals(nombrePuesto)){
+                for (Postulante postulante : listaDePostulantes) {
+                   Temario.clear();
+                   for(TematicaExperiencia xp : postulante.getTematicas()){
+                        Temario.add(xp.getNombreTematica());
+                    }
+                    for (String nombres : Temario) {
+                        System.out.println("El temario es: "+ nombres);
+                    }
+                   
+                    if (!Temario.containsAll(puesto.getTemasRequeridos())) {
+                        break;
+                    }
+                    System.out.println("El temario contiene TODOS");
+                    boolean encontrado = false;
+                    for (Entrevista entrevista : listaDeEntrevistas) {
+                            if (postulante.getNombre().equals(entrevista.getPostulante().getNombre()) &&
+                                postulante.getModalidad().equals(puesto.getTipoDeTrabajo())){
+                                for(String temaRequerido : puesto.getTemasRequeridos()){
+                                    for (TematicaExperiencia tematicaPostulante : postulante.getTematicas()){
+
+                                        if (temaRequerido.equals(tematicaPostulante.getNombreTematica())&&
+                                            tematicaPostulante.getNivelExperiencia()>=nivelPuesto) {
+                                            PersonaACEPTADA.add(postulante.getNombre());
+                                            System.out.println("Agrego persona aceptado");
+                                            encontrado = true;
+                                            break;
+                                        }
+                                    }
+                                    if (encontrado) {
+                                break; // Sal del bucle interno
+                            }
+                                }
+                            }
+                             if (encontrado) {
+                        break; // Sal del bucle interno
+                    }
+                    }
+                }
+            }
+        }
+        for (String nombres : PersonaACEPTADA) {
+            System.out.println("Si son: "+ nombres);
+       }
+        return PersonaACEPTADA;
+    }
+
+
+    
+    
+    
     public ArrayList<Puesto> getListaDePuestos() {
         return listaDePuestos;
     }
 
     public void setListaDePuestos(Puesto nuevoPuesto) {
-        System.out.println("puesto ha sido agregado: " + nuevoPuesto.getNombre());
+        System.out.println("puesto ha sido agregado: " + nuevoPuesto.getNombre()+ "Temas requeridos: " + nuevoPuesto.getTemasRequeridos());
         this.listaDePuestos.add(nuevoPuesto);
     }
     public boolean comprueboPuesto(String nombrePuesto){

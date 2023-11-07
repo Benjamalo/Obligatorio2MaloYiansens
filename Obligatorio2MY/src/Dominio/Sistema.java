@@ -80,7 +80,7 @@ public class Sistema {
     }
 
 
-    
+    //hacer metodo para ordenar postulantes
     
     
     public ArrayList<Puesto> getListaDePuestos() {

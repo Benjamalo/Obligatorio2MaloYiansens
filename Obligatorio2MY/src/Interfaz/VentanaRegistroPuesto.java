@@ -217,7 +217,12 @@ public class VentanaRegistroPuesto extends javax.swing.JFrame {
         String nombreDelPuesto = nombrePuesto.getText();
         if (sistema.comprueboPuesto(nombreDelPuesto)) {
             JOptionPane.showMessageDialog(null, "Puesto ya registrado.", "Error", JOptionPane.ERROR_MESSAGE);
-            return;    
+            nombrePuesto.setText("");
+            grupoBotones.clearSelection();
+            listaTematicasSeleccionadas.setModel(emptyListModel);
+            tematicasDelPuesto.clear();
+            modeloListaTematica = new DefaultListModel<>();
+            return;     
         }
         Puesto puesto = new Puesto(nombreDelPuesto,modalidad,tematicasDelPuesto);
         sistema.setListaDePuestos(puesto);

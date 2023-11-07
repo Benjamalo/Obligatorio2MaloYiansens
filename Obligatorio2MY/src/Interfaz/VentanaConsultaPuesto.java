@@ -10,13 +10,15 @@ public class VentanaConsultaPuesto extends javax.swing.JFrame {
     private Sistema sistema;
     DefaultListModel<String> modeloListaPuestos = new DefaultListModel<>();
     DefaultListModel<String> modeloListaPostulantes = new DefaultListModel<>();
-    DefaultListModel<String> emptyListModel = new DefaultListModel<>();
+    DefaultListModel<String> emptyListModel;
     
     
     
     public VentanaConsultaPuesto(Sistema sistema) {
         initComponents();
         this.sistema = sistema;
+        emptyListModel = new DefaultListModel<>();
+
         for (Puesto puesto : sistema.getListaDePuestos()) {
             modeloListaPuestos.addElement(puesto.getNombre());
         }
@@ -39,6 +41,8 @@ public class VentanaConsultaPuesto extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         listaDePostulantes = new javax.swing.JList<>();
+        botonExportar = new javax.swing.JButton();
+        botonCancelar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -71,6 +75,15 @@ public class VentanaConsultaPuesto extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(listaDePostulantes);
 
+        botonExportar.setText("Exportar");
+
+        botonCancelar.setText("Cancelar");
+        botonCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonCancelarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -82,18 +95,22 @@ public class VentanaConsultaPuesto extends javax.swing.JFrame {
                         .addComponent(jLabel1))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(38, 38, 38)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel2)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(botonCancelar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(botonExportar))
+                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel3)
                                 .addGap(182, 182, 182)
                                 .addComponent(nivelParaPuesto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 231, Short.MAX_VALUE)
                                 .addComponent(botonConsultar))
-                            .addComponent(jScrollPane1)
-                            .addComponent(jSeparator1)
-                            .addComponent(jScrollPane2))))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING))))
                 .addContainerGap(51, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -116,7 +133,11 @@ public class VentanaConsultaPuesto extends javax.swing.JFrame {
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(32, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(botonExportar)
+                    .addComponent(botonCancelar))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -141,8 +162,8 @@ public class VentanaConsultaPuesto extends javax.swing.JFrame {
 
     private void botonConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonConsultarActionPerformed
 
-        listaDePostulantes.removeAll();
-
+        listaDePostulantes.setModel(emptyListModel);
+        modeloListaPostulantes.clear();
         String nombrePuesto = listaDePuestos.getSelectedValue();
         int nivelPuesto = (int)nivelParaPuesto.getValue();
         ArrayList<String>PersonasConNivel = sistema.tieneEntrevista(nombrePuesto, nivelPuesto);
@@ -152,9 +173,15 @@ public class VentanaConsultaPuesto extends javax.swing.JFrame {
         listaDePostulantes.setModel(modeloListaPostulantes);
     }//GEN-LAST:event_botonConsultarActionPerformed
 
+    private void botonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCancelarActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_botonCancelarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton botonCancelar;
     private javax.swing.JButton botonConsultar;
+    private javax.swing.JButton botonExportar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

@@ -10,14 +10,15 @@ public class VentanaConsultaPuesto extends javax.swing.JFrame {
     private Sistema sistema;
     DefaultListModel<String> modeloListaPuestos = new DefaultListModel<>();
     DefaultListModel<String> modeloListaPostulantes = new DefaultListModel<>();
-    DefaultListModel<String> emptyListModel;
+    DefaultListModel<String> modeloListaVacia;
+    
     
     
     
     public VentanaConsultaPuesto(Sistema sistema) {
         initComponents();
         this.sistema = sistema;
-        emptyListModel = new DefaultListModel<>();
+        modeloListaVacia = new DefaultListModel<>();
 
         for (Puesto puesto : sistema.getListaDePuestos()) {
             modeloListaPuestos.addElement(puesto.getNombre());
@@ -76,6 +77,11 @@ public class VentanaConsultaPuesto extends javax.swing.JFrame {
         jScrollPane2.setViewportView(listaDePostulantes);
 
         botonExportar.setText("Exportar");
+        botonExportar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonExportarActionPerformed(evt);
+            }
+        });
 
         botonCancelar.setText("Cancelar");
         botonCancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -162,7 +168,7 @@ public class VentanaConsultaPuesto extends javax.swing.JFrame {
 
     private void botonConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonConsultarActionPerformed
 
-        listaDePostulantes.setModel(emptyListModel);
+        listaDePostulantes.setModel(modeloListaVacia);
         modeloListaPostulantes.clear();
         String nombrePuesto = listaDePuestos.getSelectedValue();
         int nivelPuesto = (int)nivelParaPuesto.getValue();
@@ -176,6 +182,16 @@ public class VentanaConsultaPuesto extends javax.swing.JFrame {
     private void botonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCancelarActionPerformed
         this.dispose();
     }//GEN-LAST:event_botonCancelarActionPerformed
+
+    private void botonExportarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonExportarActionPerformed
+    int nivelPuesto = (int)nivelParaPuesto.getValue();
+    ArrayList<String> cadena = sistema.tieneEntrevista(listaDePuestos.getSelectedValue(), nivelPuesto);
+    for(Puesto puesto : sistema.getListaDePuestos()){
+        if(puesto.getNombre().equals(listaDePuestos.getSelectedValue())){
+             sistema.exportarDatos(cadena,puesto);
+        }
+    }
+    }//GEN-LAST:event_botonExportarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

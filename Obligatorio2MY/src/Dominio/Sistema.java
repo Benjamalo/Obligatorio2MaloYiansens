@@ -2,6 +2,10 @@
 package Dominio;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 
 public class Sistema {
@@ -13,6 +17,7 @@ public class Sistema {
     private ArrayList<Puesto> listaDePuestos;
     private ArrayList<String> Temario;
     private ArrayList<String> PersonaACEPTADA;
+    private HashMap<String, Integer> mapeoDePostulantes;
 
  
     public Sistema(){
@@ -48,6 +53,7 @@ public class Sistema {
                     System.out.println("El temario contiene TODOS");
                     boolean encontrado = false;
                     for (Entrevista entrevista : listaDeEntrevistas) {
+                        int puntaje = entrevista.getPuntaje();
                         if (postulante.getNombre().equals(entrevista.getPostulante().getNombre()) &&
                             postulante.getModalidad().equals(puesto.getTipoDeTrabajo())){
                             for(String temaRequerido : puesto.getTemasRequeridos()){
@@ -55,7 +61,8 @@ public class Sistema {
 
                                     if (temaRequerido.equals(tematicaPostulante.getNombreTematica())&&
                                         tematicaPostulante.getNivelExperiencia()>=nivelPuesto) {
-                                        PersonaACEPTADA.add(postulante.getNombre());
+                                        //PersonaACEPTADA.add(postulante.getNombre());
+                                        mapeoDePostulantes.put(postulante.getNombre(), puntaje);
                                         System.out.println("Agrego persona aceptado");
                                         encontrado = true;
                                         break;
@@ -73,15 +80,27 @@ public class Sistema {
                 }
             }
         }
-        for (String nombres : PersonaACEPTADA) {
-            System.out.println("Si son: "+ nombres);
-       }
+        List<Map.Entry<String, Integer>> lista = new ArrayList<>(mapeoDePostulantes.entrySet());
+        lista.sort((o1, o2) -> o2.getValue().compareTo(o1.getValue()));
+        for (Map.Entry<String, Integer> entrada : mapeoDePostulantes.entrySet()) {
+            PersonaACEPTADA.add(entrada.getKey());
+        }
         return PersonaACEPTADA;
     }
 
-
-    //hacer metodo para ordenar postulantes
-    
+    public void exportarDatos(ArrayList<String> entrada, Puesto puesto){
+        ArchivoGrabacion archivo = new ArchivoGrabacion("Consulta");
+        
+        archivo.grabarLinea(puesto.getNombre());
+        for(int i=0; i<entrada.size(); i++){
+            String nombre = entrada.get(i);
+            for(Postulante postulante : listaDePostulantes){
+                if(nombre.equals(postulante.getNombre())){
+                    archivo.grabarLinea(nombre + postulante.getCedula() +postulante.getMail());
+                }
+            }
+        }
+    }
     
     public ArrayList<Puesto> getListaDePuestos() {
         return listaDePuestos;

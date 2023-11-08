@@ -2,7 +2,6 @@
 package Dominio;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -52,6 +51,7 @@ public class Sistema {
                     }
                     System.out.println("El temario contiene TODOS");
                     boolean encontrado = false;
+                    System.out.println(listaDeEntrevistas.size());
                     for (Entrevista entrevista : listaDeEntrevistas) {
                         int puntaje = entrevista.getPuntaje();
                         if (postulante.getNombre().equals(entrevista.getPostulante().getNombre()) &&

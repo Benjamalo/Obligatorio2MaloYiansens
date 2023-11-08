@@ -55,6 +55,11 @@ public class VentanaEntrevista extends javax.swing.JFrame {
         jScrollPane1.setViewportView(comentariosEntrevista);
 
         jButton1.setText("Cancelar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         botonRegistrarEntrevista.setText("Registrar");
         botonRegistrarEntrevista.addActionListener(new java.awt.event.ActionListener() {
@@ -140,6 +145,10 @@ public class VentanaEntrevista extends javax.swing.JFrame {
         puntajeEntrevista.setValue(0); // Reinicia el valor del JSpinner
         comentariosEntrevista.setText("");
     }//GEN-LAST:event_botonRegistrarEntrevistaActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

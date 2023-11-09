@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Collections;
+import java.util.Comparator;
 
 public class Sistema {
     private ArrayList<Postulante> listaDePostulantes;
@@ -84,8 +85,13 @@ public class Sistema {
         List<Map.Entry<String, Integer>> lista = new ArrayList<>(mapeoDePostulantes.entrySet());
         lista.sort(Map.Entry.comparingByValue());
         System.out.println(lista.toString());
-        //Collections.reverse(lista);
-        for (Map.Entry<String, Integer> entrada : mapeoDePostulantes.entrySet()) {
+        Collections.sort(lista, new Comparator<Map.Entry<String, Integer>>() {
+            @Override
+            public int compare(Map.Entry<String, Integer> o1, Map.Entry<String, Integer> o2) {
+                return o2.getValue().compareTo(o1.getValue());
+            }
+        });
+        for (Map.Entry<String, Integer> entrada : lista) {
             PersonaACEPTADA.add(entrada.getKey());
         }
         return PersonaACEPTADA;
@@ -94,12 +100,12 @@ public class Sistema {
     public void exportarDatos(ArrayList<String> entrada, Puesto puesto){
         ArchivoGrabacion archivo = new ArchivoGrabacion("Consulta.txt");
         
-        archivo.grabarLinea(""+puesto.getNombre());
+        archivo.grabarLinea(puesto.getNombre());
         for(int i=0; i<entrada.size(); i++){
             String nombre = entrada.get(i);
             for(Postulante postulante : listaDePostulantes){
                 if(nombre.equals(postulante.getNombre())){
-                    archivo.grabarLinea(nombre + "(" + postulante.getCedula()+ ")" +postulante.getMail());
+                    archivo.grabarLinea( postulante.getNombre() + "(" + postulante.getCedula()+ ")" +postulante.getMail());
                 }
             }
         }

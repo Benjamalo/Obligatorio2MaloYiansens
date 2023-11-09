@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
+import java.util.Collections;
 
 public class Sistema {
     private ArrayList<Postulante> listaDePostulantes;
@@ -82,7 +82,9 @@ public class Sistema {
             }
         }
         List<Map.Entry<String, Integer>> lista = new ArrayList<>(mapeoDePostulantes.entrySet());
-        lista.sort((o1, o2) -> o2.getValue().compareTo(o1.getValue()));
+        lista.sort(Map.Entry.comparingByValue());
+        System.out.println(lista.toString());
+        //Collections.reverse(lista);
         for (Map.Entry<String, Integer> entrada : mapeoDePostulantes.entrySet()) {
             PersonaACEPTADA.add(entrada.getKey());
         }
@@ -90,14 +92,14 @@ public class Sistema {
     }
 
     public void exportarDatos(ArrayList<String> entrada, Puesto puesto){
-        ArchivoGrabacion archivo = new ArchivoGrabacion("Consulta");
+        ArchivoGrabacion archivo = new ArchivoGrabacion("Consulta.txt");
         
-        archivo.grabarLinea(puesto.getNombre());
+        archivo.grabarLinea(""+puesto.getNombre());
         for(int i=0; i<entrada.size(); i++){
             String nombre = entrada.get(i);
             for(Postulante postulante : listaDePostulantes){
                 if(nombre.equals(postulante.getNombre())){
-                    archivo.grabarLinea(nombre + postulante.getCedula() +postulante.getMail());
+                    archivo.grabarLinea(nombre + "(" + postulante.getCedula()+ ")" +postulante.getMail());
                 }
             }
         }

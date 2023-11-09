@@ -61,13 +61,13 @@ public class Postulante extends Persona{
         this.tematicas = tematicas;
     }
     public String mostrarDatos(Postulante postulante){
-        String dato = postulante.getNombre() + 
-                postulante.getCedula() + 
-                postulante.getDireccion() + 
-                postulante.getMail() + 
-                postulante.getTelefono() + 
-                postulante.getLinkedIn() + 
-                postulante.getModalidad(); 
+        String dato = postulante.getNombre() + "\n" +
+                postulante.getCedula() + "\n" +
+                postulante.getDireccion() + "\n" +
+                postulante.getMail() + "\n" +
+                postulante.getTelefono() + "\n" +
+                postulante.getLinkedIn() + "\n" +
+                postulante.getModalidad();
         return dato;
     }
     @Override

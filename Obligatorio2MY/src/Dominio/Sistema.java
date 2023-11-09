@@ -27,6 +27,7 @@ public class Sistema {
         listaDeTematicas = new ArrayList<>();
         listaDeEntrevistadores = new ArrayList<>();
         listaDeEntrevistas = new ArrayList<>();
+        mapeoDePostulantes = new HashMap<>();
     }
     
 

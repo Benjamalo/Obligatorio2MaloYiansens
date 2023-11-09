@@ -31,25 +31,26 @@ public class VentanaConsultaPuesto extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        titulo = new javax.swing.JLabel();
+        etiquetaPuestos = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         listaDePuestos = new javax.swing.JList<>();
-        jLabel3 = new javax.swing.JLabel();
+        etiquetaNivel = new javax.swing.JLabel();
         nivelParaPuesto = new javax.swing.JSpinner();
         botonConsultar = new javax.swing.JButton();
-        jSeparator1 = new javax.swing.JSeparator();
-        jLabel4 = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
+        separador = new javax.swing.JSeparator();
+        etiquetaPostulantes = new javax.swing.JLabel();
+        listado = new javax.swing.JScrollPane();
         listaDePostulantes = new javax.swing.JList<>();
         botonExportar = new javax.swing.JButton();
         botonCancelar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("Consulta para puesto");
+        titulo.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
+        titulo.setText("Consulta para puesto");
 
-        jLabel2.setText("Puestos:");
+        etiquetaPuestos.setText("Puestos:");
 
         listaDePuestos.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -58,7 +59,7 @@ public class VentanaConsultaPuesto extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(listaDePuestos);
 
-        jLabel3.setText("Nivel:");
+        etiquetaNivel.setText("Nivel:");
 
         botonConsultar.setText("Consultar");
         botonConsultar.addActionListener(new java.awt.event.ActionListener() {
@@ -67,14 +68,14 @@ public class VentanaConsultaPuesto extends javax.swing.JFrame {
             }
         });
 
-        jLabel4.setText("Postulantes:");
+        etiquetaPostulantes.setText("Postulantes:");
 
         listaDePostulantes.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
-        jScrollPane2.setViewportView(listaDePostulantes);
+        listado.setViewportView(listaDePostulantes);
 
         botonExportar.setText("Exportar");
         botonExportar.addActionListener(new java.awt.event.ActionListener() {
@@ -98,48 +99,48 @@ public class VentanaConsultaPuesto extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(229, 229, 229)
-                        .addComponent(jLabel1))
+                        .addComponent(titulo))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(38, 38, 38)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(botonCancelar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 435, Short.MAX_VALUE)
                                 .addComponent(botonExportar))
-                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(etiquetaPostulantes, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(etiquetaPuestos, javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addGap(182, 182, 182)
-                                .addComponent(nivelParaPuesto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 231, Short.MAX_VALUE)
+                                .addComponent(etiquetaNivel)
+                                .addGap(144, 144, 144)
+                                .addComponent(nivelParaPuesto, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(botonConsultar))
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING))))
+                            .addComponent(separador, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(listado, javax.swing.GroupLayout.Alignment.LEADING))))
                 .addContainerGap(51, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(46, 46, 46)
-                .addComponent(jLabel1)
+                .addComponent(titulo)
                 .addGap(18, 18, 18)
-                .addComponent(jLabel2)
+                .addComponent(etiquetaPuestos)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
+                    .addComponent(etiquetaNivel)
                     .addComponent(nivelParaPuesto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(botonConsultar))
                 .addGap(18, 18, 18)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(separador, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel4)
+                .addComponent(etiquetaPostulantes)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
+                .addComponent(listado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(botonExportar)
                     .addComponent(botonCancelar))
@@ -198,16 +199,16 @@ public class VentanaConsultaPuesto extends javax.swing.JFrame {
     private javax.swing.JButton botonCancelar;
     private javax.swing.JButton botonConsultar;
     private javax.swing.JButton botonExportar;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel etiquetaNivel;
+    private javax.swing.JLabel etiquetaPostulantes;
+    private javax.swing.JLabel etiquetaPuestos;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JList<String> listaDePostulantes;
     private javax.swing.JList<String> listaDePuestos;
+    private javax.swing.JScrollPane listado;
     private javax.swing.JSpinner nivelParaPuesto;
+    private javax.swing.JSeparator separador;
+    private javax.swing.JLabel titulo;
     // End of variables declaration//GEN-END:variables
 }

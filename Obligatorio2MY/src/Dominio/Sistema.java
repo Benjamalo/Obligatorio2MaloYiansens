@@ -37,6 +37,7 @@ public class Sistema {
     
    public ArrayList<String> tieneEntrevista(String nombrePuesto, int nivelPuesto) {
         PersonaACEPTADA.clear();
+        mapeoDePostulantes.clear();
         for(Puesto puesto : listaDePuestos){
             if (puesto.getNombre().equals(nombrePuesto)){
                 for (Postulante postulante : listaDePostulantes) {
@@ -99,16 +100,20 @@ public class Sistema {
 
     public void exportarDatos(ArrayList<String> entrada, Puesto puesto){
         ArchivoGrabacion archivo = new ArchivoGrabacion("Consulta.txt");
-        
-        archivo.grabarLinea(puesto.getNombre());
+        String nombrePuesto = "Puesto: "+puesto.getNombre();
+        System.out.println(nombrePuesto);
+        archivo.grabarLinea(nombrePuesto);
         for(int i=0; i<entrada.size(); i++){
             String nombre = entrada.get(i);
             for(Postulante postulante : listaDePostulantes){
+                String datos = postulante.getNombre() + " (" + ""+postulante.getCedula() + ") " + postulante.getMail();
                 if(nombre.equals(postulante.getNombre())){
-                    archivo.grabarLinea( postulante.getNombre() + "(" + postulante.getCedula()+ ")" +postulante.getMail());
+                    System.out.println(datos);
+                    archivo.grabarLinea(datos);
                 }
             }
         }
+        archivo.cerrar();
     }
     
     public ArrayList<Puesto> getListaDePuestos() {

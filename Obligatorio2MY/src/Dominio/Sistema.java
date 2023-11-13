@@ -13,7 +13,7 @@ public class Sistema {
     private ArrayList<Tematica> listaDeTematicas;
     private ArrayList<Entrevistador> listaDeEntrevistadores;
     private ArrayList<Entrevista> listaDeEntrevistas;
-    public int contadorEntrevista=0;
+    public int contadorEntrevista=1;
     private ArrayList<Puesto> listaDePuestos;
     private ArrayList<String> Temario;
     private ArrayList<String> PersonaACEPTADA;
@@ -33,7 +33,7 @@ public class Sistema {
     
 
     
-    
+    //Voy a tener que crear un metodo para que me elimine TODO de un postulante cuando se baja (incluido entrevistas)
     
    public ArrayList<String> tieneEntrevista(String nombrePuesto, int nivelPuesto) {
         PersonaACEPTADA.clear();
@@ -85,7 +85,6 @@ public class Sistema {
         }
         List<Map.Entry<String, Integer>> lista = new ArrayList<>(mapeoDePostulantes.entrySet());
         lista.sort(Map.Entry.comparingByValue());
-        System.out.println(lista.toString());
         Collections.sort(lista, new Comparator<Map.Entry<String, Integer>>() {
             @Override
             public int compare(Map.Entry<String, Integer> o1, Map.Entry<String, Integer> o2) {
@@ -101,14 +100,12 @@ public class Sistema {
     public void exportarDatos(ArrayList<String> entrada, Puesto puesto){
         ArchivoGrabacion archivo = new ArchivoGrabacion("Consulta.txt");
         String nombrePuesto = "Puesto: "+puesto.getNombre();
-        System.out.println(nombrePuesto);
         archivo.grabarLinea(nombrePuesto);
         for(int i=0; i<entrada.size(); i++){
             String nombre = entrada.get(i);
             for(Postulante postulante : listaDePostulantes){
                 String datos = postulante.getNombre() + " (" + ""+postulante.getCedula() + ") " + postulante.getMail();
                 if(nombre.equals(postulante.getNombre())){
-                    System.out.println(datos);
                     archivo.grabarLinea(datos);
                 }
             }
@@ -119,7 +116,26 @@ public class Sistema {
     public ArrayList<Puesto> getListaDePuestos() {
         return listaDePuestos;
     }
-
+    
+    public ArrayList<Entrevista> buscadorPorPalabras(String[] palabras, String persona){
+        ArrayList<Entrevista> retorno = new ArrayList<>();
+        for(Entrevista entre : this.getListaDeEntrevistas()){
+            if(entre.getPostulante().getNombre().equals(persona) && comprobarPalabras(palabras, entre.getComentarios())){
+                retorno.add(entre);
+            }
+        }
+        return retorno;
+    }
+    
+    public boolean comprobarPalabras(String[] palabras, String comentario){
+        for(int i=0; i<palabras.length; i++){
+            if(!comentario.contains(palabras[i])){
+                return false;
+            }
+        }
+        return true;
+    }
+    
     public void setListaDePuestos(Puesto nuevoPuesto) {
         System.out.println("puesto ha sido agregado: " + nuevoPuesto.getNombre()+ "Temas requeridos: " + nuevoPuesto.getTemasRequeridos());
         this.listaDePuestos.add(nuevoPuesto);

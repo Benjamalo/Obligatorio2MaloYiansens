@@ -4,13 +4,18 @@ package Interfaz;
 import Dominio.Sistema;
 import Dominio.Postulante;
 import Dominio.TematicaExperiencia;
+import Dominio.Entrevista;
+import java.util.ArrayList;
 import javax.swing.DefaultListModel;
+import javax.swing.table.DefaultTableModel;
 
 public class VentanaHistorial extends javax.swing.JFrame {
 
     private Sistema sistema;
     private DefaultListModel<String> modeloListaPostulantes = new DefaultListModel<>();
     private DefaultListModel<String> modeloListaTematicas = new DefaultListModel<>();
+    private DefaultTableModel modeloTabla;
+    
     
     public VentanaHistorial(Sistema sistema) {
         initComponents();
@@ -19,6 +24,12 @@ public class VentanaHistorial extends javax.swing.JFrame {
             modeloListaPostulantes.addElement(postulante.getNombre() + " (" + postulante.getCedula() + ")");
         }
         listaDePostulantes.setModel(modeloListaPostulantes);
+        modeloTabla = new DefaultTableModel();
+        modeloTabla.addColumn("Nro.");
+        modeloTabla.addColumn("Evaluador");
+        modeloTabla.addColumn("Puntaje");
+        modeloTabla.addColumn("Comentarios");
+        tabla.setModel(modeloTabla);
     }
 
     
@@ -51,9 +62,8 @@ public class VentanaHistorial extends javax.swing.JFrame {
         etiquetaBuscar = new javax.swing.JLabel();
         textoBuscar = new javax.swing.JTextField();
         botonBuscar = new javax.swing.JButton();
-        jScrollBar1 = new javax.swing.JScrollBar();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        contenedorTabla = new javax.swing.JScrollPane();
+        tabla = new javax.swing.JTable();
         botonResetear = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -109,15 +119,14 @@ public class VentanaHistorial extends javax.swing.JFrame {
         textoBuscar.setFont(new java.awt.Font("Helvetica Neue", 0, 10)); // NOI18N
 
         botonBuscar.setText("Buscar");
-
-        jScrollBar1.addAdjustmentListener(new java.awt.event.AdjustmentListener() {
-            public void adjustmentValueChanged(java.awt.event.AdjustmentEvent evt) {
-                jScrollBar1AdjustmentValueChanged(evt);
+        botonBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonBuscarActionPerformed(evt);
             }
         });
 
-        jTable1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tabla.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -136,9 +145,15 @@ public class VentanaHistorial extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(jTable1);
+        tabla.setOpaque(false);
+        contenedorTabla.setViewportView(tabla);
 
         botonResetear.setText("Resetear");
+        botonResetear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonResetearActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -190,10 +205,7 @@ public class VentanaHistorial extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(6, 6, 6)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 671, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jScrollBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(contenedorTabla, javax.swing.GroupLayout.PREFERRED_SIZE, 671, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(etiquetaBuscar)
                                         .addGap(18, 18, 18)
@@ -254,12 +266,8 @@ public class VentanaHistorial extends javax.swing.JFrame {
                     .addComponent(botonBuscar)
                     .addComponent(botonResetear))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                .addComponent(contenedorTabla, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -288,9 +296,24 @@ public class VentanaHistorial extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_listaDePostulantesValueChanged
 
-    private void jScrollBar1AdjustmentValueChanged(java.awt.event.AdjustmentEvent evt) {//GEN-FIRST:event_jScrollBar1AdjustmentValueChanged
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jScrollBar1AdjustmentValueChanged
+    private void botonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBuscarActionPerformed
+        //table.setDefaultRenderer(Object.class, new HTMLRenderer());
+        String palabras[] = textoBuscar.getText().split(" ");
+        String datos[] = listaDePostulantes.getSelectedValue().split(" ");
+        String postulante = datos[0];
+        ArrayList<Entrevista> datosImprimir= sistema.buscadorPorPalabras(palabras, postulante);
+        
+        for(Entrevista entre : datosImprimir){
+            Object[] fila = {entre.getID(), entre.getEntrevistador().getNombre(), entre.getPuntaje(), entre.getComentarios().replaceAll(palabras[0], "<font color='red'>" + palabras[0] + "</font>")};
+            
+            modeloTabla.addRow(fila);
+        }
+        
+    }//GEN-LAST:event_botonBuscarActionPerformed
+
+    private void botonResetearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonResetearActionPerformed
+        modeloTabla.setRowCount(0);
+    }//GEN-LAST:event_botonResetearActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -298,6 +321,7 @@ public class VentanaHistorial extends javax.swing.JFrame {
     private javax.swing.JButton botonResetear;
     private javax.swing.JLabel cedulaEnPantalla;
     private javax.swing.JScrollPane contenedorLista;
+    private javax.swing.JScrollPane contenedorTabla;
     private javax.swing.JScrollPane contenedorTematicas;
     private javax.swing.JLabel direccionEnPantalla;
     private javax.swing.JLabel etiquetaBuscar;
@@ -311,15 +335,13 @@ public class VentanaHistorial extends javax.swing.JFrame {
     private javax.swing.JLabel etiquetaPostulante;
     private javax.swing.JLabel etiquetaTelefono;
     private javax.swing.JLabel formatoEnPantalla;
-    private javax.swing.JScrollBar jScrollBar1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel linkedinEnPantalla;
     private javax.swing.JList<String> listaDePostulantes;
     private javax.swing.JList<String> listaTematicas;
     private javax.swing.JLabel mailEnPantalla;
     private javax.swing.JLabel nombreEnPantalla;
     private javax.swing.JSeparator separador;
+    private javax.swing.JTable tabla;
     private javax.swing.JLabel telefonoEnPantalla;
     private javax.swing.JTextField textoBuscar;
     private javax.swing.JLabel titulo;

@@ -54,6 +54,7 @@ public class VentanaHistorial extends javax.swing.JFrame {
         jScrollBar1 = new javax.swing.JScrollBar();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        botonResetear = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -115,6 +116,7 @@ public class VentanaHistorial extends javax.swing.JFrame {
             }
         });
 
+        jTable1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -135,6 +137,8 @@ public class VentanaHistorial extends javax.swing.JFrame {
             }
         });
         jScrollPane2.setViewportView(jTable1);
+
+        botonResetear.setText("Resetear");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -195,7 +199,9 @@ public class VentanaHistorial extends javax.swing.JFrame {
                                         .addGap(18, 18, 18)
                                         .addComponent(textoBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(43, 43, 43)
-                                        .addComponent(botonBuscar)))))
+                                        .addComponent(botonBuscar)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(botonResetear)))))
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
@@ -245,7 +251,8 @@ public class VentanaHistorial extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(etiquetaBuscar)
                     .addComponent(textoBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(botonBuscar))
+                    .addComponent(botonBuscar)
+                    .addComponent(botonResetear))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -288,6 +295,7 @@ public class VentanaHistorial extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonBuscar;
+    private javax.swing.JButton botonResetear;
     private javax.swing.JLabel cedulaEnPantalla;
     private javax.swing.JScrollPane contenedorLista;
     private javax.swing.JScrollPane contenedorTematicas;

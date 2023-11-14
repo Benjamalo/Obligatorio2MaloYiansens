@@ -6,8 +6,13 @@ import Dominio.Sistema;
 import Dominio.Postulante;
 import Dominio.TematicaExperiencia;
 import Dominio.Entrevista;
+import java.awt.Desktop;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 public class VentanaHistorial extends javax.swing.JFrame {
 
@@ -106,7 +111,13 @@ public class VentanaHistorial extends javax.swing.JFrame {
 
         mailEnPantalla.setText("  ");
 
+        linkedinEnPantalla.setForeground(new java.awt.Color(0, 0, 255));
         linkedinEnPantalla.setText("  ");
+        linkedinEnPantalla.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                linkedinEnPantallaMouseClicked(evt);
+            }
+        });
 
         formatoEnPantalla.setText("  ");
 
@@ -126,6 +137,7 @@ public class VentanaHistorial extends javax.swing.JFrame {
             }
         });
 
+        tabla.setBackground(new java.awt.Color(242, 242, 242));
         tabla.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -148,6 +160,18 @@ public class VentanaHistorial extends javax.swing.JFrame {
         });
         tabla.setOpaque(false);
         contenedorTabla.setViewportView(tabla);
+        if (tabla.getColumnModel().getColumnCount() > 0) {
+            tabla.getColumnModel().getColumn(0).setMinWidth(40);
+            tabla.getColumnModel().getColumn(0).setPreferredWidth(40);
+            tabla.getColumnModel().getColumn(0).setMaxWidth(40);
+            tabla.getColumnModel().getColumn(1).setMinWidth(140);
+            tabla.getColumnModel().getColumn(1).setPreferredWidth(140);
+            tabla.getColumnModel().getColumn(1).setMaxWidth(140);
+            tabla.getColumnModel().getColumn(2).setMinWidth(80);
+            tabla.getColumnModel().getColumn(2).setPreferredWidth(80);
+            tabla.getColumnModel().getColumn(2).setMaxWidth(80);
+            tabla.getColumnModel().getColumn(3).setPreferredWidth(150);
+        }
 
         botonResetear.setText("Resetear");
         botonResetear.addActionListener(new java.awt.event.ActionListener() {
@@ -268,7 +292,7 @@ public class VentanaHistorial extends javax.swing.JFrame {
                     .addComponent(botonResetear))
                 .addGap(18, 18, 18)
                 .addComponent(contenedorTabla, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         pack();
@@ -287,6 +311,7 @@ public class VentanaHistorial extends javax.swing.JFrame {
                     telefonoEnPantalla.setText(String.valueOf(pos.getTelefono()));
                     mailEnPantalla.setText(pos.getMail());
                     linkedinEnPantalla.setText(pos.getLinkedIn());
+                    formatoEnPantalla.setText(pos.getModalidad());
                     for(TematicaExperiencia tema : pos.getTematicas()){
                         modeloListaTematicas.addElement(tema.getNombreTematica()+" ("+tema.getNivelExperiencia()+ ")");
                     }
@@ -298,7 +323,6 @@ public class VentanaHistorial extends javax.swing.JFrame {
     }//GEN-LAST:event_listaDePostulantesValueChanged
 
     private void botonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBuscarActionPerformed
-        //table.setDefaultRenderer(Object.class, new HTMLRenderer());
         String palabras[] = textoBuscar.getText().split(" ");
         String datos[] = listaDePostulantes.getSelectedValue().split(" ");
         String postulante = datos[0];
@@ -315,6 +339,17 @@ public class VentanaHistorial extends javax.swing.JFrame {
     private void botonResetearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonResetearActionPerformed
         modeloTabla.setRowCount(0);
     }//GEN-LAST:event_botonResetearActionPerformed
+
+    private void linkedinEnPantallaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_linkedinEnPantallaMouseClicked
+        String enlace = linkedinEnPantalla.getText();
+        try{
+            Desktop.getDesktop().browse(new URI(enlace));
+        }
+        catch(IOException | URISyntaxException e){
+            JOptionPane.showMessageDialog(this, "El link no existe, o fue ingresado de manera incorrecta", "Error", JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_linkedinEnPantallaMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -1,12 +1,12 @@
 
 package Dominio;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Collections;
-import java.util.Comparator;
+import Interfaz.VentanaHistorial;
+import java.awt.Desktop;
+import java.io.IOException;
+import java.net.*;
+import java.util.*;
+import javax.swing.JOptionPane;
 
 public class Sistema {
     private ArrayList<Postulante> listaDePostulantes;
@@ -112,6 +112,15 @@ public class Sistema {
         }
         archivo.cerrar();
     }
+    
+    /*public void clickEnLink(String link){
+        try{
+            Desktop.getDesktop().browse(new URI(link));
+        }
+        catch(IOException | URISyntaxException e){
+            JOptionPane.showMessageDialog(VentanaHistorial, "El link no existe, o fue ingresado de manera incorrecta", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }*/
     
     public ArrayList<Puesto> getListaDePuestos() {
         return listaDePuestos;

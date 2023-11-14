@@ -25,6 +25,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         botonEntrevista = new javax.swing.JButton();
         botonRegistroPuesto = new javax.swing.JButton();
         botonHistorial = new javax.swing.JButton();
+        consultaTematica = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -94,20 +95,17 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             }
         });
 
+        consultaTematica.setText("Consulta Por Tematicas Requeridas");
+        consultaTematica.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                consultaTematicaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(211, 211, 211)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(Titulo)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(12, 12, 12)
-                        .addComponent(botonTematica)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
             .addGroup(layout.createSequentialGroup()
                 .addGap(43, 43, 43)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -122,6 +120,20 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                     .addComponent(botonBajaPos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(botonPuesto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(41, 41, 41))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(211, 211, 211)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(12, 12, 12)
+                        .addComponent(botonTematica)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(Titulo)
+                        .addGap(0, 0, Short.MAX_VALUE))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(consultaTematica)
+                .addGap(128, 128, 128))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -146,7 +158,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(botonPuesto)
                     .addComponent(botonHistorial))
-                .addContainerGap(218, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(consultaTematica)
+                .addContainerGap(177, Short.MAX_VALUE))
         );
 
         pack();
@@ -198,6 +212,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         ventanaHistorial.setVisible(true);
     }//GEN-LAST:event_botonHistorialActionPerformed
 
+    private void consultaTematicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultaTematicaActionPerformed
+        VentanaConsultaTematica ventanaTematica = new VentanaConsultaTematica(sistema);
+        ventanaTematica.setVisible(true);
+    }//GEN-LAST:event_consultaTematicaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -244,5 +263,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton botonPuesto;
     private javax.swing.JButton botonRegistroPuesto;
     private javax.swing.JButton botonTematica;
+    private javax.swing.JButton consultaTematica;
     // End of variables declaration//GEN-END:variables
 }

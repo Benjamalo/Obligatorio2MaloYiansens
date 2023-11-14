@@ -31,6 +31,33 @@ public class Sistema implements Serializable{
     
     //Voy a tener que crear un metodo para que me elimine TODO de un postulante cuando se baja (incluido entrevistas)
     
+    
+    public int puestosConTematica(String nombreTematica){
+        int contador= 0;
+        for(Puesto pues : listaDePuestos){
+            for(String nombreTemas: pues.getTemasRequeridos()){
+                if(nombreTemas.equals(nombreTematica)){
+                    contador++;
+                }
+            }
+        
+        }
+        return contador;
+    }
+    
+    public int personasConTematica(String nombreTematica){
+       // ArrayList<String> personasConTematicas = new ArrayList<>();
+        int contadorPersonas = 0;
+        for(Postulante post : listaDePostulantes){
+            for(TematicaExperiencia tematicas : post.getTematicas()){
+                if(tematicas.getNombreTematica().equals(nombreTematica) && tematicas.getNivelExperiencia()>=5)
+               // personasConTematicas.add(post.getNombre());
+                contadorPersonas++;
+            }
+        }
+        return contadorPersonas;
+    }
+    
    public ArrayList<String> tieneEntrevista(String nombrePuesto, int nivelPuesto) {
         PersonaACEPTADA.clear();
         mapeoDePostulantes.clear();

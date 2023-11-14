@@ -1,6 +1,7 @@
 
 package Interfaz;
 
+import Dominio.HTMLRenderer;
 import Dominio.Sistema;
 import Dominio.Postulante;
 import Dominio.TematicaExperiencia;
@@ -8,7 +9,6 @@ import Dominio.Entrevista;
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 import javax.swing.table.DefaultTableModel;
-
 public class VentanaHistorial extends javax.swing.JFrame {
 
     private Sistema sistema;
@@ -30,6 +30,7 @@ public class VentanaHistorial extends javax.swing.JFrame {
         modeloTabla.addColumn("Puntaje");
         modeloTabla.addColumn("Comentarios");
         tabla.setModel(modeloTabla);
+        tabla.setDefaultRenderer(Object.class, new HTMLRenderer()); 
     }
 
     

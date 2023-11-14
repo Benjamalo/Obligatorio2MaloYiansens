@@ -72,7 +72,7 @@ public class VentanaHistorial extends javax.swing.JFrame {
         tabla = new javax.swing.JTable();
         botonResetear = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         titulo.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         titulo.setText("Historial del Postulante");
@@ -292,7 +292,7 @@ public class VentanaHistorial extends javax.swing.JFrame {
                     .addComponent(botonResetear))
                 .addGap(18, 18, 18)
                 .addComponent(contenedorTabla, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addContainerGap(77, Short.MAX_VALUE))
         );
 
         pack();

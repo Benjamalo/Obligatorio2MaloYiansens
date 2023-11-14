@@ -1,14 +1,10 @@
 
 package Dominio;
 
-import Interfaz.VentanaHistorial;
-import java.awt.Desktop;
-import java.io.IOException;
-import java.net.*;
+import java.io.Serializable;
 import java.util.*;
-import javax.swing.JOptionPane;
 
-public class Sistema {
+public class Sistema implements Serializable{
     private ArrayList<Postulante> listaDePostulantes;
     private ArrayList<Tematica> listaDeTematicas;
     private ArrayList<Entrevistador> listaDeEntrevistadores;

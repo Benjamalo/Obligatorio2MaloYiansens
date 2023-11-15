@@ -13,6 +13,7 @@ public class VentanaPostulante extends javax.swing.JFrame {
     private ArrayList<Tematica> tematicasRegistradas;
     private ArrayList<Postulante> postulantes;
     private Sistema sistema;
+    
     public VentanaPostulante(Sistema sistema) {
         initComponents();
         this.sistema = sistema;
@@ -24,11 +25,31 @@ public class VentanaPostulante extends javax.swing.JFrame {
         this.postulantes = sistema.getListaDePostulantes();
     }
 
-    private VentanaPostulante() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 
-   
+    public void pasar(){
+        String nombre = textoNombre.getText();
+        int cedula = Integer.parseInt(textoCedula.getText());
+        String direccion = textoDireccion.getText();
+        String mail = textoMail.getText();
+        int telefono = Integer.parseInt(textoTelefono.getText());
+        String linkedin = textoLinkedin.getText();
+        boolean existe = sistema.revisar(nombre, cedula, telefono, mail, linkedin);
+        if(existe){
+            VentanaPostulante2 ventanaTematica = new VentanaPostulante2(nombre, cedula, direccion, linkedin,telefono,mail,modalidad,tematicasRegistradas,postulantes);
+            ventanaTematica.setVisible(true);
+            textoNombre.setText("");
+            textoCedula.setText("");
+            textoDireccion.setText("");
+            textoMail.setText("");
+            textoTelefono.setText("");
+            textoLinkedin.setText(""); 
+            grupoBotones.clearSelection();
+        }
+        else{
+            JOptionPane.showMessageDialog(this, "Ese postulante ya existe", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -210,25 +231,7 @@ public class VentanaPostulante extends javax.swing.JFrame {
     }//GEN-LAST:event_radioMixtoActionPerformed
 
     private void botonSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSiguienteActionPerformed
-
-        String nombre = textoNombre.getText();
-        int cedula = Integer.parseInt(textoCedula.getText());
-        String direccion = textoDireccion.getText();
-        String mail = textoMail.getText();
-        int telefono = Integer.parseInt(textoTelefono.getText());
-        String linkedin = textoLinkedin.getText();
-        if (sistema.existeCedula(cedula)) {
-            return;
-        }
-        VentanaPostulante2 ventanaTematica = new VentanaPostulante2(nombre, cedula, direccion, linkedin,telefono,mail,modalidad,tematicasRegistradas,postulantes);
-        ventanaTematica.setVisible(true);
-        textoNombre.setText("");
-        textoCedula.setText("");
-        textoDireccion.setText("");
-        textoMail.setText("");
-        textoTelefono.setText("");
-        textoLinkedin.setText(""); 
-        grupoBotones.clearSelection();
+        pasar();
     }//GEN-LAST:event_botonSiguienteActionPerformed
 
     private void botonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCancelarActionPerformed
@@ -239,100 +242,6 @@ public class VentanaPostulante extends javax.swing.JFrame {
         this.modalidad = "Presencial" ;
     }//GEN-LAST:event_radioPresencialActionPerformed
 
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(VentanaPostulante.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(VentanaPostulante.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(VentanaPostulante.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(VentanaPostulante.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new VentanaPostulante().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonCancelar;

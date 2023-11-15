@@ -249,6 +249,21 @@ public class Sistema extends Observable implements Serializable {
     public boolean establecerFecha(int fecha){
         return fecha>=1950;
     }
+    
+    public boolean revisar(String nombre, int cedula, int telefono, String mail, String linkedin){
+        boolean ok = true;
+        for(Postulante pos : this.getListaDePostulantes()){
+            if(pos.getNombre().equals(nombre) 
+               || pos.getCedula()==cedula 
+               || pos.getTelefono()==telefono 
+               || pos.getMail().equals(mail)
+               || pos.getLinkedIn().equals(linkedin)){
+                ok=false;
+            }
+        }
+        return ok;
+    }
+    
     @Override
     public String toString() {
         return "Sistema{" + "listaDePostulantes=" + listaDePostulantes + ", listaDeTematicas=" + listaDeTematicas + ", listaDeEntrevistadores=" + listaDeEntrevistadores + '}';

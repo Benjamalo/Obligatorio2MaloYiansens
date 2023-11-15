@@ -3,11 +3,9 @@ import Dominio.Sistema;
 import Dominio.Tematica;
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.Observable;
-import java.util.Observer;
 import java.util.Set;
 
-public class VentanaTematica extends javax.swing.JFrame implements Observer{
+public class VentanaTematica extends javax.swing.JFrame{
     public ArrayList<Tematica> tematicasRegistradas;
     private Set<String> temas = new HashSet<>();
 
@@ -23,13 +21,13 @@ public class VentanaTematica extends javax.swing.JFrame implements Observer{
     }
 
     public void botonRegistrar(){
-    String nombreTematicaTexto = nombreTematica.getText().toUpperCase();
+    String nombreTematicaTexto = nombreTematica.getText();
     String descripcionTematicaTexto = areaDescripcion.getText();
         
     if (temas.contains(nombreTematicaTexto.toUpperCase())) {    
         return;
         }    
-    temas.add(nombreTematicaTexto);
+    temas.add(nombreTematicaTexto.toUpperCase());
     Tematica tematica = new Tematica();
     tematica.setNombre(nombreTematicaTexto);
     tematica.setDescripcion(descripcionTematicaTexto);
@@ -192,8 +190,4 @@ public class VentanaTematica extends javax.swing.JFrame implements Observer{
     private javax.swing.JPanel panelPrincipal;
     // End of variables declaration//GEN-END:variables
     private Sistema sistema;
-    @Override
-    public void update(Observable o, Object arg) {
-        
-    }
 }

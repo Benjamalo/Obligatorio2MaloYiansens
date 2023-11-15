@@ -2,13 +2,16 @@
 package Interfaz;
 
 import Dominio.Postulante;
+import Dominio.Sistema;
 import Dominio.Tematica;
 import Dominio.TematicaExperiencia;
 import java.util.ArrayList;
+import java.util.Observable;
+import java.util.Observer;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 
-public class VentanaPostulante2 extends javax.swing.JFrame {
+public class VentanaPostulante2 extends javax.swing.JFrame{
     
     private ArrayList<Tematica> temas;
     private DefaultComboBoxModel<String> comboBoxModel;
@@ -23,9 +26,12 @@ public class VentanaPostulante2 extends javax.swing.JFrame {
     private String modalidadPostulante;
     private ArrayList<String> tematicaPostulante;
     private ArrayList<Postulante> postulantes;
-    private ArrayList<TematicaExperiencia> tematicaConXP;    
-    public VentanaPostulante2(String nombre, int cedula, String direccion, String linkedin, int telefono,String mail,String modalidad, ArrayList<Tematica> tematicasRegistradas,ArrayList<Postulante> postulantes) {
+    private ArrayList<TematicaExperiencia> tematicaConXP; 
+    private Sistema sistema;
+    
+    public VentanaPostulante2(String nombre, int cedula, String direccion, String linkedin, int telefono,String mail,String modalidad, Sistema sistema) {
         initComponents();
+        this.sistema = sistema;
         tematicaConXP= new ArrayList<>();
         temasAgregados = new ArrayList<>();
         tematicaPostulante = new ArrayList<>();
@@ -36,9 +42,9 @@ public class VentanaPostulante2 extends javax.swing.JFrame {
         telefonoPostulante = telefono;
         mailPostulante = mail;
         modalidadPostulante = modalidad;
-        this.postulantes = postulantes;
+        this.postulantes = sistema.getListaDePostulantes();
         temas = new ArrayList<>();
-        temas.addAll(tematicasRegistradas);
+        temas.addAll(sistema.getListaDeTematicas());
         DefaultListModel<String> emptyListModel = new DefaultListModel<>();
         listaExperiencia.setModel(emptyListModel);
         comboBoxModel = new DefaultComboBoxModel<>();
@@ -70,11 +76,6 @@ public class VentanaPostulante2 extends javax.swing.JFrame {
         etiquetaTema.setText("Tema:");
 
         listaTema.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        listaTema.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                listaTemaActionPerformed(evt);
-            }
-        });
 
         etiquetaNivel.setText("Nivel:");
 
@@ -200,10 +201,6 @@ public class VentanaPostulante2 extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void listaTemaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listaTemaActionPerformed
-        
-    }//GEN-LAST:event_listaTemaActionPerformed
-
     private void botonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEliminarActionPerformed
         String tematicaSeleccionada = listaExperiencia.getSelectedValue();
         String[] nombreTematicaSeleccionada = tematicaSeleccionada.split(" \\(");
@@ -245,22 +242,8 @@ public class VentanaPostulante2 extends javax.swing.JFrame {
     private void botonRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRegistrarActionPerformed
 
         Postulante postulante = new Postulante(nombrePostulante,cedulaPostulante,direccionPostulante,linkedinPostulante,telefonoPostulante,mailPostulante,modalidadPostulante, tematicaConXP);
-        System.out.println("------------------Postulante creado correctamente---------------------");
-        postulantes.add(postulante);
-        /*for (Postulante postulante : postulantes) {
-            System.out.println("Nombre: " + postulante.getNombre());
-            System.out.println("Cedula: " + postulante.getCedula());
-            System.out.println("Dirección: " + postulante.getDireccion());
-            System.out.println("LinkedIn: " + postulante.getLinkedIn());
-            System.out.println("Teléfono: " + postulante.getTelefono());
-            System.out.println("Correo electrónico: " + postulante.getMail());
-            System.out.println("Modalidad: " + postulante.getModalidad());
-            System.out.println("Tematicas:");
-            for (String tematica : postulante.getTematicas()) {
-                System.out.println("   - " + tematica);
-            }   
-        System.out.println("------------------------------");
-        }*/
+        sistema.agregarPostulante(postulante);
+        
         this.dispose();
     }//GEN-LAST:event_botonRegistrarActionPerformed
 
@@ -279,4 +262,9 @@ public class VentanaPostulante2 extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> listaTema;
     private javax.swing.JSpinner numeroNivel;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void update(Observable o, Object arg) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }

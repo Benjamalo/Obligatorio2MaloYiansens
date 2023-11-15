@@ -60,16 +60,6 @@ public class Postulante extends Persona{
     public void setTematicas(ArrayList<TematicaExperiencia> tematicas) {
         this.tematicas = tematicas;
     }
-    public String mostrarDatos(Postulante postulante){
-        String dato = postulante.getNombre() + "\n" +
-                postulante.getCedula() + "\n" +
-                postulante.getDireccion() + "\n" +
-                postulante.getMail() + "\n" +
-                postulante.getTelefono() + "\n" +
-                postulante.getLinkedIn() + "\n" +
-                postulante.getModalidad();
-        return dato;
-    }
     @Override
     public String toString(){
         return getNombre() + "(" + getCedula()+ ")" + "tematicas: " + getTematicas();

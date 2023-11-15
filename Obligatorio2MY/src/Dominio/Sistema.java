@@ -223,6 +223,9 @@ public class Sistema extends Observable implements Serializable {
     public void agregarTematica(Tematica tema){
         this.listaDeTematicas.add(tema);
     }
+    public void agregarPostulante(Postulante postulante){
+        this.listaDePostulantes.add(postulante);
+    }
     
     public void setListaDeEntrevistadores(ArrayList<Entrevistador> listaDeEvaluadores) {
         this.listaDeEntrevistadores = listaDeEvaluadores;

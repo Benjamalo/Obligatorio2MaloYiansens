@@ -35,7 +35,7 @@ public class VentanaPostulante extends javax.swing.JFrame {
         String linkedin = textoLinkedin.getText();
         boolean existe = sistema.revisar(nombre, cedula, telefono, mail, linkedin);
         if(existe){
-            VentanaPostulante2 ventanaTematica = new VentanaPostulante2(nombre, cedula, direccion, linkedin,telefono,mail,modalidad,tematicasRegistradas,postulantes);
+            VentanaPostulante2 ventanaTematica = new VentanaPostulante2(nombre, cedula, direccion, linkedin,telefono,mail,modalidad,sistema);
             ventanaTematica.setVisible(true);
             textoNombre.setText("");
             textoCedula.setText("");

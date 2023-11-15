@@ -1,10 +1,9 @@
 
 package Dominio;
 
-import java.io.Serializable;
 
 
-public class Persona implements Serializable{
+public class Persona{
     private String nombre;
     private int cedula;
     private String direccion;

@@ -1,7 +1,10 @@
 
 package Dominio;
 
-import java.io.Serializable;
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.*;
 
 public class Sistema implements Serializable{
@@ -249,8 +252,42 @@ public class Sistema implements Serializable{
         return false;
     }
     
+    public void guardarDatos(){
+        String nombreArchivo = "sistema_guardado.dat";
+
+        try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(nombreArchivo))) {
+            out.writeObject(this);
+            System.out.println("Datos guardados correctamente.");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void abrirDatos(){
+        String nombreArchivo = "sistema_serializado.dat";
+
+        try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(nombreArchivo))) {
+            // Deserializar el objeto desde el archivo
+            Sistema sistema = (Sistema) in.readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void borrarDatos() {
+        String nombreArchivo = "sistema_guardado.dat";
+        Path archivoPath = Paths.get(nombreArchivo);
+
+        try {
+            Files.deleteIfExists(archivoPath);
+            System.out.println("Datos borrados correctamente.");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    
     public boolean establecerFecha(int fecha){
-        return fecha>=1950;
+        return fecha>=1950 && fecha<=2023;
     }
     @Override
     public String toString() {

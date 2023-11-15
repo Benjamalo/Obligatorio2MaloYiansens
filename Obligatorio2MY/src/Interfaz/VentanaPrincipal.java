@@ -28,6 +28,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         consultaTematica = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
         Titulo.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         Titulo.setText("Menu Principal");
@@ -216,6 +221,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         VentanaConsultaTematica ventanaTematica = new VentanaConsultaTematica(sistema);
         ventanaTematica.setVisible(true);
     }//GEN-LAST:event_consultaTematicaActionPerformed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        sistema.guardarDatos();
+    }//GEN-LAST:event_formWindowClosed
 
     /**
      * @param args the command line arguments

@@ -263,8 +263,4 @@ public class VentanaPostulante2 extends javax.swing.JFrame{
     private javax.swing.JSpinner numeroNivel;
     // End of variables declaration//GEN-END:variables
 
-    @Override
-    public void update(Observable o, Object arg) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
 }

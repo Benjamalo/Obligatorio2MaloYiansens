@@ -39,13 +39,11 @@
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace min="0" pref="26" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Group type="102" attributes="0">
+                  <Group type="102" alignment="1" attributes="0">
                       <Component id="botonCancelar" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                       <Component id="botonEliminar" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <Component id="textoInfo" alignment="1" max="32767" attributes="0"/>
-                  <Component id="separador" alignment="1" max="32767" attributes="0"/>
                   <Group type="102" alignment="1" attributes="0">
                       <Component id="etiquetaEliminar" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -69,15 +67,11 @@
                   <Component id="etiquetaEliminar" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="separador" min="-2" pref="10" max="-2" attributes="0"/>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="textoInfo" min="-2" pref="79" max="-2" attributes="0"/>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="botonCancelar" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="botonEliminar" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="botonCancelar" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="36" max="32767" attributes="0"/>
+              <EmptySpace pref="19" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -118,10 +112,6 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Eliminar:"/>
       </Properties>
-    </Component>
-    <Component class="javax.swing.JSeparator" name="separador">
-    </Component>
-    <Component class="javax.swing.JTextField" name="textoInfo">
     </Component>
     <Component class="javax.swing.JButton" name="botonCancelar">
       <Properties>

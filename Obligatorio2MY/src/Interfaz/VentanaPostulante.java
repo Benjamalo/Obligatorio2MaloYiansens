@@ -13,15 +13,15 @@ public class VentanaPostulante extends javax.swing.JFrame {
     private ArrayList<Tematica> tematicasRegistradas;
     private ArrayList<Postulante> postulantes;
     private Sistema sistema;
-    public VentanaPostulante( ArrayList<Tematica> tematicasRegistradas,ArrayList<Postulante> postulantes, Sistema sistema) {
+    public VentanaPostulante(Sistema sistema) {
         initComponents();
         this.sistema = sistema;
-        this.tematicasRegistradas = tematicasRegistradas;
+        this.tematicasRegistradas = sistema.getListaDeTematicas();
         grupoBotones = new ButtonGroup();
         grupoBotones.add(radioMixto);
         grupoBotones.add(radioPresencial);
         grupoBotones.add(radioRemoto);
-        this.postulantes = postulantes;
+        this.postulantes = sistema.getListaDePostulantes();
     }
 
     private VentanaPostulante() {
@@ -218,7 +218,6 @@ public class VentanaPostulante extends javax.swing.JFrame {
         int telefono = Integer.parseInt(textoTelefono.getText());
         String linkedin = textoLinkedin.getText();
         if (sistema.existeCedula(cedula)) {
-            System.out.println("la cedula ya existe");
             return;
         }
         VentanaPostulante2 ventanaTematica = new VentanaPostulante2(nombre, cedula, direccion, linkedin,telefono,mail,modalidad,tematicasRegistradas,postulantes);

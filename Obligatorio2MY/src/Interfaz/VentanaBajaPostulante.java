@@ -3,22 +3,33 @@ package Interfaz;
 
 
 import Dominio.Postulante;
+import Dominio.Sistema;
 import java.util.*;
 
-public class VentanaBajaPostulante extends javax.swing.JFrame {
+public class VentanaBajaPostulante extends javax.swing.JFrame implements Observer {
 
-    private ArrayList<Postulante> lista;
+    private Sistema sistema;
     
-    public VentanaBajaPostulante(ArrayList<Postulante> listadoPostulantes) {
+    public VentanaBajaPostulante(Sistema sistema) {
         initComponents();
-        for(Postulante pos : listadoPostulantes){
+        this.sistema = sistema;
+        for(Postulante pos : sistema.getListaDePostulantes()){
             comboPostulantes.addItem(pos.toString());
         }
-        lista = listadoPostulantes;
         botonEliminar.setEnabled(false);
     }
 
-    
+    public void actualizar(){
+        String item = (String) comboPostulantes.getSelectedItem();
+        for(int i=0; i<sistema.getListaDePostulantes().size(); i++){
+            String pos = sistema.getListaDePostulantes().get(i).toString();
+            if(pos.equals(item)){
+                sistema.getListaDePostulantes().remove(sistema.getListaDePostulantes().get(i));
+                break;
+            }
+        }
+        comboPostulantes.setSelectedItem(null);
+    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -27,8 +38,6 @@ public class VentanaBajaPostulante extends javax.swing.JFrame {
         etiquetaSubtitulo = new javax.swing.JLabel();
         comboPostulantes = new javax.swing.JComboBox<>();
         etiquetaEliminar = new javax.swing.JLabel();
-        separador = new javax.swing.JSeparator();
-        textoInfo = new javax.swing.JTextField();
         botonCancelar = new javax.swing.JButton();
         botonEliminar = new javax.swing.JButton();
 
@@ -78,12 +87,10 @@ public class VentanaBajaPostulante extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 26, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(botonCancelar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(botonEliminar))
-                    .addComponent(textoInfo, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(separador, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(etiquetaEliminar)
                         .addGap(18, 18, 18)
@@ -102,42 +109,21 @@ public class VentanaBajaPostulante extends javax.swing.JFrame {
                     .addComponent(comboPostulantes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(etiquetaEliminar))
                 .addGap(18, 18, 18)
-                .addComponent(separador, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(textoInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(botonCancelar)
-                    .addComponent(botonEliminar))
-                .addContainerGap(36, Short.MAX_VALUE))
+                    .addComponent(botonEliminar)
+                    .addComponent(botonCancelar))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void comboPostulantesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboPostulantesActionPerformed
-        String item = (String) comboPostulantes.getSelectedItem();
-        Iterator<Postulante> iterador = lista.iterator();
-        while(iterador.hasNext()){
-            Postulante pos = iterador.next();
-            if(pos.toString().equals(item)){
-                textoInfo.setText(pos.mostrarDatos(pos));
-            }
-        }
         botonEliminar.setEnabled(true);
     }//GEN-LAST:event_comboPostulantesActionPerformed
 
     private void botonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEliminarActionPerformed
-        String item = (String) comboPostulantes.getSelectedItem();
-        for(int i=0; i<lista.size(); i++){
-            String pos = lista.get(i).toString();
-            if(pos.equals(item)){
-                lista.remove(lista.get(i));
-                break;
-            }
-        }
-        comboPostulantes.setSelectedItem(null);
-        textoInfo.setText("");
+        actualizar();
     }//GEN-LAST:event_botonEliminarActionPerformed
 
     private void botonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCancelarActionPerformed
@@ -153,7 +139,10 @@ public class VentanaBajaPostulante extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> comboPostulantes;
     private javax.swing.JLabel etiquetaEliminar;
     private javax.swing.JLabel etiquetaSubtitulo;
-    private javax.swing.JSeparator separador;
-    private javax.swing.JTextField textoInfo;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void update(Observable o, Object arg) {
+        actualizar();
+    }
 }

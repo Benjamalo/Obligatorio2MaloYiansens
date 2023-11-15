@@ -4,7 +4,7 @@ package Dominio;
 import java.io.Serializable;
 import java.util.*;
 
-public class Sistema implements Serializable{
+public class Sistema extends Observable implements Serializable {
     private ArrayList<Postulante> listaDePostulantes;
     private ArrayList<Tematica> listaDeTematicas;
     private ArrayList<Entrevistador> listaDeEntrevistadores;
@@ -17,7 +17,7 @@ public class Sistema implements Serializable{
 
  
     public Sistema(){
-        PersonaACEPTADA=new ArrayList<>();
+        PersonaACEPTADA = new ArrayList<>();
         Temario = new ArrayList<>();
         listaDePuestos = new ArrayList<>();
         listaDePostulantes = new ArrayList<>();
@@ -136,15 +136,6 @@ public class Sistema implements Serializable{
         archivo.cerrar();
     }
     
-    /*public void clickEnLink(String link){
-        try{
-            Desktop.getDesktop().browse(new URI(link));
-        }
-        catch(IOException | URISyntaxException e){
-            JOptionPane.showMessageDialog(VentanaHistorial, "El link no existe, o fue ingresado de manera incorrecta", "Error", JOptionPane.ERROR_MESSAGE);
-        }
-    }*/
-    
     public ArrayList<Puesto> getListaDePuestos() {
         return listaDePuestos;
     }
@@ -169,8 +160,9 @@ public class Sistema implements Serializable{
     }
     
     public void setListaDePuestos(Puesto nuevoPuesto) {
-        System.out.println("puesto ha sido agregado: " + nuevoPuesto.getNombre()+ "Temas requeridos: " + nuevoPuesto.getTemasRequeridos());
         this.listaDePuestos.add(nuevoPuesto);
+        setChanged();
+        notifyObservers();
     }
     public boolean comprueboPuesto(String nombrePuesto){
         for(Puesto puesto : listaDePuestos){
@@ -204,7 +196,7 @@ public class Sistema implements Serializable{
     }
 
     public void setListaDeEntrevistas(Entrevista listaDeEntrevistas) {
-        contadorEntrevista+=1;
+        contadorEntrevista++;
         this.listaDeEntrevistas.add(listaDeEntrevistas);
     }
 
@@ -227,13 +219,18 @@ public class Sistema implements Serializable{
     public ArrayList<Entrevistador> getListaDeEntrevistadores() {
         return listaDeEntrevistadores;
     }
-
+    
+    public void agregarTematica(Tematica tema){
+        this.listaDeTematicas.add(tema);
+    }
+    
     public void setListaDeEntrevistadores(ArrayList<Entrevistador> listaDeEvaluadores) {
         this.listaDeEntrevistadores = listaDeEvaluadores;
     }
     public void agregarEntrevistador(Entrevistador entrevistador){
         this.listaDeEntrevistadores.add(entrevistador);
-        System.out.println("El entrevistador ha sido agregado: " + entrevistador.getNombre());
+        setChanged();
+        notifyObservers();
     }
     public boolean existeCedula(int cedula){
         for(Postulante postulante : listaDePostulantes){

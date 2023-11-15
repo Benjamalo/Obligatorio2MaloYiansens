@@ -153,23 +153,28 @@ public class VentanaHistorial extends javax.swing.JFrame {
             Class[] types = new Class [] {
                 java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class
             };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
             }
         });
         tabla.setOpaque(false);
         contenedorTabla.setViewportView(tabla);
         if (tabla.getColumnModel().getColumnCount() > 0) {
-            tabla.getColumnModel().getColumn(0).setMinWidth(40);
+            tabla.getColumnModel().getColumn(0).setResizable(false);
             tabla.getColumnModel().getColumn(0).setPreferredWidth(40);
-            tabla.getColumnModel().getColumn(0).setMaxWidth(40);
-            tabla.getColumnModel().getColumn(1).setMinWidth(140);
+            tabla.getColumnModel().getColumn(1).setResizable(false);
             tabla.getColumnModel().getColumn(1).setPreferredWidth(140);
-            tabla.getColumnModel().getColumn(1).setMaxWidth(140);
-            tabla.getColumnModel().getColumn(2).setMinWidth(80);
+            tabla.getColumnModel().getColumn(2).setResizable(false);
             tabla.getColumnModel().getColumn(2).setPreferredWidth(80);
-            tabla.getColumnModel().getColumn(2).setMaxWidth(80);
+            tabla.getColumnModel().getColumn(3).setResizable(false);
             tabla.getColumnModel().getColumn(3).setPreferredWidth(150);
         }
 
@@ -196,33 +201,39 @@ public class VentanaHistorial extends javax.swing.JFrame {
                             .addComponent(etiquetaPostulante)
                             .addComponent(contenedorLista, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(59, 59, 59)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(etiquetaExp)
-                                .addGap(18, 18, 18)
-                                .addComponent(contenedorTematicas, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(etiquetaNombre)
                                     .addComponent(etiquetaCedula)
                                     .addComponent(etiquetaDireccion))
-                                .addGap(63, 63, 63)
+                                .addGap(32, 32, 32)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(direccionEnPantalla, javax.swing.GroupLayout.DEFAULT_SIZE, 216, Short.MAX_VALUE)
-                                    .addComponent(cedulaEnPantalla, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(nombreEnPantalla, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(cedulaEnPantalla, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(nombreEnPantalla, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(0, 0, Short.MAX_VALUE))
+                                    .addComponent(direccionEnPantalla, javax.swing.GroupLayout.DEFAULT_SIZE, 247, Short.MAX_VALUE)))
+                            .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(etiquetaMail)
-                                    .addComponent(etiquetaLinkedIn)
-                                    .addComponent(etiquetaTelefono)
-                                    .addComponent(etiquetaFormato))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(linkedinEnPantalla, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(telefonoEnPantalla, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(mailEnPantalla, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(formatoEnPantalla, javax.swing.GroupLayout.DEFAULT_SIZE, 216, Short.MAX_VALUE))))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(etiquetaExp)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(contenedorTematicas, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(etiquetaMail)
+                                            .addComponent(etiquetaLinkedIn)
+                                            .addComponent(etiquetaTelefono)
+                                            .addComponent(etiquetaFormato))
+                                        .addGap(37, 37, 37)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(mailEnPantalla, javax.swing.GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE)
+                                            .addComponent(telefonoEnPantalla, javax.swing.GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE)
+                                            .addComponent(linkedinEnPantalla, javax.swing.GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE)
+                                            .addComponent(formatoEnPantalla, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                .addGap(0, 0, Short.MAX_VALUE)))
                         .addContainerGap(28, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -319,16 +330,25 @@ public class VentanaHistorial extends javax.swing.JFrame {
                     break;
                 }
             }
+            ArrayList<Entrevista> entrevistas= sistema.getListaDeEntrevistas();
+            for(Entrevista i : entrevistas){
+                if(i.getPostulante().getNombre().equals(comprobar)){
+                    Object[] fila = {i.getID(), i.getEntrevistador().getNombre(), i.getPuntaje(), i.getComentarios()};
+                    modeloTabla.addRow(fila);
+                }
+            }
         }
     }//GEN-LAST:event_listaDePostulantesValueChanged
 
     private void botonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBuscarActionPerformed
+        modeloTabla.setRowCount(0);
+        String valor[] = listaDePostulantes.getSelectedValue().split(" ");
+        String comprobar = valor[0];
         String palabras[] = textoBuscar.getText().split(" ");
-        String datos[] = listaDePostulantes.getSelectedValue().split(" ");
-        String postulante = datos[0];
-        ArrayList<Entrevista> datosImprimir= sistema.buscadorPorPalabras(palabras, postulante);
+        ArrayList<Entrevista> datosImprimir= sistema.getListaDeEntrevistas();
         
         for(Entrevista entre : datosImprimir){
+            if(entre.getPostulante().getNombre().equals(comprobar));
             Object[] fila = {entre.getID(), entre.getEntrevistador().getNombre(), entre.getPuntaje(), entre.getComentarios().replaceAll(palabras[0], "<font color='red'>" + palabras[0] + "</font>")};
             
             modeloTabla.addRow(fila);

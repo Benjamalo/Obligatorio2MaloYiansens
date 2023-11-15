@@ -1,23 +1,43 @@
 package Interfaz;
+import Dominio.Sistema;
 import Dominio.Tematica;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Observable;
+import java.util.Observer;
 import java.util.Set;
 
-public class VentanaTematica extends javax.swing.JFrame {
+public class VentanaTematica extends javax.swing.JFrame implements Observer{
     public ArrayList<Tematica> tematicasRegistradas;
     private Set<String> temas = new HashSet<>();
 
-    public VentanaTematica(ArrayList<Tematica> listaDeTematicas) {
+
+    public VentanaTematica(Sistema sistema) {
         initComponents();
-        this.tematicasRegistradas = listaDeTematicas;
+        this.sistema=sistema;
+        this.tematicasRegistradas = sistema.getListaDeTematicas();
     }
 
     private VentanaTematica() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-
+    public void botonRegistrar(){
+    String nombreTematicaTexto = nombreTematica.getText().toUpperCase();
+    String descripcionTematicaTexto = areaDescripcion.getText();
+        
+    if (temas.contains(nombreTematicaTexto.toUpperCase())) {    
+        return;
+        }    
+    temas.add(nombreTematicaTexto);
+    Tematica tematica = new Tematica();
+    tematica.setNombre(nombreTematicaTexto);
+    tematica.setDescripcion(descripcionTematicaTexto);
+    sistema.agregarTematica(tematica);
+    nombreTematica.setText("");
+    areaDescripcion.setText("");
+    }
+    //Si hay que cargar datos, tiene que haber un metodo que muestre todos los datos
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -36,12 +56,6 @@ public class VentanaTematica extends javax.swing.JFrame {
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel3.setText("Registro de temática");
-
-        nombreTematica.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nombreTematicaActionPerformed(evt);
-            }
-        });
 
         areaDescripcion.setColumns(20);
         areaDescripcion.setRows(5);
@@ -125,32 +139,12 @@ public class VentanaTematica extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void nombreTematicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombreTematicaActionPerformed
-    
-    }//GEN-LAST:event_nombreTematicaActionPerformed
-
     private void CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelarActionPerformed
         this.dispose();
     }//GEN-LAST:event_CancelarActionPerformed
 
     private void RegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegistrarActionPerformed
-    String nombreTematicaTexto = nombreTematica.getText();
-    String descripcionTematicaTexto = areaDescripcion.getText();
-        
-    if (temas.contains(nombreTematicaTexto)) {
-        System.out.println("ya existe: "+ nombreTematicaTexto+ " en " + tematicasRegistradas);
-            return;
-        }    
-            temas.add(nombreTematicaTexto);
-            Tematica tematica = new Tematica();
-            tematica.setNombre(nombreTematicaTexto);
-            tematica.setDescripcion(descripcionTematicaTexto);
-            tematicasRegistradas.add(tematica);
-            nombreTematica.setText("");
-            areaDescripcion.setText("");
-            System.out.println("Tematica registrada: " + nombreTematicaTexto);
-        
-
+    botonRegistrar();
     }//GEN-LAST:event_RegistrarActionPerformed
     
     public static void main(String args[]) {
@@ -197,4 +191,9 @@ public class VentanaTematica extends javax.swing.JFrame {
     private javax.swing.JTextField nombreTematica;
     private javax.swing.JPanel panelPrincipal;
     // End of variables declaration//GEN-END:variables
+    private Sistema sistema;
+    @Override
+    public void update(Observable o, Object arg) {
+        
+    }
 }

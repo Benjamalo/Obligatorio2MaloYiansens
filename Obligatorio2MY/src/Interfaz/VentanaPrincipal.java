@@ -167,14 +167,13 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonTematicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonTematicaActionPerformed
-        VentanaTematica ventanatema = new VentanaTematica(sistema.getListaDeTematicas());
+        VentanaTematica ventanatema = new VentanaTematica(sistema);
         ventanatema.setVisible(true);
     }//GEN-LAST:event_botonTematicaActionPerformed
 
     private void botonPosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonPosActionPerformed
-        VentanaPostulante ventanaPos = new VentanaPostulante(sistema.getListaDeTematicas(), sistema.getListaDePostulantes(),sistema);
+        VentanaPostulante ventanaPos = new VentanaPostulante(sistema);
         ventanaPos.setVisible(true);
-        System.out.println("SISTEMA: "+ sistema.toString());
     }//GEN-LAST:event_botonPosActionPerformed
 
     private void botonEvaluadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEvaluadorActionPerformed
@@ -189,7 +188,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_botonConsultaActionPerformed
 
     private void botonBajaPosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBajaPosActionPerformed
-        VentanaBajaPostulante ventanaBajaPos = new VentanaBajaPostulante(sistema.getListaDePostulantes());
+        VentanaBajaPostulante ventanaBajaPos = new VentanaBajaPostulante(sistema);
         ventanaBajaPos.setVisible(true);
     }//GEN-LAST:event_botonBajaPosActionPerformed
 

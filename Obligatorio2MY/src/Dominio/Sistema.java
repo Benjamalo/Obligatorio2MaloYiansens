@@ -263,8 +263,8 @@ public class Sistema implements Serializable{
         }
     }
     
-    public void abrirDatos(){
-        String nombreArchivo = "sistema_serializado.dat";
+    /*public void abrirDatos(){
+        String nombreArchivo = "sistema_guardado.dat";
 
         try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(nombreArchivo))) {
             // Deserializar el objeto desde el archivo
@@ -284,7 +284,7 @@ public class Sistema implements Serializable{
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
+    }*/
     
     public boolean establecerFecha(int fecha){
         return fecha>=1950 && fecha<=2023;

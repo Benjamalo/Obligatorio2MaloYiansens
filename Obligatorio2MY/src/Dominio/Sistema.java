@@ -1,6 +1,9 @@
 
 package Dominio;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.*;
 
@@ -247,6 +250,18 @@ public class Sistema implements Serializable {
     
     public boolean establecerFecha(int fecha){
         return fecha>=1950;
+    }
+    
+    public void guardarDatos(){
+        String nombreArchivo = "sistema_guardado.ser";
+
+        try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(nombreArchivo))) {
+            out.writeObject(this);
+            out.close();
+            System.out.println("Datos guardados correctamente.");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
     
     public boolean revisar(String nombre, int cedula, int telefono, String mail, String linkedin){

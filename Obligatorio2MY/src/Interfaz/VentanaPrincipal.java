@@ -21,7 +21,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         botonPos = new javax.swing.JButton();
         botonEvaluador = new javax.swing.JButton();
         botonConsulta = new javax.swing.JButton();
-        botonPuesto = new javax.swing.JButton();
         botonBajaPos = new javax.swing.JButton();
         botonEntrevista = new javax.swing.JButton();
         botonRegistroPuesto = new javax.swing.JButton();
@@ -29,6 +28,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         consultaTematica = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         Titulo.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         Titulo.setText("Menu Principal");
@@ -61,13 +65,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             }
         });
 
-        botonPuesto.setText("Ingresar Puestos");
-        botonPuesto.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonPuestoActionPerformed(evt);
-            }
-        });
-
         botonBajaPos.setText("Baja de Postulante");
         botonBajaPos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -96,7 +93,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             }
         });
 
-        consultaTematica.setText("Consulta Por Tematicas Requeridas");
+        consultaTematica.setText("Consulta Tematicas");
         consultaTematica.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 consultaTematicaActionPerformed(evt);
@@ -119,29 +116,23 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                     .addComponent(botonConsulta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(botonEntrevista, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(botonBajaPos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(botonPuesto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(consultaTematica, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(41, 41, 41))
             .addGroup(layout.createSequentialGroup()
-                .addGap(211, 211, 211)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(12, 12, 12)
-                        .addComponent(botonTematica)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(Titulo)
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                .addGap(223, 223, 223)
+                .addComponent(botonTematica)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(consultaTematica)
-                .addGap(128, 128, 128))
+                .addComponent(Titulo)
+                .addGap(194, 194, 194))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(17, 17, 17)
+                .addGap(18, 18, 18)
                 .addComponent(Titulo)
-                .addGap(30, 30, 30)
+                .addGap(29, 29, 29)
                 .addComponent(botonTematica)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -157,11 +148,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                     .addComponent(botonRegistroPuesto))
                 .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(botonPuesto)
-                    .addComponent(botonHistorial))
-                .addGap(18, 18, 18)
-                .addComponent(consultaTematica)
-                .addContainerGap(177, Short.MAX_VALUE))
+                    .addComponent(botonHistorial)
+                    .addComponent(consultaTematica))
+                .addContainerGap(50, Short.MAX_VALUE))
         );
 
         pack();
@@ -203,10 +192,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         regPusto.setVisible(true);
     }//GEN-LAST:event_botonRegistroPuestoActionPerformed
 
-    private void botonPuestoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonPuestoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_botonPuestoActionPerformed
-
     private void botonHistorialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonHistorialActionPerformed
         VentanaHistorial ventanaHistorial = new VentanaHistorial(sistema);
         ventanaHistorial.setVisible(true);
@@ -217,6 +202,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         ventanaTematica.setVisible(true);
     }//GEN-LAST:event_consultaTematicaActionPerformed
 
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        sistema.guardarDatos();
+    }//GEN-LAST:event_formWindowClosing
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Titulo;
@@ -226,7 +215,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton botonEvaluador;
     private javax.swing.JButton botonHistorial;
     private javax.swing.JButton botonPos;
-    private javax.swing.JButton botonPuesto;
     private javax.swing.JButton botonRegistroPuesto;
     private javax.swing.JButton botonTematica;
     private javax.swing.JButton consultaTematica;

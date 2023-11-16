@@ -1,7 +1,7 @@
 
 package Dominio;
 
-import Interfaz.VentanaPrincipal;
+import Interfaz.VentanaInicial;
 
 
 
@@ -10,7 +10,7 @@ public class main {
     
     public static void main(String[] args) {
 
-        VentanaPrincipal ventana = new VentanaPrincipal();
+        VentanaInicial ventana = new VentanaInicial();
         ventana.setVisible(true);
     }
     

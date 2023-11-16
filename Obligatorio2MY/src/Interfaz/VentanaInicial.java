@@ -84,7 +84,9 @@ public class VentanaInicial extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonVacioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonVacioActionPerformed
-        // TODO add your handling code here:
+        VentanaPrincipal ventana = new VentanaPrincipal(this.sistema);
+        ventana.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_botonVacioActionPerformed
 
     private void botonRecuperarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRecuperarActionPerformed

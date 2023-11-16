@@ -109,17 +109,7 @@ public class VentanaInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_botonMantenerActionPerformed
 
     private void botonVacioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonVacioActionPerformed
-        String nombreArchivo = "sistema_guardado.dat";
-        
-        Path archivoPath = Paths.get(nombreArchivo);
-
-        try {
-            Files.deleteIfExists(archivoPath);
-            System.out.println("Datos borrados correctamente.");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        VentanaPrincipal ventana = new VentanaPrincipal(this.sistema);
+        VentanaPrincipal ventana = new VentanaPrincipal(new Sistema());
         ventana.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_botonVacioActionPerformed

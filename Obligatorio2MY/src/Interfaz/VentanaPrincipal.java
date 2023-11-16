@@ -8,7 +8,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     public VentanaPrincipal(Sistema sistema) {
         initComponents();
-        sistema = sistema;
+        this.sistema = sistema;
     }
 
     

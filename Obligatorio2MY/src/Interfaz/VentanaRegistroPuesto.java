@@ -215,7 +215,7 @@ public class VentanaRegistroPuesto extends javax.swing.JFrame {
 
     private void botonRegistrarPuestoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRegistrarPuestoActionPerformed
         String nombreDelPuesto = nombrePuesto.getText();
-        if (sistema.comprueboPuesto(nombreDelPuesto)) {
+        if (sistema.comprueboPuesto(nombreDelPuesto.toLowerCase())) {
             JOptionPane.showMessageDialog(null, "Puesto ya registrado.", "Error", JOptionPane.ERROR_MESSAGE);
             nombrePuesto.setText("");
             grupoBotones.clearSelection();

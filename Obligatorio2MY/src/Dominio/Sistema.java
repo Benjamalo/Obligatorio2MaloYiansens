@@ -4,7 +4,7 @@ package Dominio;
 import java.io.Serializable;
 import java.util.*;
 
-public class Sistema extends Observable implements Serializable {
+public class Sistema implements Serializable {
     private ArrayList<Postulante> listaDePostulantes;
     private ArrayList<Tematica> listaDeTematicas;
     private ArrayList<Entrevistador> listaDeEntrevistadores;
@@ -161,12 +161,10 @@ public class Sistema extends Observable implements Serializable {
     
     public void setListaDePuestos(Puesto nuevoPuesto) {
         this.listaDePuestos.add(nuevoPuesto);
-        setChanged();
-        notifyObservers();
     }
     public boolean comprueboPuesto(String nombrePuesto){
         for(Puesto puesto : listaDePuestos){
-            if (puesto.getNombre().equals(nombrePuesto)) {
+            if (puesto.getNombre().toLowerCase().equals(nombrePuesto)) {
                 return true;
             }
         }
@@ -232,8 +230,6 @@ public class Sistema extends Observable implements Serializable {
     }
     public void agregarEntrevistador(Entrevistador entrevistador){
         this.listaDeEntrevistadores.add(entrevistador);
-        setChanged();
-        notifyObservers();
     }
     public boolean existeCedula(int cedula){
         for(Postulante postulante : listaDePostulantes){

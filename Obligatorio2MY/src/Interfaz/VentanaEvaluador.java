@@ -164,7 +164,7 @@ public class VentanaEvaluador extends javax.swing.JFrame {
             return;
         }
         if (!sistema.establecerFecha(fecha)){
-            JOptionPane.showMessageDialog(null, "Fecha de ingreso menor al 1950s.", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Ingrese una fecha válida.", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
        
@@ -174,7 +174,6 @@ public class VentanaEvaluador extends javax.swing.JFrame {
         textoCedula.setText("");
         textoDireccion.setText("");
         seleccionFecha.setValue(0);
-        //quiero probar crear un metodo que llame a Sistema
     }//GEN-LAST:event_botonRegistrarActionPerformed
 
     

@@ -1,7 +1,9 @@
 
 package Dominio;
 
-public class TematicaExperiencia {
+import java.io.Serializable;
+
+public class TematicaExperiencia implements Serializable{
     private String nombreTematica;
     private int nivelExperiencia;
 

@@ -1,6 +1,8 @@
 
 package Dominio;
 
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
@@ -17,8 +19,8 @@ public class Sistema implements Serializable {
     private ArrayList<String> Temario;
     private ArrayList<String> PersonaACEPTADA;
     private HashMap<String, Integer> mapeoDePostulantes;
-
- 
+    private final PropertyChangeSupport manejador;
+    
     public Sistema(){
         PersonaACEPTADA = new ArrayList<>();
         Temario = new ArrayList<>();
@@ -28,12 +30,20 @@ public class Sistema implements Serializable {
         listaDeEntrevistadores = new ArrayList<>();
         listaDeEntrevistas = new ArrayList<>();
         mapeoDePostulantes = new HashMap<>();
+        this.manejador = new PropertyChangeSupport(this);
     }
     
 
     
     //Voy a tener que crear un metodo para que me elimine TODO de un postulante cuando se baja (incluido entrevistas)
     
+    public void addPropertyChangeListener(PropertyChangeListener listener){
+        manejador.addPropertyChangeListener(listener);
+    }
+    
+    public void removePropertyChangeListener(PropertyChangeListener listener){
+        manejador.removePropertyChangeListener(listener);
+    }
     
     public int puestosConTematica(String nombreTematica){
         int contador= 0;
@@ -169,6 +179,7 @@ public class Sistema implements Serializable {
     
     public void setListaDePuestos(Puesto nuevoPuesto) {
         this.listaDePuestos.add(nuevoPuesto);
+        manejador.firePropertyChange("Puestos", null, nuevoPuesto);
     }
     public boolean comprueboPuesto(String nombrePuesto){
         for(Puesto puesto : listaDePuestos){
@@ -228,6 +239,7 @@ public class Sistema implements Serializable {
     
     public void agregarTematica(Tematica tema){
         this.listaDeTematicas.add(tema);
+        manejador.firePropertyChange("Tematicas", null, tema);
     }
     public void agregarPostulante(Postulante postulante){
         this.listaDePostulantes.add(postulante);

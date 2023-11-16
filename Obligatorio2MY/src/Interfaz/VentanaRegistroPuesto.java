@@ -4,13 +4,15 @@ package Interfaz;
 import Dominio.Puesto;
 import Dominio.Sistema;
 import Dominio.Tematica;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
-public class VentanaRegistroPuesto extends javax.swing.JFrame {
+public class VentanaRegistroPuesto extends javax.swing.JFrame implements PropertyChangeListener{
     private ButtonGroup grupoBotones;
     private String modalidad;
     private DefaultComboBoxModel<String> modeloTematicas;
@@ -27,11 +29,7 @@ public class VentanaRegistroPuesto extends javax.swing.JFrame {
         
         modeloVacio = new DefaultListModel<>();
 
-        listaTematicasSeleccionadas.setModel(modeloVacio);
-        for (Tematica tematicas : sistema.getListaDeTematicas()) {
-            modeloTematicas.addElement(tematicas.getNombre()); 
-        }
-        listaTemas.setModel(modeloTematicas);
+        this.sistema.addPropertyChangeListener(this);
 
         grupoBotones = new ButtonGroup();
         grupoBotones.add(radioMixto);
@@ -39,6 +37,13 @@ public class VentanaRegistroPuesto extends javax.swing.JFrame {
         grupoBotones.add(radioRemoto);    
     }
 
+    public void cargarTematicas(){
+        listaTematicasSeleccionadas.setModel(modeloVacio);
+        for (Tematica tematicas : sistema.getListaDeTematicas()) {
+            modeloTematicas.addElement(tematicas.getNombre()); 
+        }
+        listaTemas.setModel(modeloTematicas);
+    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -286,4 +291,9 @@ public class VentanaRegistroPuesto extends javax.swing.JFrame {
     private javax.swing.JRadioButton radioPresencial;
     private javax.swing.JRadioButton radioRemoto;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
+        cargarTematicas();
+    }
 }

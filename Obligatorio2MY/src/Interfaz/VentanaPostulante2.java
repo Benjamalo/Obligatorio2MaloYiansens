@@ -5,13 +5,13 @@ import Dominio.Postulante;
 import Dominio.Sistema;
 import Dominio.Tematica;
 import Dominio.TematicaExperiencia;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
-import java.util.Observable;
-import java.util.Observer;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 
-public class VentanaPostulante2 extends javax.swing.JFrame{
+public class VentanaPostulante2 extends javax.swing.JFrame implements PropertyChangeListener{
     
     private ArrayList<Tematica> temas;
     private DefaultComboBoxModel<String> comboBoxModel;
@@ -44,6 +44,11 @@ public class VentanaPostulante2 extends javax.swing.JFrame{
         modalidadPostulante = modalidad;
         this.postulantes = sistema.getListaDePostulantes();
         temas = new ArrayList<>();
+        this.sistema.addPropertyChangeListener(this);
+        cargarTematicas();
+    }
+    
+    public void cargarTematicas(){
         temas.addAll(sistema.getListaDeTematicas());
         DefaultListModel<String> emptyListModel = new DefaultListModel<>();
         listaExperiencia.setModel(emptyListModel);
@@ -51,7 +56,7 @@ public class VentanaPostulante2 extends javax.swing.JFrame{
         listaTema.setModel(comboBoxModel);
         for (Tematica tematica : temas) {
             comboBoxModel.addElement(tematica.getNombre()); 
-        }   
+        }
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -262,5 +267,10 @@ public class VentanaPostulante2 extends javax.swing.JFrame{
     private javax.swing.JComboBox<String> listaTema;
     private javax.swing.JSpinner numeroNivel;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
+        cargarTematicas();
+    }
 
 }

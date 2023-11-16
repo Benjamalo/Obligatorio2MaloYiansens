@@ -2,21 +2,27 @@ package Interfaz;
 
 import Dominio.Sistema;
 import Dominio.Tematica;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import javax.swing.DefaultListModel;
 
-public class VentanaConsultaTematica extends javax.swing.JFrame {
+public class VentanaConsultaTematica extends javax.swing.JFrame implements PropertyChangeListener{
     DefaultListModel<String> modeloListaTematicas = new DefaultListModel<>();
     private Sistema sistema;
     
     public VentanaConsultaTematica(Sistema sistema) {
         initComponents();
         this.sistema = sistema;
+        this.sistema.addPropertyChangeListener(this);
+        cargarTematicas();
+    }
+
+    public void cargarTematicas(){
         for (Tematica tematica : sistema.getListaDeTematicas()) {
             modeloListaTematicas.addElement(tematica.getNombre());
         }
-        listaTematicas.setModel(modeloListaTematicas);     
+        listaTematicas.setModel(modeloListaTematicas);
     }
-
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -156,4 +162,9 @@ public class VentanaConsultaTematica extends javax.swing.JFrame {
     private javax.swing.JLabel puestosParaTematica;
     private javax.swing.JLabel subtitulo;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
+        cargarTematicas();
+    }
 }

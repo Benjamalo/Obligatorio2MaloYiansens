@@ -3,29 +3,32 @@ package Interfaz;
 
 import Dominio.Puesto;
 import Dominio.Sistema;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 
-public class VentanaConsultaPuesto extends javax.swing.JFrame {
+public class VentanaConsultaPuesto extends javax.swing.JFrame implements PropertyChangeListener{
     private Sistema sistema;
     DefaultListModel<String> modeloListaPuestos = new DefaultListModel<>();
     DefaultListModel<String> modeloListaPostulantes = new DefaultListModel<>();
     DefaultListModel<String> modeloListaVacia;
     
     
-    
-    
     public VentanaConsultaPuesto(Sistema sistema) {
         initComponents();
         this.sistema = sistema;
+        this.sistema.addPropertyChangeListener(this);
         modeloListaVacia = new DefaultListModel<>();
-
+        cargarDatos(); 
+    }
+    
+    public void cargarDatos(){
         for (Puesto puesto : sistema.getListaDePuestos()) {
             modeloListaPuestos.addElement(puesto.getNombre());
         }
-        listaDePuestos.setModel(modeloListaPuestos);        
+        listaDePuestos.setModel(modeloListaPuestos); 
     }
-
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -211,4 +214,9 @@ public class VentanaConsultaPuesto extends javax.swing.JFrame {
     private javax.swing.JSeparator separador;
     private javax.swing.JLabel titulo;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
+        cargarDatos();
+    }
 }

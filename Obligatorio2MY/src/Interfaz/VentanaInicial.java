@@ -11,6 +11,7 @@ import java.io.ObjectInputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -18,10 +19,10 @@ import java.nio.file.Paths;
  */
 public class VentanaInicial extends javax.swing.JFrame {
 
-    Sistema sistema;
+    Sistema sistema = new Sistema();
     public VentanaInicial() {
         initComponents();
-        this.sistema = new Sistema();
+        
     }
 
     /**
@@ -63,10 +64,6 @@ public class VentanaInicial extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(titulo)
-                .addGap(193, 193, 193))
             .addGroup(layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addComponent(subtitulo)
@@ -77,6 +74,10 @@ public class VentanaInicial extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(botonVacio, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(46, 46, 46))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(titulo)
+                .addGap(205, 205, 205))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -96,10 +97,11 @@ public class VentanaInicial extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonMantenerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonMantenerActionPerformed
-        String nombreArchivo = "sistema_guardado.dat";
+        String nombreArchivo = "sistema_guardado.ser";
         
         try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(nombreArchivo))) {
             this.sistema = (Sistema) in.readObject();
+            in.close();
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
@@ -109,7 +111,8 @@ public class VentanaInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_botonMantenerActionPerformed
 
     private void botonVacioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonVacioActionPerformed
-        VentanaPrincipal ventana = new VentanaPrincipal(new Sistema());
+
+        VentanaPrincipal ventana = new VentanaPrincipal(this.sistema);
         ventana.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_botonVacioActionPerformed

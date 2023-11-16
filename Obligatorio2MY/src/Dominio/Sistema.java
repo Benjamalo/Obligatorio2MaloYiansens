@@ -253,10 +253,11 @@ public class Sistema implements Serializable{
     }
     
     public void guardarDatos(){
-        String nombreArchivo = "sistema_guardado.dat";
+        String nombreArchivo = "sistema_guardado.ser";
 
         try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(nombreArchivo))) {
             out.writeObject(this);
+            out.close();
             System.out.println("Datos guardados correctamente.");
         } catch (IOException e) {
             e.printStackTrace();

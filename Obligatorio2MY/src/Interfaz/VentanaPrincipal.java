@@ -4,11 +4,13 @@ package Interfaz;
 import Dominio.Sistema;
 
 public class VentanaPrincipal extends javax.swing.JFrame {
-    Sistema sistema;
+    private Sistema sistema;
 
     public VentanaPrincipal(Sistema sistema) {
         initComponents();
+
         this.sistema = sistema;
+
     }
 
     

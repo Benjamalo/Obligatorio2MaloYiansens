@@ -82,7 +82,12 @@ public class Sistema implements Serializable {
                     boolean encontrado = false;
                     System.out.println(listaDeEntrevistas.size());
                     for (Entrevista entrevista : listaDeEntrevistas) {
-                        int puntaje = entrevista.getPuntaje();
+                        int  puntajeUltimaEntrevista=entrevista.getPuntaje();
+                        for(Entrevista otra: listaDeEntrevistas){
+                            if (entrevista.getPostulante().getNombre().equals(otra.getPostulante().getNombre())) {
+                                puntajeUltimaEntrevista= otra.getPuntaje();
+                            }
+                        }
                         if (postulante.getNombre().equals(entrevista.getPostulante().getNombre()) &&
                             postulante.getModalidad().equals(puesto.getTipoDeTrabajo())){
                             for(String temaRequerido : puesto.getTemasRequeridos()){
@@ -91,7 +96,7 @@ public class Sistema implements Serializable {
                                     if (temaRequerido.equals(tematicaPostulante.getNombreTematica())&&
                                         tematicaPostulante.getNivelExperiencia()>=nivelPuesto) {
                                         //PersonaACEPTADA.add(postulante.getNombre());
-                                        mapeoDePostulantes.put(postulante.getNombre(), puntaje);
+                                        mapeoDePostulantes.put(postulante.getNombre(), puntajeUltimaEntrevista);
                                         System.out.println("Agrego persona aceptado");
                                         encontrado = true;
                                         break;

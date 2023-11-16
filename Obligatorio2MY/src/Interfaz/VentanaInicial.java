@@ -1,14 +1,18 @@
 
 package Interfaz;
 
+import Dominio.Sistema;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+
 
 public class VentanaInicial extends javax.swing.JFrame {
 
-    /**
-     * Creates new form VentanaInicial
-     */
+    private Sistema sistema;
     public VentanaInicial() {
         initComponents();
+        
     }
 
     @SuppressWarnings("unchecked")
@@ -84,7 +88,17 @@ public class VentanaInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_botonVacioActionPerformed
 
     private void botonRecuperarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRecuperarActionPerformed
-        // TODO add your handling code here:
+        String nombreArchivo = "sistema_guardado.ser";
+        
+        try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(nombreArchivo))) {
+            this.sistema = (Sistema) in.readObject();
+            in.close();
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        VentanaPrincipal ventana = new VentanaPrincipal(this.sistema);
+        ventana.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_botonRecuperarActionPerformed
 
     /**

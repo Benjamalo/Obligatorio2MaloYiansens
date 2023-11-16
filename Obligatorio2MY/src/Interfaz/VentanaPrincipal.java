@@ -168,12 +168,12 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonTematicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonTematicaActionPerformed
-        VentanaTematica ventanatema = new VentanaTematica(sistema);
+        VentanaTematica ventanatema = new VentanaTematica(this.sistema);
         ventanatema.setVisible(true);
     }//GEN-LAST:event_botonTematicaActionPerformed
 
     private void botonPosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonPosActionPerformed
-        VentanaPostulante ventanaPos = new VentanaPostulante(sistema);
+        VentanaPostulante ventanaPos = new VentanaPostulante(this.sistema);
         ventanaPos.setVisible(true);
     }//GEN-LAST:event_botonPosActionPerformed
 

@@ -9,7 +9,7 @@ import java.io.ObjectInputStream;
 
 public class VentanaInicial extends javax.swing.JFrame {
 
-    private Sistema sistema;
+    private Sistema sistema = new Sistema();
     public VentanaInicial() {
         initComponents();
         
@@ -84,7 +84,7 @@ public class VentanaInicial extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonVacioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonVacioActionPerformed
-        VentanaPrincipal ventana = new VentanaPrincipal(this.sistema);
+        VentanaPrincipal ventana = new VentanaPrincipal(new Sistema());
         ventana.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_botonVacioActionPerformed

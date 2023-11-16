@@ -13,24 +13,25 @@ import javax.swing.JOptionPane;
 public class VentanaRegistroPuesto extends javax.swing.JFrame {
     private ButtonGroup grupoBotones;
     private String modalidad;
-    private DefaultComboBoxModel<String> comboBoxModelTematicas;
+    private DefaultComboBoxModel<String> modeloTematicas;
     private Sistema sistema;
     DefaultListModel<String> modeloListaTematica = new DefaultListModel<>();
     private ArrayList<String> tematicasDelPuesto;
-    DefaultListModel<String> emptyListModel ;
+    DefaultListModel<String> modeloVacio;
+    
     public VentanaRegistroPuesto(Sistema sistema) {
         initComponents();
         this.sistema = sistema;
         tematicasDelPuesto= new ArrayList<>();
-        comboBoxModelTematicas = new DefaultComboBoxModel<>();
+        modeloTematicas = new DefaultComboBoxModel<>();
         
-        emptyListModel = new DefaultListModel<>();
+        modeloVacio = new DefaultListModel<>();
 
-        listaTematicasSeleccionadas.setModel(emptyListModel);
+        listaTematicasSeleccionadas.setModel(modeloVacio);
         for (Tematica tematicas : sistema.getListaDeTematicas()) {
-            comboBoxModelTematicas.addElement(tematicas.getNombre()); 
+            modeloTematicas.addElement(tematicas.getNombre()); 
         }
-        listaTemas.setModel(comboBoxModelTematicas);
+        listaTemas.setModel(modeloTematicas);
 
         grupoBotones = new ButtonGroup();
         grupoBotones.add(radioMixto);
@@ -219,7 +220,7 @@ public class VentanaRegistroPuesto extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Puesto ya registrado.", "Error", JOptionPane.ERROR_MESSAGE);
             nombrePuesto.setText("");
             grupoBotones.clearSelection();
-            listaTematicasSeleccionadas.setModel(emptyListModel);
+            listaTematicasSeleccionadas.setModel(modeloVacio);
             tematicasDelPuesto.clear();
             modeloListaTematica = new DefaultListModel<>();
             return;     
@@ -228,7 +229,7 @@ public class VentanaRegistroPuesto extends javax.swing.JFrame {
         sistema.setListaDePuestos(puesto);
         nombrePuesto.setText("");
         grupoBotones.clearSelection();
-        listaTematicasSeleccionadas.setModel(emptyListModel);
+        listaTematicasSeleccionadas.setModel(modeloVacio);
         tematicasDelPuesto.clear();
         modeloListaTematica = new DefaultListModel<>();
         

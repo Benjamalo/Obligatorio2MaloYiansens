@@ -431,6 +431,6 @@ public class VentanaHistorial extends javax.swing.JFrame implements PropertyChan
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         cargarDatos();
-        cargarTabla();
+
     }
 }

@@ -60,6 +60,11 @@ public class VentanaConsultaTematica extends javax.swing.JFrame implements Prope
         Titulo.setText("Consulta de temáticas requeridas");
 
         botonSalir.setText("Salir");
+        botonSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonSalirActionPerformed(evt);
+            }
+        });
 
         subtitulo.setText("Seleccione una temática:");
 
@@ -149,6 +154,10 @@ public class VentanaConsultaTematica extends javax.swing.JFrame implements Prope
         
 
     }//GEN-LAST:event_listaTematicasValueChanged
+
+    private void botonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSalirActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_botonSalirActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Titulo;

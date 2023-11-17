@@ -51,13 +51,12 @@ public class VentanaPostulante2 extends javax.swing.JFrame implements PropertyCh
     public void cargarTematicas(){
         temas.clear();
         temas.addAll(sistema.getListaDeTematicas());
-        DefaultListModel<String> emptyListModel = new DefaultListModel<>();
-        listaExperiencia.setModel(emptyListModel);
         modelo = new DefaultComboBoxModel<>();
         listaTema.setModel(modelo);
         for (Tematica tematica : temas) {
             modelo.addElement(tematica.getNombre()); 
         }
+
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents

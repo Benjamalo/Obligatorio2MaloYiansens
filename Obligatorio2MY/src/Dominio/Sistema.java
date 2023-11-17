@@ -212,11 +212,19 @@ public class Sistema implements Serializable {
         return listaDeEntrevistas;
     }
 
-    public void setListaDeEntrevistas(Entrevista listaDeEntrevistas) {
-        contadorEntrevista++;
-        this.listaDeEntrevistas.add(listaDeEntrevistas);
+    public void setListaDeEntrevistas(ArrayList<Entrevista> listaDeEntrevistas) {
+        //contadorEntrevista++;
+        //this.listaDeEntrevistas.add(listaDeEntrevistas);
+        //manejador.firePropertyChange("Entrevistas", null, entrevista);
+        this.listaDeEntrevistas = listaDeEntrevistas;
     }
-
+    
+    public void agregarEntrevista(Entrevista entrevista){
+        contadorEntrevista++;
+        this.listaDeEntrevistas.add(entrevista);
+        manejador.firePropertyChange("Entrevistas", null, entrevista);
+    }
+    
     public ArrayList<Tematica> getListaDeTematicas() {
         return listaDeTematicas;
     }

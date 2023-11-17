@@ -24,11 +24,7 @@ public class VentanaRegistroPuesto extends javax.swing.JFrame implements Propert
     public VentanaRegistroPuesto(Sistema sistema) {
         initComponents();
         this.sistema = sistema;
-        tematicasDelPuesto= new ArrayList<>();
-        modeloTematicas = new DefaultComboBoxModel<>();
-        
-        modeloVacio = new DefaultListModel<>();
-
+        cargarTematicas();
         this.sistema.addPropertyChangeListener(this);
 
         grupoBotones = new ButtonGroup();
@@ -38,12 +34,16 @@ public class VentanaRegistroPuesto extends javax.swing.JFrame implements Propert
     }
 
     public void cargarTematicas(){
+        tematicasDelPuesto= new ArrayList<>();
+        modeloTematicas = new DefaultComboBoxModel<>();
+        modeloVacio = new DefaultListModel<>();
         listaTematicasSeleccionadas.setModel(modeloVacio);
         for (Tematica tematicas : sistema.getListaDeTematicas()) {
             modeloTematicas.addElement(tematicas.getNombre()); 
         }
         listaTemas.setModel(modeloTematicas);
     }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -114,11 +114,6 @@ public class VentanaRegistroPuesto extends javax.swing.JFrame implements Propert
         jScrollPane1.setViewportView(listaTematicasSeleccionadas);
 
         listaTemas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        listaTemas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                listaTemasActionPerformed(evt);
-            }
-        });
 
         botonAgregarTematica.setText("Agregar");
         botonAgregarTematica.addActionListener(new java.awt.event.ActionListener() {
@@ -251,10 +246,6 @@ public class VentanaRegistroPuesto extends javax.swing.JFrame implements Propert
     private void radioMixtoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioMixtoActionPerformed
         this.modalidad = "Mixto";
     }//GEN-LAST:event_radioMixtoActionPerformed
-
-    private void listaTemasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listaTemasActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_listaTemasActionPerformed
 
     private void botonAgregarTematicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAgregarTematicaActionPerformed
         String tematicaSeleccionada = (String) listaTemas.getSelectedItem();

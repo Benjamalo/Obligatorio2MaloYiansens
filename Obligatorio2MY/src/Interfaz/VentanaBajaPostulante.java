@@ -23,7 +23,7 @@ public class VentanaBajaPostulante extends javax.swing.JFrame implements Propert
         DefaultComboBoxModel modelo = new DefaultComboBoxModel();
         comboPostulantes.setModel(modelo);
         for(Postulante pos : sistema.getListaDePostulantes()){
-            comboPostulantes.addItem(pos.toString());
+            comboPostulantes.addItem(pos.getNombre() + " (" + pos.getCedula()+")");
         }
         botonEliminar.setEnabled(false);
     }

@@ -55,11 +55,6 @@ public class VentanaEntrevista extends javax.swing.JFrame implements PropertyCha
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         listaEvaluadores.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        listaEvaluadores.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                listaEvaluadoresActionPerformed(evt);
-            }
-        });
 
         listaPostulantes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -189,7 +184,7 @@ public class VentanaEntrevista extends javax.swing.JFrame implements PropertyCha
         Postulante postulante = sistema.darPostulante(nombrePostulante);
         int contadorEntrevista = sistema.contadorEntrevista;
         Entrevista entrevista = new Entrevista(entrevistador,postulante,puntajeDeEntrevista,comentariosDeEntrevista,contadorEntrevista);
-        sistema.setListaDeEntrevistas(entrevista);
+        sistema.agregarEntrevista(entrevista);
         //listaEvaluadores.setSelectedIndex(-1);  Deselecciona todos los elementos
         //listaPostulantes.setSelectedIndex(-1);  Deselecciona todos los elementos
         puntajeEntrevista.setValue(0); 
@@ -199,10 +194,6 @@ public class VentanaEntrevista extends javax.swing.JFrame implements PropertyCha
     private void botonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCancelarActionPerformed
         this.dispose();
     }//GEN-LAST:event_botonCancelarActionPerformed
-
-    private void listaEvaluadoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listaEvaluadoresActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_listaEvaluadoresActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

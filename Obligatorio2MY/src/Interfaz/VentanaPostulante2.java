@@ -31,6 +31,8 @@ public class VentanaPostulante2 extends javax.swing.JFrame implements PropertyCh
     
     public VentanaPostulante2(String nombre, int cedula, String direccion, String linkedin, int telefono,String mail,String modalidad, Sistema sistema) {
         initComponents();
+        DefaultListModel<String> emptyListModel = new DefaultListModel<>();
+        listaExperiencia.setModel(emptyListModel);
         this.sistema = sistema;
         tematicaConXP= new ArrayList<>();
         temasAgregados = new ArrayList<>();

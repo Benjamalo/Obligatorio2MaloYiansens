@@ -15,6 +15,9 @@ public class VentanaConsultaTematica extends javax.swing.JFrame implements Prope
         this.sistema = sistema;
         this.sistema.addPropertyChangeListener(this);
         cargarTematicas();
+
+        DefaultListModel<String> emptyListModel = new DefaultListModel<>();
+        listaTematicas.setModel(emptyListModel);
     }
 
     public void cargarTematicas(){

@@ -21,6 +21,8 @@ public class VentanaConsultaPuesto extends javax.swing.JFrame implements Propert
         this.sistema.addPropertyChangeListener(this);
         modeloListaVacia = new DefaultListModel<>();
         cargarDatos(); 
+        DefaultListModel<String> emptyListModel = new DefaultListModel<>();
+        listaDePostulantes.setModel(emptyListModel);
     }
     
     public void cargarDatos(){

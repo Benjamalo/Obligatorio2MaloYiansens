@@ -26,7 +26,8 @@ public class VentanaRegistroPuesto extends javax.swing.JFrame implements Propert
         this.sistema = sistema;
         cargarTematicas();
         this.sistema.addPropertyChangeListener(this);
-
+        DefaultListModel<String> emptyListModel = new DefaultListModel<>();
+        listaTematicasSeleccionadas.setModel(emptyListModel);
         grupoBotones = new ButtonGroup();
         grupoBotones.add(radioMixto);
         grupoBotones.add(radioPresencial);

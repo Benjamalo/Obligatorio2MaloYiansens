@@ -4,31 +4,36 @@ import Dominio.Entrevista;
 import Dominio.Entrevistador;
 import Dominio.Postulante;
 import Dominio.Sistema;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import javax.swing.DefaultComboBoxModel;
 
-public class VentanaEntrevista extends javax.swing.JFrame {
-    private DefaultComboBoxModel<String> comboBoxModelEntrevistadores;
-    private DefaultComboBoxModel<String> comboBoxModelPostulantes;
+public class VentanaEntrevista extends javax.swing.JFrame implements PropertyChangeListener{
+    private DefaultComboBoxModel<String> modeloEntrevistadores;
+    private DefaultComboBoxModel<String> modeloPostulantes;
 
     private Sistema sistema;
     public VentanaEntrevista(Sistema sistema) {
         initComponents();
         this.sistema = sistema;
-
-         comboBoxModelEntrevistadores = new DefaultComboBoxModel<>();
-         comboBoxModelPostulantes = new DefaultComboBoxModel<>();
-         for (Entrevistador entrevistador : sistema.getListaDeEntrevistadores()) {
-             System.out.println("entrevistador: "+ entrevistador.getNombre());
-            comboBoxModelEntrevistadores.addElement(entrevistador.getNombre()); 
+        cargarDatos();
+        this.sistema.addPropertyChangeListener(this);
+    }
+    
+    public void cargarDatos(){
+        modeloEntrevistadores = new DefaultComboBoxModel<>();
+        modeloPostulantes = new DefaultComboBoxModel<>();
+        for (Entrevistador entrevistador : sistema.getListaDeEntrevistadores()) {
+            modeloEntrevistadores.addElement(entrevistador.getNombre()); 
         }
-         listaEvaluadores.setModel(comboBoxModelEntrevistadores);
+       listaEvaluadores.setModel(modeloEntrevistadores);
         
         for (Postulante postulante : sistema.getListaDePostulantes()) {
-            comboBoxModelPostulantes.addElement(postulante.getNombre()); 
+            modeloPostulantes.addElement(postulante.getNombre()); 
         } 
-        listaPostulantes.setModel(comboBoxModelPostulantes);
+        listaPostulantes.setModel(modeloPostulantes);
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -149,9 +154,9 @@ public class VentanaEntrevista extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(textoComentario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(24, 24, 24)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(botonCancelar)
-                    .addComponent(botonRegistrarEntrevista))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(botonRegistrarEntrevista)
+                    .addComponent(botonCancelar))
                 .addContainerGap())
         );
 
@@ -185,10 +190,9 @@ public class VentanaEntrevista extends javax.swing.JFrame {
         int contadorEntrevista = sistema.contadorEntrevista;
         Entrevista entrevista = new Entrevista(entrevistador,postulante,puntajeDeEntrevista,comentariosDeEntrevista,contadorEntrevista);
         sistema.setListaDeEntrevistas(entrevista);
-        System.out.println("lista de entrevistas: "+sistema.getListaDeEntrevistas());
-        listaEvaluadores.setSelectedIndex(-1); // Deselecciona todos los elementos
-        listaPostulantes.setSelectedIndex(-1); // Deselecciona todos los elementos
-        puntajeEntrevista.setValue(0); // Reinicia el valor del JSpinner
+        //listaEvaluadores.setSelectedIndex(-1);  Deselecciona todos los elementos
+        //listaPostulantes.setSelectedIndex(-1);  Deselecciona todos los elementos
+        puntajeEntrevista.setValue(0); 
         comentarioEntrevista.setText("");
     }//GEN-LAST:event_botonRegistrarEntrevistaActionPerformed
 
@@ -216,4 +220,9 @@ public class VentanaEntrevista extends javax.swing.JFrame {
     private javax.swing.JScrollPane textoComentario;
     private javax.swing.JLabel titulo;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
+        cargarDatos();
+    }
 }

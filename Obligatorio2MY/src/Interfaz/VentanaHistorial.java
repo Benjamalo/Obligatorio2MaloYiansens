@@ -7,6 +7,8 @@ import Dominio.Postulante;
 import Dominio.TematicaExperiencia;
 import Dominio.Entrevista;
 import java.awt.Desktop;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -14,7 +16,7 @@ import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-public class VentanaHistorial extends javax.swing.JFrame {
+public class VentanaHistorial extends javax.swing.JFrame implements PropertyChangeListener{
 
     private Sistema sistema;
     private DefaultListModel<String> modeloListaPostulantes = new DefaultListModel<>();
@@ -25,6 +27,12 @@ public class VentanaHistorial extends javax.swing.JFrame {
     public VentanaHistorial(Sistema sistema) {
         initComponents();
         this.sistema = sistema;
+        cargarDatos();
+        this.sistema.addPropertyChangeListener(this);
+         
+    }
+
+    public void cargarDatos(){
         for(Postulante postulante : sistema.getListaDePostulantes()){
             modeloListaPostulantes.addElement(postulante.getNombre() + " (" + postulante.getCedula() + ")");
         }
@@ -35,10 +43,36 @@ public class VentanaHistorial extends javax.swing.JFrame {
         modeloTabla.addColumn("Puntaje");
         modeloTabla.addColumn("Comentarios");
         tabla.setModel(modeloTabla);
-        tabla.setDefaultRenderer(Object.class, new HTMLRenderer()); 
+        tabla.setDefaultRenderer(Object.class, new HTMLRenderer());
     }
+    public void cargarTabla(){
+        String valor[] = listaDePostulantes.getSelectedValue().split(" ");
+            String comprobar = valor[0];
 
-    
+            for (Postulante pos : sistema.getListaDePostulantes()) {
+                if (pos.getNombre().equals(comprobar)) {
+                    nombreEnPantalla.setText(pos.getNombre());
+                    cedulaEnPantalla.setText(""+(pos.getCedula()));
+                    direccionEnPantalla.setText(pos.getDireccion());
+                    telefonoEnPantalla.setText(String.valueOf(pos.getTelefono()));
+                    mailEnPantalla.setText(pos.getMail());
+                    linkedinEnPantalla.setText(pos.getLinkedIn());
+                    formatoEnPantalla.setText(pos.getModalidad());
+                    for(TematicaExperiencia tema : pos.getTematicas()){
+                        modeloListaTematicas.addElement(tema.getNombreTematica()+" ("+tema.getNivelExperiencia()+ ")");
+                    }
+                    listaTematicas.setModel(modeloListaTematicas);
+                    break;
+                }
+            }
+            ArrayList<Entrevista> entrevistas= sistema.getListaDeEntrevistas();
+            for(Entrevista i : entrevistas){
+                if(i.getPostulante().getNombre().equals(comprobar)){
+                    Object[] fila = {i.getID(), i.getEntrevistador().getNombre(), i.getPuntaje(), i.getComentarios()};
+                    modeloTabla.addRow(fila);
+                }
+            }
+    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -71,6 +105,7 @@ public class VentanaHistorial extends javax.swing.JFrame {
         contenedorTabla = new javax.swing.JScrollPane();
         tabla = new javax.swing.JTable();
         botonResetear = new javax.swing.JButton();
+        botonSalir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -169,19 +204,26 @@ public class VentanaHistorial extends javax.swing.JFrame {
         contenedorTabla.setViewportView(tabla);
         if (tabla.getColumnModel().getColumnCount() > 0) {
             tabla.getColumnModel().getColumn(0).setResizable(false);
-            tabla.getColumnModel().getColumn(0).setPreferredWidth(40);
+            tabla.getColumnModel().getColumn(0).setPreferredWidth(20);
             tabla.getColumnModel().getColumn(1).setResizable(false);
-            tabla.getColumnModel().getColumn(1).setPreferredWidth(140);
+            tabla.getColumnModel().getColumn(1).setPreferredWidth(100);
             tabla.getColumnModel().getColumn(2).setResizable(false);
-            tabla.getColumnModel().getColumn(2).setPreferredWidth(80);
+            tabla.getColumnModel().getColumn(2).setPreferredWidth(50);
             tabla.getColumnModel().getColumn(3).setResizable(false);
-            tabla.getColumnModel().getColumn(3).setPreferredWidth(150);
+            tabla.getColumnModel().getColumn(3).setPreferredWidth(200);
         }
 
         botonResetear.setText("Resetear");
         botonResetear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonResetearActionPerformed(evt);
+            }
+        });
+
+        botonSalir.setText("Salir");
+        botonSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonSalirActionPerformed(evt);
             }
         });
 
@@ -249,7 +291,8 @@ public class VentanaHistorial extends javax.swing.JFrame {
                                         .addGap(43, 43, 43)
                                         .addComponent(botonBuscar)
                                         .addGap(18, 18, 18)
-                                        .addComponent(botonResetear)))))
+                                        .addComponent(botonResetear))
+                                    .addComponent(botonSalir))))
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
@@ -303,7 +346,9 @@ public class VentanaHistorial extends javax.swing.JFrame {
                     .addComponent(botonResetear))
                 .addGap(18, 18, 18)
                 .addComponent(contenedorTabla, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(77, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(botonSalir)
+                .addContainerGap(36, Short.MAX_VALUE))
         );
 
         pack();
@@ -311,32 +356,7 @@ public class VentanaHistorial extends javax.swing.JFrame {
 
     private void listaDePostulantesValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listaDePostulantesValueChanged
         if (!evt.getValueIsAdjusting()) {
-            String valor[] = listaDePostulantes.getSelectedValue().split(" ");
-            String comprobar = valor[0];
-
-            for (Postulante pos : sistema.getListaDePostulantes()) {
-                if (pos.getNombre().equals(comprobar)) {
-                    nombreEnPantalla.setText(pos.getNombre());
-                    cedulaEnPantalla.setText(""+(pos.getCedula()));
-                    direccionEnPantalla.setText(pos.getDireccion());
-                    telefonoEnPantalla.setText(String.valueOf(pos.getTelefono()));
-                    mailEnPantalla.setText(pos.getMail());
-                    linkedinEnPantalla.setText(pos.getLinkedIn());
-                    formatoEnPantalla.setText(pos.getModalidad());
-                    for(TematicaExperiencia tema : pos.getTematicas()){
-                        modeloListaTematicas.addElement(tema.getNombreTematica()+" ("+tema.getNivelExperiencia()+ ")");
-                    }
-                    listaTematicas.setModel(modeloListaTematicas);
-                    break;
-                }
-            }
-            ArrayList<Entrevista> entrevistas= sistema.getListaDeEntrevistas();
-            for(Entrevista i : entrevistas){
-                if(i.getPostulante().getNombre().equals(comprobar)){
-                    Object[] fila = {i.getID(), i.getEntrevistador().getNombre(), i.getPuntaje(), i.getComentarios()};
-                    modeloTabla.addRow(fila);
-                }
-            }
+            cargarTabla();
         }
     }//GEN-LAST:event_listaDePostulantesValueChanged
 
@@ -371,10 +391,15 @@ public class VentanaHistorial extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_linkedinEnPantallaMouseClicked
 
+    private void botonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSalirActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_botonSalirActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonBuscar;
     private javax.swing.JButton botonResetear;
+    private javax.swing.JButton botonSalir;
     private javax.swing.JLabel cedulaEnPantalla;
     private javax.swing.JScrollPane contenedorLista;
     private javax.swing.JScrollPane contenedorTabla;
@@ -402,4 +427,10 @@ public class VentanaHistorial extends javax.swing.JFrame {
     private javax.swing.JTextField textoBuscar;
     private javax.swing.JLabel titulo;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
+        cargarDatos();
+        cargarTabla();
+    }
 }

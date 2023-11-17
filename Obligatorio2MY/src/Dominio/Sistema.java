@@ -243,6 +243,7 @@ public class Sistema implements Serializable {
     }
     public void agregarPostulante(Postulante postulante){
         this.listaDePostulantes.add(postulante);
+        manejador.firePropertyChange("Postulantes", null, postulante);
     }
     
     public void setListaDeEntrevistadores(ArrayList<Entrevistador> listaDeEvaluadores) {
@@ -250,7 +251,23 @@ public class Sistema implements Serializable {
     }
     public void agregarEntrevistador(Entrevistador entrevistador){
         this.listaDeEntrevistadores.add(entrevistador);
+        manejador.firePropertyChange("Entrevistador", null, entrevistador);
     }
+    
+    public void eliminar(String nombre){
+        for(Postulante pos : this.getListaDePostulantes()){
+            if(pos.getNombre().equals(nombre)){
+                this.listaDePostulantes.remove(pos);
+            }
+        }
+        for(Entrevista entre : this.getListaDeEntrevistas()){
+            if(entre.getPostulante().getNombre().equals(nombre)){
+                this.listaDeEntrevistas.remove(entre);
+            }
+        }
+        manejador.firePropertyChange("PostulanteEliminado", null, nombre);
+    }
+    
     public boolean existeCedula(int cedula){
         for(Postulante postulante : listaDePostulantes){
             if (postulante.getCedula() == cedula) {

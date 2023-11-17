@@ -4,31 +4,28 @@ package Interfaz;
 
 import Dominio.Postulante;
 import Dominio.Sistema;
-import java.util.*;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import javax.swing.DefaultComboBoxModel;
 
-public class VentanaBajaPostulante extends javax.swing.JFrame implements Observer {
+public class VentanaBajaPostulante extends javax.swing.JFrame implements PropertyChangeListener {
 
     private Sistema sistema;
     
     public VentanaBajaPostulante(Sistema sistema) {
         initComponents();
         this.sistema = sistema;
+        cargarDatos();
+        this.sistema.addPropertyChangeListener(this);
+    }
+
+    public void cargarDatos(){
+        DefaultComboBoxModel modelo = new DefaultComboBoxModel();
+        comboPostulantes.setModel(modelo);
         for(Postulante pos : sistema.getListaDePostulantes()){
             comboPostulantes.addItem(pos.toString());
         }
         botonEliminar.setEnabled(false);
-    }
-
-    public void actualizar(){
-        String item = (String) comboPostulantes.getSelectedItem();
-        for(int i=0; i<sistema.getListaDePostulantes().size(); i++){
-            String pos = sistema.getListaDePostulantes().get(i).toString();
-            if(pos.equals(item)){
-                sistema.getListaDePostulantes().remove(sistema.getListaDePostulantes().get(i));
-                break;
-            }
-        }
-        comboPostulantes.setSelectedItem(null);
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -123,7 +120,8 @@ public class VentanaBajaPostulante extends javax.swing.JFrame implements Observe
     }//GEN-LAST:event_comboPostulantesActionPerformed
 
     private void botonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEliminarActionPerformed
-        actualizar();
+        String item = (String) comboPostulantes.getSelectedItem();
+        sistema.eliminar(item);
     }//GEN-LAST:event_botonEliminarActionPerformed
 
     private void botonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCancelarActionPerformed
@@ -142,7 +140,7 @@ public class VentanaBajaPostulante extends javax.swing.JFrame implements Observe
     // End of variables declaration//GEN-END:variables
 
     @Override
-    public void update(Observable o, Object arg) {
-        actualizar();
+    public void propertyChange(PropertyChangeEvent evt) {
+        cargarDatos();
     }
 }

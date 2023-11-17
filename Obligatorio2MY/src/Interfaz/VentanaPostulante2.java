@@ -49,6 +49,7 @@ public class VentanaPostulante2 extends javax.swing.JFrame implements PropertyCh
     }
     
     public void cargarTematicas(){
+        temas.clear();
         temas.addAll(sistema.getListaDeTematicas());
         DefaultListModel<String> emptyListModel = new DefaultListModel<>();
         listaExperiencia.setModel(emptyListModel);

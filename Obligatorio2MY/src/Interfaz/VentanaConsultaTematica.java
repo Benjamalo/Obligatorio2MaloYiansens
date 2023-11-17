@@ -54,7 +54,7 @@ public class VentanaConsultaTematica extends javax.swing.JFrame implements Prope
 
         etiquetaPostulantes.setText("Postulantes con nivel mayor a 5:");
 
-        etiquetaPuestos.setText("Puestos con tematica requerida:");
+        etiquetaPuestos.setText("Puestos con tématica requerida:");
 
         Titulo.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         Titulo.setText("Consulta de temáticas requeridas");

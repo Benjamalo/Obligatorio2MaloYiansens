@@ -43,9 +43,9 @@ public class VentanaEvaluador extends javax.swing.JFrame {
 
         etiquetaNombre.setText("Nombre:");
 
-        etiquetaCedula.setText("Cedula:");
+        etiquetaCedula.setText("Cédula:");
 
-        etiquetaDireccion.setText("Direccion:");
+        etiquetaDireccion.setText("Dirección:");
 
         etiquetaIngreso.setText("Año de ingreso a empresa:");
 

@@ -74,7 +74,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="subtitulo">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Seleccione si desea recuperar datos anteriores, o partir de un sistema vacio."/>
+        <Property name="text" type="java.lang.String" value="Seleccione si desea recuperar datos anteriores, o partir de un sistema vac&#xed;o."/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="botonRecuperar">
@@ -87,7 +87,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="botonVacio">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Sistema vacio"/>
+        <Property name="text" type="java.lang.String" value="Sistema vac&#xed;o"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonVacioActionPerformed"/>

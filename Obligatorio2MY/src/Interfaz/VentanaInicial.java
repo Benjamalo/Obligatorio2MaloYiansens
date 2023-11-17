@@ -30,7 +30,7 @@ public class VentanaInicial extends javax.swing.JFrame {
         titulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         titulo.setText("¡Bienvenido!");
 
-        subtitulo.setText("Seleccione si desea recuperar datos anteriores, o partir de un sistema vacio.");
+        subtitulo.setText("Seleccione si desea recuperar datos anteriores, o partir de un sistema vacío.");
 
         botonRecuperar.setText("Recuperar datos");
         botonRecuperar.addActionListener(new java.awt.event.ActionListener() {
@@ -39,7 +39,7 @@ public class VentanaInicial extends javax.swing.JFrame {
             }
         });
 
-        botonVacio.setText("Sistema vacio");
+        botonVacio.setText("Sistema vacío");
         botonVacio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonVacioActionPerformed(evt);

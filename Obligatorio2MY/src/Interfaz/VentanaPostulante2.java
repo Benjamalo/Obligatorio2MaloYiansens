@@ -14,7 +14,7 @@ import javax.swing.DefaultListModel;
 public class VentanaPostulante2 extends javax.swing.JFrame implements PropertyChangeListener{
     
     private ArrayList<Tematica> temas;
-    private DefaultComboBoxModel<String> comboBoxModel;
+    private DefaultComboBoxModel<String> modelo;
     DefaultListModel<String> modeloListaTematica = new DefaultListModel<>();
     private ArrayList<String> temasAgregados;
     private String nombrePostulante;
@@ -53,10 +53,10 @@ public class VentanaPostulante2 extends javax.swing.JFrame implements PropertyCh
         temas.addAll(sistema.getListaDeTematicas());
         DefaultListModel<String> emptyListModel = new DefaultListModel<>();
         listaExperiencia.setModel(emptyListModel);
-        comboBoxModel = new DefaultComboBoxModel<>();
-        listaTema.setModel(comboBoxModel);
+        modelo = new DefaultComboBoxModel<>();
+        listaTema.setModel(modelo);
         for (Tematica tematica : temas) {
-            comboBoxModel.addElement(tematica.getNombre()); 
+            modelo.addElement(tematica.getNombre()); 
         }
     }
     @SuppressWarnings("unchecked")

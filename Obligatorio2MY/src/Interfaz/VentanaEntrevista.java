@@ -185,8 +185,6 @@ public class VentanaEntrevista extends javax.swing.JFrame implements PropertyCha
         int contadorEntrevista = sistema.contadorEntrevista;
         Entrevista entrevista = new Entrevista(entrevistador,postulante,puntajeDeEntrevista,comentariosDeEntrevista,contadorEntrevista);
         sistema.agregarEntrevista(entrevista);
-        //listaEvaluadores.setSelectedIndex(-1);  Deselecciona todos los elementos
-        //listaPostulantes.setSelectedIndex(-1);  Deselecciona todos los elementos
         puntajeEntrevista.setValue(0); 
         comentarioEntrevista.setText("");
     }//GEN-LAST:event_botonRegistrarEntrevistaActionPerformed

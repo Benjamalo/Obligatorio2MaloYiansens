@@ -81,9 +81,9 @@ public class VentanaPostulante extends javax.swing.JFrame {
 
         etiquetaNombre.setText("Nombre:");
 
-        etiquetaDireccion.setText("Direccion:");
+        etiquetaDireccion.setText("Dirección:");
 
-        etiquetaCedula.setText("Cedula:");
+        etiquetaCedula.setText("Cédula:");
 
         etiquetaMail.setText("Mail:");
 
@@ -126,7 +126,7 @@ public class VentanaPostulante extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setText("Telefono:");
+        jLabel1.setText("Teléfono:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

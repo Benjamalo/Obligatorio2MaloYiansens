@@ -37,7 +37,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         Titulo.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         Titulo.setText("Menu Principal");
 
-        botonTematica.setText("Tematicas");
+        botonTematica.setText("Temáticas");
         botonTematica.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonTematicaActionPerformed(evt);
@@ -93,7 +93,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             }
         });
 
-        consultaTematica.setText("Consulta Tematicas");
+        consultaTematica.setText("Consulta Temáticas");
         consultaTematica.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 consultaTematicaActionPerformed(evt);
@@ -119,20 +119,20 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                     .addComponent(consultaTematica, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(41, 41, 41))
             .addGroup(layout.createSequentialGroup()
-                .addGap(223, 223, 223)
+                .addGap(210, 210, 210)
                 .addComponent(botonTematica)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(Titulo)
-                .addGap(194, 194, 194))
+                .addGap(180, 180, 180))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(18, 18, 18)
+                .addGap(16, 16, 16)
                 .addComponent(Titulo)
-                .addGap(29, 29, 29)
+                .addGap(31, 31, 31)
                 .addComponent(botonTematica)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)

@@ -19,8 +19,8 @@ public class ArchivoGrabacion {
     }
 
     public ArchivoGrabacion(String unNombre, boolean ext) {
-        // si el parametro viene en true, indica que se extiende
-        // si es false, se sobreescribe
+
+
         try {
             FileWriter f = new FileWriter(unNombre, ext);
             out = new Formatter(f);

@@ -35,7 +35,7 @@ public class Sistema implements Serializable {
     
 
     
-    //Voy a tener que crear un metodo para que me elimine TODO de un postulante cuando se baja (incluido entrevistas)
+
     
     public void addPropertyChangeListener(PropertyChangeListener listener){
         manejador.addPropertyChangeListener(listener);
@@ -59,12 +59,12 @@ public class Sistema implements Serializable {
     }
     
     public int personasConTematica(String nombreTematica){
-       // ArrayList<String> personasConTematicas = new ArrayList<>();
+
         int contadorPersonas = 0;
         for(Postulante post : listaDePostulantes){
             for(TematicaExperiencia tematicas : post.getTematicas()){
                 if(tematicas.getNombreTematica().equals(nombreTematica) && tematicas.getNivelExperiencia()>=5)
-               // personasConTematicas.add(post.getNombre());
+
                 contadorPersonas++;
             }
         }
@@ -81,16 +81,14 @@ public class Sistema implements Serializable {
                    for(TematicaExperiencia xp : postulante.getTematicas()){
                         Temario.add(xp.getNombreTematica());
                     }
-                    for (String nombres : Temario) {
-                        System.out.println("El temario es: "+ nombres);
-                    }
+
                    
                     if (!Temario.containsAll(puesto.getTemasRequeridos())) {
                         break;
                     }
-                    System.out.println("El temario contiene TODOS");
+
                     boolean encontrado = false;
-                    System.out.println(listaDeEntrevistas.size());
+
                     for (Entrevista entrevista : listaDeEntrevistas) {
                         int  puntajeUltimaEntrevista=entrevista.getPuntaje();
                         for(Entrevista otra: listaDeEntrevistas){
@@ -105,9 +103,9 @@ public class Sistema implements Serializable {
 
                                     if (temaRequerido.equals(tematicaPostulante.getNombreTematica())&&
                                         tematicaPostulante.getNivelExperiencia()>=nivelPuesto) {
-                                        //PersonaACEPTADA.add(postulante.getNombre());
+
                                         mapeoDePostulantes.put(postulante.getNombre(), puntajeUltimaEntrevista);
-                                        System.out.println("Agrego persona aceptado");
+
                                         encontrado = true;
                                         break;
                                     }
@@ -213,9 +211,9 @@ public class Sistema implements Serializable {
     }
 
     public void setListaDeEntrevistas(ArrayList<Entrevista> listaDeEntrevistas) {
-        //contadorEntrevista++;
-        //this.listaDeEntrevistas.add(listaDeEntrevistas);
-        //manejador.firePropertyChange("Entrevistas", null, entrevista);
+
+
+
         this.listaDeEntrevistas = listaDeEntrevistas;
     }
     
@@ -300,7 +298,7 @@ public class Sistema implements Serializable {
         try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(nombreArchivo))) {
             out.writeObject(this);
             out.close();
-            System.out.println("Datos guardados correctamente.");
+
         } catch (IOException e) {
             e.printStackTrace();
         }

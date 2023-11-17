@@ -124,11 +124,11 @@ public class VentanaHistorial extends javax.swing.JFrame implements PropertyChan
 
         etiquetaNombre.setText("Nombre:");
 
-        etiquetaCedula.setText("Cedula:");
+        etiquetaCedula.setText("Cédula:");
 
-        etiquetaDireccion.setText("Direccion:");
+        etiquetaDireccion.setText("Dirección:");
 
-        etiquetaTelefono.setText("Telefono:");
+        etiquetaTelefono.setText("Teléfono:");
 
         etiquetaMail.setText("Mail:");
 

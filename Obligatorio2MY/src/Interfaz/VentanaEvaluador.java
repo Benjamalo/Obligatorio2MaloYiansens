@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package Interfaz;
 
 import java.util.ArrayList;
@@ -150,6 +147,10 @@ public class VentanaEvaluador extends javax.swing.JFrame {
     }//GEN-LAST:event_botonCancelarActionPerformed
 
     private void botonRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRegistrarActionPerformed
+        if (textoNombre.getText().isEmpty()||textoCedula.getText().isEmpty()||textoDireccion.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Hay campos vacíos.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         String nombre = textoNombre.getText();
         String cedula = textoCedula.getText();
         if(cedula.matches(".*[a-zA-Z].*")){

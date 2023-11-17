@@ -7,6 +7,7 @@ import Dominio.Sistema;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 
 public class VentanaEntrevista extends javax.swing.JFrame implements PropertyChangeListener{
     private DefaultComboBoxModel<String> modeloEntrevistadores;
@@ -176,6 +177,10 @@ public class VentanaEntrevista extends javax.swing.JFrame implements PropertyCha
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonRegistrarEntrevistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRegistrarEntrevistaActionPerformed
+        if (comentarioEntrevista.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Agregue una descripción.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         String nombreEvaluador = (String) listaEvaluadores.getSelectedItem();
         String nombrePostulante = (String) listaPostulantes.getSelectedItem();
         int puntajeDeEntrevista = (int) puntajeEntrevista.getValue();

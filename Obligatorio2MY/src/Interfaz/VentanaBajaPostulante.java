@@ -121,7 +121,9 @@ public class VentanaBajaPostulante extends javax.swing.JFrame implements Propert
 
     private void botonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEliminarActionPerformed
         String item = (String) comboPostulantes.getSelectedItem();
-        sistema.eliminar(item);
+        String[] nombre = item.split(" ");
+        sistema.eliminar(nombre[0]);
+        
     }//GEN-LAST:event_botonEliminarActionPerformed
 
     private void botonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCancelarActionPerformed

@@ -33,6 +33,7 @@ public class VentanaHistorial extends javax.swing.JFrame implements PropertyChan
     }
 
     public void cargarDatos(){
+        
         for(Postulante postulante : sistema.getListaDePostulantes()){
             modeloListaPostulantes.addElement(postulante.getNombre() + " (" + postulante.getCedula() + ")");
         }
@@ -46,6 +47,8 @@ public class VentanaHistorial extends javax.swing.JFrame implements PropertyChan
         tabla.setDefaultRenderer(Object.class, new HTMLRenderer());
     }
     public void cargarTabla(){
+        modeloTabla.setRowCount(0);
+        modeloListaTematicas.clear();
         String valor[] = listaDePostulantes.getSelectedValue().split(" ");
             String comprobar = valor[0];
 

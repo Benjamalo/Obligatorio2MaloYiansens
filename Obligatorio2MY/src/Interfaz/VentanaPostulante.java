@@ -27,13 +27,22 @@ public class VentanaPostulante extends javax.swing.JFrame {
 
 
     public void pasar(){
+        if (textoNombre.getText().isEmpty()||textoCedula.getText().isEmpty()||
+            textoDireccion.getText().isEmpty()||
+            textoMail.getText().isEmpty()||
+            textoTelefono.getText().isEmpty()|| 
+            textoLinkedin.getText().isEmpty()
+            ) {
+            JOptionPane.showMessageDialog(this, "Complete todos los campos.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         String nombre = textoNombre.getText();
         int cedula = Integer.parseInt(textoCedula.getText());
         String direccion = textoDireccion.getText();
         String mail = textoMail.getText();
         int telefono = Integer.parseInt(textoTelefono.getText());
         String linkedin = textoLinkedin.getText();
-        boolean existe = sistema.revisar(nombre, cedula, telefono, mail, linkedin);
+        boolean existe = sistema.revisar(cedula);
         if(existe){
             VentanaPostulante2 ventanaTematica = new VentanaPostulante2(nombre, cedula, direccion, linkedin,telefono,mail,modalidad,sistema);
             ventanaTematica.setVisible(true);

@@ -4,6 +4,7 @@ import Dominio.Tematica;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
+import javax.swing.JOptionPane;
 
 public class VentanaTematica extends javax.swing.JFrame{
     public ArrayList<Tematica> tematicasRegistradas;
@@ -15,18 +16,18 @@ public class VentanaTematica extends javax.swing.JFrame{
         this.sistema=sistema;
         this.tematicasRegistradas = sistema.getListaDeTematicas();
     }
-
-    private VentanaTematica() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
     public void botonRegistrar(){
     String nombreTematicaTexto = nombreTematica.getText();
     String descripcionTematicaTexto = areaDescripcion.getText();
         
     if (temas.contains(nombreTematicaTexto.toUpperCase())) {    
+        JOptionPane.showMessageDialog(null, "Esa temática ya existe.", "Error", JOptionPane.ERROR_MESSAGE);
         return;
-        }    
+        }
+    else if(nombreTematicaTexto.isEmpty()||descripcionTematicaTexto.isEmpty() ){
+        JOptionPane.showMessageDialog(null, "No puede haber ningún campo vacío.", "Error", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
     temas.add(nombreTematicaTexto.toUpperCase());
     Tematica tematica = new Tematica();
     tematica.setNombre(nombreTematicaTexto);
@@ -35,7 +36,7 @@ public class VentanaTematica extends javax.swing.JFrame{
     nombreTematica.setText("");
     areaDescripcion.setText("");
     }
-    //Si hay que cargar datos, tiene que haber un metodo que muestre todos los datos
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -144,39 +145,6 @@ public class VentanaTematica extends javax.swing.JFrame{
     private void RegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegistrarActionPerformed
     botonRegistrar();
     }//GEN-LAST:event_RegistrarActionPerformed
-    
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(VentanaTematica.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(VentanaTematica.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(VentanaTematica.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(VentanaTematica.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new VentanaTematica().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Cancelar;

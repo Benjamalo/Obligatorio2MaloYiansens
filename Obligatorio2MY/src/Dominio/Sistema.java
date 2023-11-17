@@ -261,6 +261,7 @@ public class Sistema implements Serializable {
     }
     
     public void eliminar(String nombre){
+        
         for(Postulante pos : this.getListaDePostulantes()){
             if(pos.getNombre().equals(nombre)){
                 this.listaDePostulantes.remove(pos);
@@ -289,7 +290,7 @@ public class Sistema implements Serializable {
     }
     
     public boolean establecerFecha(int fecha){
-        return fecha>=1950;
+        return fecha<2023;
     }
     
     public void guardarDatos(){
@@ -304,14 +305,10 @@ public class Sistema implements Serializable {
         }
     }
     
-    public boolean revisar(String nombre, int cedula, int telefono, String mail, String linkedin){
+    public boolean revisar(int cedula){
         boolean ok = true;
         for(Postulante pos : this.getListaDePostulantes()){
-            if(pos.getNombre().equals(nombre) 
-               || pos.getCedula()==cedula 
-               || pos.getTelefono()==telefono 
-               || pos.getMail().equals(mail)
-               || pos.getLinkedIn().equals(linkedin)){
+            if( pos.getCedula()==cedula  ){
                 ok=false;
             }
         }

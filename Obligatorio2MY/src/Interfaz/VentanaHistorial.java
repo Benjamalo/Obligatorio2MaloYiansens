@@ -33,10 +33,31 @@ public class VentanaHistorial extends javax.swing.JFrame implements PropertyChan
     }
 
     public void cargarDatos(){
-        
-        for(Postulante postulante : sistema.getListaDePostulantes()){
+
+        //DefaultListModel<String> modeloVacio = new DefaultListModel<>();
+        //listaDePostulantes.setModel(modeloVacio);        
+     if (modeloListaPostulantes.isEmpty()) {
+        // Llena la lista con los postulantes actuales
+        for (Postulante postulante : sistema.getListaDePostulantes()) {
             modeloListaPostulantes.addElement(postulante.getNombre() + " (" + postulante.getCedula() + ")");
         }
+    } else {
+        // La lista no está vacía, agrega nuevos postulantes si hay cambios
+        for (Postulante postulante : sistema.getListaDePostulantes()) {
+            String postulanteString = postulante.getNombre() + " (" + postulante.getCedula() + ")";
+            if (!modeloListaPostulantes.contains(postulanteString)) {
+                modeloListaPostulantes.addElement(postulanteString);
+            }
+        }
+    }
+        listaDePostulantes.clearSelection();
+        nombreEnPantalla.setText("");
+        cedulaEnPantalla.setText("");
+        direccionEnPantalla.setText("");
+        telefonoEnPantalla.setText("");
+        mailEnPantalla.setText("");
+        linkedinEnPantalla.setText("");
+        formatoEnPantalla.setText("");
         listaDePostulantes.setModel(modeloListaPostulantes);
         modeloTabla = new DefaultTableModel();
         modeloTabla.addColumn("Nro.");
@@ -49,6 +70,7 @@ public class VentanaHistorial extends javax.swing.JFrame implements PropertyChan
     public void cargarTabla(){
         modeloTabla.setRowCount(0);
         modeloListaTematicas.clear();
+        if (listaDePostulantes.getSelectedValue() != null) {
         String valor[] = listaDePostulantes.getSelectedValue().split(" ");
             String comprobar = valor[0];
 
@@ -74,7 +96,7 @@ public class VentanaHistorial extends javax.swing.JFrame implements PropertyChan
                     Object[] fila = {i.getID(), i.getEntrevistador().getNombre(), i.getPuntaje(), i.getComentarios()};
                     modeloTabla.addRow(fila);
                 }
-            }
+            }}
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents

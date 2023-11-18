@@ -260,18 +260,23 @@ public class Sistema implements Serializable {
         manejador.firePropertyChange("Entrevistador", null, entrevistador);
     }
     
-    public void eliminar(String nombre){
-        
-        for(Postulante pos : this.getListaDePostulantes()){
-            if(pos.getNombre().equals(nombre)){
-                this.listaDePostulantes.remove(pos);
+    public void eliminar(String nombre) {
+        Iterator<Postulante> iteradorPostulantes = this.getListaDePostulantes().iterator();
+        while (iteradorPostulantes.hasNext()) {
+            Postulante pos = iteradorPostulantes.next();
+            if (pos.getNombre().equals(nombre)) {
+                iteradorPostulantes.remove();
             }
         }
-        for(Entrevista entre : this.getListaDeEntrevistas()){
-            if(entre.getPostulante().getNombre().equals(nombre)){
-                this.listaDeEntrevistas.remove(entre);
+
+        Iterator<Entrevista> iteradorEntrevistas = this.getListaDeEntrevistas().iterator();
+        while (iteradorEntrevistas.hasNext()) {
+            Entrevista entre = iteradorEntrevistas.next();
+            if (entre.getPostulante().getNombre().equals(nombre)) {
+                iteradorEntrevistas.remove();
             }
         }
+
         manejador.firePropertyChange("PostulanteEliminado", null, nombre);
     }
     

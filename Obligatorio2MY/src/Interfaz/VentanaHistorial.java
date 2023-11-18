@@ -387,13 +387,13 @@ public class VentanaHistorial extends javax.swing.JFrame implements PropertyChan
         String valor[] = listaDePostulantes.getSelectedValue().split(" ");
         String comprobar = valor[0];
         String palabras[] = textoBuscar.getText().split(" ");
-        ArrayList<Entrevista> datosImprimir= sistema.getListaDeEntrevistas();
         
-        for(Entrevista entre : datosImprimir){
-            if(entre.getPostulante().getNombre().equals(comprobar));
+        for(Entrevista entre : sistema.getListaDeEntrevistas()){
+            if(entre.getPostulante().getNombre().equals(comprobar)){
             Object[] fila = {entre.getID(), entre.getEntrevistador().getNombre(), entre.getPuntaje(), entre.getComentarios().replaceAll(palabras[0], "<font color='red'>" + palabras[0] + "</font>")};
             
             modeloTabla.addRow(fila);
+            }
         }
         
     }//GEN-LAST:event_botonBuscarActionPerformed

@@ -1,13 +1,18 @@
 
 package Dominio;
 
+import Interfaz.VentanaPrincipal;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.*;
+import javax.swing.JOptionPane;
 
 public class Sistema implements Serializable {
     private ArrayList<Postulante> listaDePostulantes;
@@ -19,7 +24,7 @@ public class Sistema implements Serializable {
     private ArrayList<String> Temario;
     private ArrayList<String> PersonaACEPTADA;
     private HashMap<String, Integer> mapeoDePostulantes;
-    private final PropertyChangeSupport manejador;
+    private transient PropertyChangeSupport manejador;
     
     public Sistema(){
         PersonaACEPTADA = new ArrayList<>();
@@ -33,7 +38,9 @@ public class Sistema implements Serializable {
         this.manejador = new PropertyChangeSupport(this);
     }
     
-
+    public void inicializarManejador(){
+        this.manejador = new PropertyChangeSupport(this);
+    }
     
 
     
@@ -299,15 +306,30 @@ public class Sistema implements Serializable {
     }
     
     public void guardarDatos(){
-        String nombreArchivo = "sistema_guardado.ser";
-
-        try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(nombreArchivo))) {
-            out.writeObject(this);
-            out.close();
-
-        } catch (IOException e) {
+        try {
+            FileOutputStream archivo = new FileOutputStream("sistema_guardado.dat");
+            ObjectOutputStream serializador = new ObjectOutputStream(archivo);
+            serializador.writeObject(this);
+        }
+        catch(IOException e){
             e.printStackTrace();
         }
+    }
+    
+    public void cargarDatos(){
+        Sistema sistema = new Sistema();
+        FileInputStream archivo;
+        try {
+            archivo = new FileInputStream("sistema_guardado.dat");
+            ObjectInputStream deserializador = new ObjectInputStream(archivo);
+            sistema = (Sistema) deserializador.readObject();
+            sistema.inicializarManejador();
+        } catch (IOException | ClassNotFoundException e) {
+            JOptionPane.showMessageDialog(null, "No se encontraron datos guardados, se iniciará el sistema vacío.", "Error", JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
+        }
+        VentanaPrincipal ventana = new VentanaPrincipal(sistema);
+        ventana.setVisible(true);
     }
     
     public boolean revisar(int cedula){

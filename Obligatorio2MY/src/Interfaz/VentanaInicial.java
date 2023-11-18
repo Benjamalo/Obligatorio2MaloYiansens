@@ -90,16 +90,7 @@ public class VentanaInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_botonVacioActionPerformed
 
     private void botonRecuperarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRecuperarActionPerformed
-        String nombreArchivo = "sistema_guardado.ser";
-        
-        try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(nombreArchivo))) {
-            this.sistema = (Sistema) in.readObject();
-            in.close();
-        } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-        VentanaPrincipal ventana = new VentanaPrincipal(this.sistema);
-        ventana.setVisible(true);
+        sistema.cargarDatos();
         this.dispose();
     }//GEN-LAST:event_botonRecuperarActionPerformed
 

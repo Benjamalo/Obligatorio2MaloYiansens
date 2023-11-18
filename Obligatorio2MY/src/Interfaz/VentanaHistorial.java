@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
+import java.util.Comparator;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -22,10 +23,11 @@ public class VentanaHistorial extends javax.swing.JFrame implements PropertyChan
     private DefaultListModel<String> modeloListaPostulantes = new DefaultListModel<>();
     private DefaultListModel<String> modeloListaTematicas = new DefaultListModel<>();
     private DefaultTableModel modeloTabla;
-    
+    private ArrayList<Postulante> personasEnLista;
     
     public VentanaHistorial(Sistema sistema) {
         initComponents();
+        personasEnLista = new ArrayList<>();
         this.sistema = sistema;
         cargarDatos();
         this.sistema.addPropertyChangeListener(this);
@@ -33,24 +35,17 @@ public class VentanaHistorial extends javax.swing.JFrame implements PropertyChan
     }
 
     public void cargarDatos(){
+       
+        modeloListaPostulantes.clear();
+        personasEnLista.clear();
 
-        //DefaultListModel<String> modeloVacio = new DefaultListModel<>();
-        //listaDePostulantes.setModel(modeloVacio);        
-     if (modeloListaPostulantes.isEmpty()) {
-        // Llena la lista con los postulantes actuales
         for (Postulante postulante : sistema.getListaDePostulantes()) {
-            modeloListaPostulantes.addElement(postulante.getNombre() + " (" + postulante.getCedula() + ")");
+           personasEnLista.add(postulante);
         }
-    } else {
-        // La lista no está vacía, agrega nuevos postulantes si hay cambios
-        for (Postulante postulante : sistema.getListaDePostulantes()) {
-            String postulanteString = postulante.getNombre() + " (" + postulante.getCedula() + ")";
-            if (!modeloListaPostulantes.contains(postulanteString)) {
-                modeloListaPostulantes.addElement(postulanteString);
-            }
-        }
-    }
-        listaDePostulantes.clearSelection();
+        personasEnLista.sort(Comparator.comparingInt(Postulante::getCedula));
+        for(Postulante posti : personasEnLista){
+            modeloListaPostulantes.addElement(posti.getNombre() + " (" + posti.getCedula() + ")");
+        } 
         nombreEnPantalla.setText("");
         cedulaEnPantalla.setText("");
         direccionEnPantalla.setText("");
@@ -67,36 +62,38 @@ public class VentanaHistorial extends javax.swing.JFrame implements PropertyChan
         tabla.setModel(modeloTabla);
         tabla.setDefaultRenderer(Object.class, new HTMLRenderer());
     }
+
     public void cargarTabla(){
         modeloTabla.setRowCount(0);
         modeloListaTematicas.clear();
-        if (listaDePostulantes.getSelectedValue() != null) {
-        String valor[] = listaDePostulantes.getSelectedValue().split(" ");
-            String comprobar = valor[0];
 
-            for (Postulante pos : sistema.getListaDePostulantes()) {
-                if (pos.getNombre().equals(comprobar)) {
-                    nombreEnPantalla.setText(pos.getNombre());
-                    cedulaEnPantalla.setText(""+(pos.getCedula()));
-                    direccionEnPantalla.setText(pos.getDireccion());
-                    telefonoEnPantalla.setText(String.valueOf(pos.getTelefono()));
-                    mailEnPantalla.setText(pos.getMail());
-                    linkedinEnPantalla.setText(pos.getLinkedIn());
-                    formatoEnPantalla.setText(pos.getModalidad());
-                    for(TematicaExperiencia tema : pos.getTematicas()){
-                        modeloListaTematicas.addElement(tema.getNombreTematica()+" ("+tema.getNivelExperiencia()+ ")");
+        if (listaDePostulantes.getSelectedValue() != null) {
+            String valor[] = listaDePostulantes.getSelectedValue().split(" ");
+                String comprobar = valor[0];
+                for (Postulante pos : personasEnLista) {
+                    if (pos.getNombre().equals(comprobar)) {
+                        nombreEnPantalla.setText(pos.getNombre());
+                        cedulaEnPantalla.setText(""+(pos.getCedula()));
+                        direccionEnPantalla.setText(pos.getDireccion());
+                        telefonoEnPantalla.setText(String.valueOf(pos.getTelefono()));
+                        mailEnPantalla.setText(pos.getMail());
+                        linkedinEnPantalla.setText(pos.getLinkedIn());
+                        formatoEnPantalla.setText(pos.getModalidad());
+                        for(TematicaExperiencia tema : pos.getTematicas()){
+                            modeloListaTematicas.addElement(tema.getNombreTematica()+" ("+tema.getNivelExperiencia()+ ")");
+                        }
+                        listaTematicas.setModel(modeloListaTematicas);
+                        break;
                     }
-                    listaTematicas.setModel(modeloListaTematicas);
-                    break;
                 }
-            }
-            ArrayList<Entrevista> entrevistas= sistema.getListaDeEntrevistas();
-            for(Entrevista i : entrevistas){
-                if(i.getPostulante().getNombre().equals(comprobar)){
-                    Object[] fila = {i.getID(), i.getEntrevistador().getNombre(), i.getPuntaje(), i.getComentarios()};
-                    modeloTabla.addRow(fila);
+                ArrayList<Entrevista> entrevistas= sistema.getListaDeEntrevistas();
+                for(Entrevista i : entrevistas){
+                    if(i.getPostulante().getNombre().equals(comprobar)){
+                        Object[] fila = {i.getID(), i.getEntrevistador().getNombre(), i.getPuntaje(), i.getComentarios()};
+                        modeloTabla.addRow(fila);
+                    }
                 }
-            }}
+        }
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents

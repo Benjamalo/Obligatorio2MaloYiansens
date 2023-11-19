@@ -383,23 +383,24 @@ public class VentanaHistorial extends javax.swing.JFrame implements PropertyChan
     }//GEN-LAST:event_listaDePostulantesValueChanged
 
     private void botonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBuscarActionPerformed
-        modeloTabla.setRowCount(0);
-        String valor[] = listaDePostulantes.getSelectedValue().split(" ");
-        String comprobar = valor[0];
-        String palabras[] = textoBuscar.getText().split(" ");
-        
-        for(Entrevista entre : sistema.getListaDeEntrevistas()){
-            if(entre.getPostulante().getNombre().equals(comprobar)){
-            Object[] fila = {entre.getID(), entre.getEntrevistador().getNombre(), entre.getPuntaje(), entre.getComentarios().replaceAll(palabras[0], "<font color='red'>" + palabras[0] + "</font>")};
-            
-            modeloTabla.addRow(fila);
+        if(listaDePostulantes.getSelectedValue()!= null){
+            modeloTabla.setRowCount(0);
+            String valor[] = listaDePostulantes.getSelectedValue().split(" ");
+            String comprobar = valor[0];
+            String palabras[] = textoBuscar.getText().split(" ");
+
+            for(Entrevista entre : sistema.getListaDeEntrevistas()){
+                if(entre.getPostulante().getNombre().equals(comprobar)){
+                Object[] fila = {entre.getID(), entre.getEntrevistador().getNombre(), entre.getPuntaje(), entre.getComentarios().replaceAll(palabras[0], "<font color='red'>" + palabras[0] + "</font>")};
+
+                modeloTabla.addRow(fila);
+                }
             }
         }
-        
     }//GEN-LAST:event_botonBuscarActionPerformed
 
     private void botonResetearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonResetearActionPerformed
-        modeloTabla.setRowCount(0);
+        cargarTabla();
     }//GEN-LAST:event_botonResetearActionPerformed
 
     private void linkedinEnPantallaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_linkedinEnPantallaMouseClicked

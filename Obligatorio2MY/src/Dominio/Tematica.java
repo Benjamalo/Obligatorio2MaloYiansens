@@ -1,28 +1,16 @@
 package Dominio;
 
 import java.io.Serializable;
-import javax.swing.JTextField;
+
 
 public class Tematica implements Serializable{
     private String nombre;
     private String descripcion;
-    private int nivel;
-    public Tematica(String nombre, int nivel){
+    
+    public Tematica(String nombre,String descripcion){
         this.nombre=nombre;
-        this.nivel =nivel;
-        
+        this.descripcion=descripcion;
     }
-    public Tematica(){
-    
-    }
-    public int getNivel() {
-        return nivel;
-    }
-
-    public void setNivel(int nivel) {
-        this.nivel = nivel;
-    }
-    
     public String getNombre() {
         return nombre;
     }

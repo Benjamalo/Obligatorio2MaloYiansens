@@ -29,9 +29,7 @@ public class VentanaTematica extends javax.swing.JFrame{
         return;
     }
     temas.add(nombreTematicaTexto.toUpperCase());
-    Tematica tematica = new Tematica();
-    tematica.setNombre(nombreTematicaTexto);
-    tematica.setDescripcion(descripcionTematicaTexto);
+    Tematica tematica = new Tematica(nombreTematicaTexto,descripcionTematicaTexto);
     sistema.agregarTematica(tematica);
     nombreTematica.setText("");
     areaDescripcion.setText("");
@@ -51,7 +49,7 @@ public class VentanaTematica extends javax.swing.JFrame{
         Cancelar = new javax.swing.JButton();
         Registrar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel3.setText("Registro de temática");

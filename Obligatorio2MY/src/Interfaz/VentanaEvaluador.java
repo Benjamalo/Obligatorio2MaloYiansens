@@ -33,7 +33,7 @@ public class VentanaEvaluador extends javax.swing.JFrame {
         textoNombre = new javax.swing.JTextField();
         seleccionFecha = new javax.swing.JSpinner();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         Titulo.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         Titulo.setText("Alta de Evaluador");

@@ -78,7 +78,7 @@ public class VentanaPostulante2 extends javax.swing.JFrame implements PropertyCh
         jScrollPane1 = new javax.swing.JScrollPane();
         listaExperiencia = new javax.swing.JList<>();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         etiquetaTema.setText("Tema:");
 

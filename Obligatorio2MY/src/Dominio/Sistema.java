@@ -5,7 +5,6 @@ import Interfaz.VentanaPrincipal;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -21,14 +20,14 @@ public class Sistema implements Serializable {
     private ArrayList<Entrevista> listaDeEntrevistas;
     public int contadorEntrevista=1;
     private ArrayList<Puesto> listaDePuestos;
-    private ArrayList<String> Temario;
-    private ArrayList<String> PersonaACEPTADA;
+    private ArrayList<String> temario;
+    private ArrayList<String> personaAceptada;
     private HashMap<String, Integer> mapeoDePostulantes;
     private transient PropertyChangeSupport manejador;
     
     public Sistema(){
-        PersonaACEPTADA = new ArrayList<>();
-        Temario = new ArrayList<>();
+        personaAceptada = new ArrayList<>();
+        temario = new ArrayList<>();
         listaDePuestos = new ArrayList<>();
         listaDePostulantes = new ArrayList<>();
         listaDeTematicas = new ArrayList<>();
@@ -79,18 +78,18 @@ public class Sistema implements Serializable {
     }
     
    public ArrayList<String> tieneEntrevista(String nombrePuesto, int nivelPuesto) {
-        PersonaACEPTADA.clear();
+        personaAceptada.clear();
         mapeoDePostulantes.clear();
         for(Puesto puesto : listaDePuestos){
             if (puesto.getNombre().equals(nombrePuesto)){
                 for (Postulante postulante : listaDePostulantes) {
-                   Temario.clear();
+                   temario.clear();
                    for(TematicaExperiencia xp : postulante.getTematicas()){
-                        Temario.add(xp.getNombreTematica());
+                        temario.add(xp.getNombreTematica());
                     }
 
                    
-                    if (!Temario.containsAll(puesto.getTemasRequeridos())) {
+                    if (!temario.containsAll(puesto.getTemasRequeridos())) {
                         break;
                     }
 
@@ -138,9 +137,9 @@ public class Sistema implements Serializable {
             }
         });
         for (Map.Entry<String, Integer> entrada : lista) {
-            PersonaACEPTADA.add(entrada.getKey());
+            personaAceptada.add(entrada.getKey());
         }
-        return PersonaACEPTADA;
+        return personaAceptada;
     }
 
     public void exportarDatos(ArrayList<String> entrada, Puesto puesto){
@@ -163,7 +162,7 @@ public class Sistema implements Serializable {
         return listaDePuestos;
     }
     
-    public ArrayList<Entrevista> buscadorPorPalabras(String[] palabras, String persona){
+    /*public ArrayList<Entrevista> buscadorPorPalabras(String[] palabras, String persona){
         ArrayList<Entrevista> retorno = new ArrayList<>();
         for(Entrevista entre : this.getListaDeEntrevistas()){
             if(entre.getPostulante().getNombre().equals(persona) && comprobarPalabras(palabras, entre.getComentarios())){
@@ -171,7 +170,7 @@ public class Sistema implements Serializable {
             }
         }
         return retorno;
-    }
+    }*/
     
     public boolean comprobarPalabras(String[] palabras, String comentario){
         for(int i=0; i<palabras.length; i++){
@@ -218,9 +217,6 @@ public class Sistema implements Serializable {
     }
 
     public void setListaDeEntrevistas(ArrayList<Entrevista> listaDeEntrevistas) {
-
-
-
         this.listaDeEntrevistas = listaDeEntrevistas;
     }
     

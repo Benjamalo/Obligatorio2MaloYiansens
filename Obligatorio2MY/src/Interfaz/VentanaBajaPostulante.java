@@ -38,7 +38,7 @@ public class VentanaBajaPostulante extends javax.swing.JFrame implements Propert
         botonCancelar = new javax.swing.JButton();
         botonEliminar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         Titulo.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         Titulo.setText("Baja de Postulante");

@@ -83,7 +83,7 @@ public class VentanaPostulante extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         textoTelefono = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         titulo.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         titulo.setText("Alta de postulante");

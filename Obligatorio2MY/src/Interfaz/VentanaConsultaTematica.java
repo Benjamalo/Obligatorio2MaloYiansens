@@ -14,13 +14,16 @@ public class VentanaConsultaTematica extends javax.swing.JFrame implements Prope
         initComponents();
         this.sistema = sistema;
         this.sistema.addPropertyChangeListener(this);
+        
         cargarTematicas();
 
-        DefaultListModel<String> emptyListModel = new DefaultListModel<>();
-        listaTematicas.setModel(emptyListModel);
+
     }
 
     public void cargarTematicas(){
+        DefaultListModel<String> emptyListModel = new DefaultListModel<>();
+        listaTematicas.setModel(emptyListModel);
+        modeloListaTematicas.clear();
         for (Tematica tematica : sistema.getListaDeTematicas()) {
             modeloListaTematicas.addElement(tematica.getNombre());
         }
@@ -41,7 +44,7 @@ public class VentanaConsultaTematica extends javax.swing.JFrame implements Prope
         botonSalir = new javax.swing.JButton();
         subtitulo = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         listaTematicas.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };

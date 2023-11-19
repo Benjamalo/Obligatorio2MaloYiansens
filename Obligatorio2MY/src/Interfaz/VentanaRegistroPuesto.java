@@ -77,7 +77,7 @@ public class VentanaRegistroPuesto extends javax.swing.JFrame implements Propert
         });
         jScrollPane2.setViewportView(jList1);
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         radioRemoto.setText("Remoto");
         radioRemoto.addActionListener(new java.awt.event.ActionListener() {

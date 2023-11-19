@@ -53,7 +53,7 @@ public class VentanaEntrevista extends javax.swing.JFrame implements PropertyCha
         etiquetaPuntaje = new javax.swing.JLabel();
         etiquetaComentarios = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         listaEvaluadores.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 

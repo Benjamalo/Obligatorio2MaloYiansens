@@ -1,4 +1,4 @@
-
+//Benjamin Malo y Geronimo Yiansens
 package Dominio;
 
 import java.io.Serializable;
